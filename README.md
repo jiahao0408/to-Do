@@ -92,7 +92,7 @@ Leyenda: ✅ hecho y probado (test o emulador) · ☑️ hecho, solo compilado �
 | RF-37 Deshacer | ✅ | Aviso de 5 s |
 | RF-38 Deslizar | ☑️ | Derecha completa; izquierda borra o pospone |
 | RF-43 / RF-44 Recordatorios | ✅ | Plan de avisos probado en tests |
-| RF-47 Fiabilidad de avisos | ⚠️ | Permisos, alarmas exactas, receptor de reinicio y tope de 60 pendientes. No he comprobado que suenen con la app cerrada |
+| RF-47 Fiabilidad de avisos | ⚠️ | Permisos, alarmas exactas (`USE_EXACT_ALARM`; en el emulador quedan con `window=0`), receptor de reinicio y tope de 60 pendientes. No he comprobado que suenen con la app cerrada |
 | RF-54 Tema | ☑️ | Claro, oscuro o sistema; color de acento; color dinámico en Android 12+ |
 | RF-55 Idiomas | ☑️ | es / en / zh |
 | RF-56 Ajustes de semana | ☑️ | |
@@ -169,4 +169,4 @@ En `ios/TodayWidget/` está el código de WidgetKit y del App Intent del check (
 
 - No se ha probado en iOS ni en un móvil físico; solo en el emulador de Android (API 37).
 - Al borrar una tarea, sus archivos adjuntos se quedan en la carpeta de la app; solo se borra la fila.
-- La alarma exacta en Android 14+ requiere que el usuario la permita. Si no, los avisos usan el modo inexacto y pueden retrasarse.
+- Para alarmas exactas uso `USE_EXACT_ALARM`, que Android concede a las apps de calendario. Google Play pide justificar ese permiso al publicar; si se quitara, los avisos serían inexactos (hasta 1 h de margen).
