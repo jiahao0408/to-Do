@@ -15,12 +15,11 @@ import '../common/actions.dart';
 import '../common/celebration.dart';
 import '../common/format.dart';
 import '../providers.dart';
-import '../screens/categories_screen.dart';
 import '../screens/inbox_screen.dart';
 import '../screens/overdue_dialog.dart';
 import '../screens/search_screen.dart';
-import '../screens/settings_screen.dart';
 import '../task/quick_add.dart';
+import 'app_drawer.dart';
 import 'extra_destinations.dart';
 
 class HomeShell extends ConsumerStatefulWidget {
@@ -95,8 +94,44 @@ class _HomeShellState extends ConsumerState<HomeShell> {
         return ws.month == we.month
             ? f.monthYearShort(ws)
             : '${f.dayMonth(ws)} – ${f.dayMonth(we)}';
+      case CalendarView.threeDays:
+        final end = addDays(s.anchor, 2);
+        return s.anchor.month == end.month
+            ? f.monthYearShort(s.anchor)
+            : '${f.dayMonth(s.anchor)} – ${f.dayMonth(end)}';
+      case CalendarView.workWeek:
+        final mon = startOfWeek(s.anchor);
+        final fri = addDays(mon, 4);
+        return mon.month == fri.month
+            ? f.monthYearShort(mon)
+            : '${f.dayMonth(mon)} – ${f.dayMonth(fri)}';
       case CalendarView.month:
         return f.monthYearShort(s.anchor);
+    }
+  }
+
+  /// Destinos de la barra inferior (máx. 5). Semana y entre semana comparten
+  /// el mismo destino; tocarlo otra vez alterna entre ambas.
+  static const _navViews = [
+    CalendarView.day,
+    CalendarView.threeDays,
+    CalendarView.week,
+    CalendarView.month,
+    CalendarView.agenda,
+  ];
+
+  int _navIndex(CalendarView v) =>
+      v == CalendarView.workWeek ? 2 : _navViews.indexOf(v);
+
+  void _onNav(int i) {
+    final ctrl = ref.read(calendarProvider.notifier);
+    final current = ref.read(calendarProvider).view;
+    final target = _navViews[i];
+    if (target == CalendarView.week &&
+        (current == CalendarView.week || current == CalendarView.workWeek)) {
+      ctrl.setView(current == CalendarView.week ? CalendarView.workWeek : CalendarView.week);
+    } else {
+      ctrl.setView(target);
     }
   }
 
@@ -108,11 +143,18 @@ class _HomeShellState extends ConsumerState<HomeShell> {
     final selection = ref.watch(selectionProvider);
     final inboxCount = ref.watch(snapshotProvider.select((s) => s.inbox.length));
     final selecting = selection.isNotEmpty;
-    final timeline = state.view == CalendarView.day || state.view == CalendarView.week;
+    final timeline = const {
+      CalendarView.day,
+      CalendarView.threeDays,
+      CalendarView.week,
+      CalendarView.workWeek,
+    }.contains(state.view);
 
     final body = switch (state.view) {
       CalendarView.day => const DayView(key: ValueKey('day')),
+      CalendarView.threeDays => const ThreeDayView(key: ValueKey('3d')),
       CalendarView.week => const WeekView(key: ValueKey('week')),
+      CalendarView.workWeek => const WeekView(key: ValueKey('workWeek'), workWeek: true),
       CalendarView.month => const MonthView(key: ValueKey('month')),
       CalendarView.agenda => const AgendaView(key: ValueKey('agenda')),
     };
@@ -125,7 +167,7 @@ class _HomeShellState extends ConsumerState<HomeShell> {
       child: CelebrationOverlay(
         child: Scaffold(
           appBar: selecting ? _selectionBar(context, selection.length) : _mainBar(context, state, f, l, inboxCount, timeline),
-          drawer: selecting ? null : const _AppDrawer(),
+          drawer: selecting ? null : const AppDrawer(),
           body: Column(
             children: [
               Expanded(child: body),
@@ -140,11 +182,18 @@ class _HomeShellState extends ConsumerState<HomeShell> {
                   child: const Icon(Icons.add),
                 ),
           bottomNavigationBar: NavigationBar(
-            selectedIndex: state.view.index,
-            onDestinationSelected: (i) => ref.read(calendarProvider.notifier).setView(CalendarView.values[i]),
+            selectedIndex: _navIndex(state.view),
+            onDestinationSelected: _onNav,
+            labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
             destinations: [
               NavigationDestination(icon: const Icon(Icons.view_day_outlined), selectedIcon: const Icon(Icons.view_day), label: l.viewDay),
-              NavigationDestination(icon: const Icon(Icons.view_week_outlined), selectedIcon: const Icon(Icons.view_week), label: l.viewWeek),
+              NavigationDestination(icon: const Icon(Icons.view_column_outlined), selectedIcon: const Icon(Icons.view_column), label: l.viewThreeDays),
+              NavigationDestination(
+                icon: const Icon(Icons.view_week_outlined),
+                selectedIcon: Icon(state.view == CalendarView.workWeek ? Icons.work : Icons.view_week),
+                label: state.view == CalendarView.workWeek ? l.viewWorkWeek : l.viewWeek,
+                tooltip: '${l.viewWeek} / ${l.viewWorkWeek}',
+              ),
               NavigationDestination(icon: const Icon(Icons.calendar_month_outlined), selectedIcon: const Icon(Icons.calendar_month), label: l.viewMonth),
               NavigationDestination(icon: const Icon(Icons.view_agenda_outlined), selectedIcon: const Icon(Icons.view_agenda), label: l.viewAgenda),
             ],
@@ -284,34 +333,6 @@ class _HomeShellState extends ConsumerState<HomeShell> {
             ui.undo(point, l.tasksDeleted(list.length));
           },
         ),
-      ],
-    );
-  }
-}
-
-class _AppDrawer extends StatelessWidget {
-  const _AppDrawer();
-
-  @override
-  Widget build(BuildContext context) {
-    final l = context.l10n;
-    void open(Widget page) {
-      Navigator.pop(context);
-      Navigator.of(context).push(MaterialPageRoute(builder: (_) => page));
-    }
-
-    return NavigationDrawer(
-      children: [
-        Padding(
-          padding: const EdgeInsets.fromLTRB(28, 24, 16, 16),
-          child: Text(l.appTitle, style: Theme.of(context).textTheme.titleLarge),
-        ),
-        ListTile(leading: const Icon(Icons.inbox_outlined), title: Text(l.inbox), onTap: () => open(const InboxScreen())),
-        ListTile(leading: const Icon(Icons.search), title: Text(l.search), onTap: () => open(const SearchScreen())),
-        ListTile(leading: const Icon(Icons.label_outline), title: Text(l.categories), onTap: () => open(const CategoriesScreen())),
-        ...extraDrawerItems(context, open),
-        const Divider(),
-        ListTile(leading: const Icon(Icons.settings_outlined), title: Text(l.settings), onTap: () => open(const SettingsScreen())),
       ],
     );
   }

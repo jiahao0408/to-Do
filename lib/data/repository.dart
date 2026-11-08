@@ -67,6 +67,8 @@ class Repository {
       db.select(db.timeEntries).get(),
       db.select(db.templates).get(),
       db.select(db.settings).get(),
+      db.select(db.projects).get(),
+      db.select(db.dayNotes).get(),
     ]);
     return AppSnapshot(
       tasks: (results[0] as List<TaskRow>).map(taskFromRow).toList(),
@@ -89,6 +91,8 @@ class Repository {
       settings: {
         for (final s in results[9] as List<SettingRow>) s.key: s.value,
       },
+      projects: (results[10] as List<ProjectRow>).map(projectFromRow).toList(),
+      dayNotes: (results[11] as List<DayNoteRow>).map(dayNoteFromRow).toList(),
     );
   }
 
@@ -322,6 +326,48 @@ class Repository {
 
   Future<void> deleteTemplate(int id) =>
       (db.delete(db.templates)..where((t) => t.id.equals(id))).go();
+
+  // -------------------------------------------------------------- proyectos
+
+  Future<int> saveProject(Project p) async {
+    final c = ProjectsCompanion(
+      name: Value(p.name),
+      color: Value(p.color),
+      dueDate: Value(p.dueDate == null ? null : formatDateKey(p.dueDate!)),
+      archived: Value(p.archived),
+    );
+    if (p.id == null) return db.into(db.projects).insert(c);
+    await (db.update(db.projects)..where((x) => x.id.equals(p.id!))).write(c);
+    return p.id!;
+  }
+
+  /// Borra el proyecto; sus tareas quedan sin proyecto.
+  Future<void> deleteProject(int id) => db.transaction(() async {
+        await (db.update(db.tasks)..where((t) => t.projectId.equals(id)))
+            .write(const TasksCompanion(projectId: Value(null)));
+        await (db.delete(db.projects)..where((p) => p.id.equals(id))).go();
+      });
+
+  // ----------------------------------------------------------------- diario
+
+  /// Guarda la nota del día; vacía = se borra.
+  Future<void> saveDayNote(DateTime day, String body) async {
+    final key = formatDateKey(day);
+    if (body.trim().isEmpty) {
+      await (db.delete(db.dayNotes)..where((n) => n.date.equals(key))).go();
+      return;
+    }
+    await db.into(db.dayNotes).insertOnConflictUpdate(
+        DayNotesCompanion.insert(date: key, body: body, updatedAt: now));
+  }
+
+  // -------------------------------------------------------------------- ics
+
+  /// Ids de tareas importadas antes, por UID de .ics.
+  Future<Map<String, int>> taskIdsByIcsUid() async {
+    final rows = await (db.select(db.tasks)..where((t) => t.icsUid.isNotNull())).get();
+    return {for (final r in rows) r.icsUid!: r.id};
+  }
 
   // ---------------------------------------------------------------- ajustes
 

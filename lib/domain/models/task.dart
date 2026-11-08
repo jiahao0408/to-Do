@@ -28,6 +28,8 @@ class Task {
     this.tz = 'UTC',
     required this.createdAt,
     required this.updatedAt,
+    this.projectId,
+    this.icsUid,
   });
 
   final int? id;
@@ -53,6 +55,12 @@ class Task {
   final String tz;
   final DateTime createdAt;
   final DateTime updatedAt;
+
+  /// Proyecto (aparte de la categoría).
+  final int? projectId;
+
+  /// UID del evento .ics de origen, si se importó.
+  final String? icsUid;
 
   static const defaultDurationMin = 60;
 
@@ -88,6 +96,8 @@ class Task {
     String? tz,
     DateTime? createdAt,
     DateTime? updatedAt,
+    int? Function()? projectId,
+    String? Function()? icsUid,
   }) {
     return Task(
       id: id != null ? id() : this.id,
@@ -109,6 +119,8 @@ class Task {
       tz: tz ?? this.tz,
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
+      projectId: projectId != null ? projectId() : this.projectId,
+      icsUid: icsUid != null ? icsUid() : this.icsUid,
     );
   }
 

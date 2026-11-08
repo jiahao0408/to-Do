@@ -124,7 +124,7 @@ class _TimelineState extends ConsumerState<Timeline> {
     final theme = Theme.of(context);
     final f = Fmt.of(context);
     final days = widget.days;
-    final perDay = [for (final d in days) snap.occurrencesOnDay(d)];
+    final perDay = [for (final d in days) snap.calendarOccurrencesOnDay(d)];
 
     return Column(
       children: [

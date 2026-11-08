@@ -31,6 +31,37 @@ class Tasks extends Table {
   TextColumn get tz => text().withDefault(const Constant('UTC'))();
   DateTimeColumn get createdAt => dateTime()();
   DateTimeColumn get updatedAt => dateTime()();
+
+  // --- v2 ---
+  /// Proyecto al que pertenece (aparte de la categoría).
+  IntColumn get projectId => integer().nullable()();
+
+  /// UID del evento .ics del que se importó (para no duplicar).
+  TextColumn get icsUid => text().nullable()();
+}
+
+/// v2: proyectos con color, fecha límite opcional y avance.
+@DataClassName('ProjectRow')
+class Projects extends Table {
+  IntColumn get id => integer().autoIncrement()();
+  TextColumn get name => text()();
+  IntColumn get color => integer()();
+
+  /// `yyyy-MM-dd`, opcional.
+  TextColumn get dueDate => text().nullable()();
+  BoolColumn get archived => boolean().withDefault(const Constant(false))();
+}
+
+/// v2: diario, una nota por día.
+@DataClassName('DayNoteRow')
+class DayNotes extends Table {
+  /// `yyyy-MM-dd`.
+  TextColumn get date => text()();
+  TextColumn get body => text()();
+  DateTimeColumn get updatedAt => dateTime()();
+
+  @override
+  Set<Column> get primaryKey => {date};
 }
 
 @DataClassName('SubtaskRow')
@@ -145,13 +176,15 @@ class Settings extends Table {
   TimeEntries,
   Templates,
   Settings,
+  Projects,
+  DayNotes,
 ])
 class AppDatabase extends _$AppDatabase {
   AppDatabase(super.e);
 
   /// Versión del esquema. Súbela y añade un paso en [migration] al cambiarlo.
   @override
-  int get schemaVersion => 1;
+  int get schemaVersion => 2;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
@@ -162,7 +195,12 @@ class AppDatabase extends _$AppDatabase {
         },
         onUpgrade: (m, from, to) async {
           // Migraciones versionadas: un bloque por versión.
-          // if (from < 2) { await m.addColumn(tasks, tasks.nuevaColumna); }
+          if (from < 2) {
+            await m.addColumn(tasks, tasks.projectId);
+            await m.addColumn(tasks, tasks.icsUid);
+            await m.createTable(projects);
+            await m.createTable(dayNotes);
+          }
         },
         beforeOpen: (details) async {
           await customStatement('PRAGMA foreign_keys = ON');

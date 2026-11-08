@@ -10,7 +10,7 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
-  String get appTitle => 'Calendar';
+  String get appTitle => 'to Do';
 
   @override
   String get viewDay => 'Day';
@@ -1004,4 +1004,240 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get about => 'About';
+
+  @override
+  String get viewThreeDays => '3 days';
+
+  @override
+  String get viewWorkWeek => 'Work week';
+
+  @override
+  String get icsImport => 'Import .ics';
+
+  @override
+  String get icsExport => 'Export .ics';
+
+  @override
+  String get icsImportHint =>
+      'Add events from Google Calendar, Outlook or other apps';
+
+  @override
+  String get icsExportHint => 'Share your tasks as a calendar file';
+
+  @override
+  String get icsSelectAll => 'All';
+
+  @override
+  String get icsSelectNone => 'None';
+
+  @override
+  String get icsAlreadyImported => 'Already imported: replaced if checked';
+
+  @override
+  String get icsUnsupportedRule =>
+      'Unsupported repeat: only the first one is imported';
+
+  @override
+  String get icsMultiDay => 'Multi-day: imported on its first day';
+
+  @override
+  String get icsCategoryFromFile => 'From the file';
+
+  @override
+  String icsImportButton(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: 'Import $n',
+      one: 'Import 1',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String icsImported(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: '$n tasks imported',
+      one: '1 task imported',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get icsNothing => 'The file has no events or tasks';
+
+  @override
+  String icsError(String error) {
+    return 'Could not read the file: $error';
+  }
+
+  @override
+  String get icsRange => 'Dates';
+
+  @override
+  String get icsAllDates => 'All';
+
+  @override
+  String get icsChooseRange => 'Choose range';
+
+  @override
+  String get icsIncludeCompleted => 'Include completed';
+
+  @override
+  String get icsIncludeUndated => 'Include undated tasks (as to-dos)';
+
+  @override
+  String icsWillExport(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: '$n tasks will be exported',
+      one: '1 task will be exported',
+      zero: 'Nothing to export',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get icsExportButton => 'Export and share';
+
+  @override
+  String get projects => 'Projects';
+
+  @override
+  String get project => 'Project';
+
+  @override
+  String get newProject => 'New project';
+
+  @override
+  String get projectName => 'Project name';
+
+  @override
+  String get noProject => 'No project';
+
+  @override
+  String get projectDue => 'Due date';
+
+  @override
+  String get noDueDate => 'No due date';
+
+  @override
+  String deleteProjectConfirm(String name) {
+    return 'Delete “$name”? Its tasks will have no project.';
+  }
+
+  @override
+  String get projectEmpty => 'This project has no tasks yet';
+
+  @override
+  String get projectSeriesNote =>
+      'Repeating tasks do not count towards progress';
+
+  @override
+  String get diary => 'Journal';
+
+  @override
+  String get dayNote => 'Note of the day';
+
+  @override
+  String get dayNoteHint => 'How did the day go?';
+
+  @override
+  String get diaryEmpty => 'Nothing written in the journal yet';
+
+  @override
+  String get searchDiary => 'Search the journal';
+
+  @override
+  String get showInCalendar => 'Show in calendar';
+
+  @override
+  String get manageCategories => 'Manage categories';
+
+  @override
+  String get countdownsAndPinned => 'Countdowns and pinned';
+
+  @override
+  String get nothingPinned => 'Nothing pinned or counting down';
+
+  @override
+  String get processInbox => 'Process inbox';
+
+  @override
+  String processInboxProgress(int i, int n) {
+    return '$i of $n';
+  }
+
+  @override
+  String get skip => 'Skip';
+
+  @override
+  String get inboxDone => 'Inbox zero!';
+
+  @override
+  String get gestureGuide => 'Gesture guide';
+
+  @override
+  String get gestures => 'Gestures';
+
+  @override
+  String get naturalLanguage => 'Natural language';
+
+  @override
+  String get gTapBlock => 'Tap a task: see its details';
+
+  @override
+  String get gLongPressMove =>
+      'Long-press and move: change the time (and the day in week or 3-day view)';
+
+  @override
+  String get gLongPress => 'Long-press without moving: multi-select';
+
+  @override
+  String get gResize => 'Drag the bottom edge of a block: change its duration';
+
+  @override
+  String get gPinch => 'Pinch with two fingers: zoom the hours in or out';
+
+  @override
+  String get gSwipePages =>
+      'Swipe sideways: previous or next day, week or month';
+
+  @override
+  String get gSwipeList =>
+      'In lists: swipe right to complete; left to delete or postpone';
+
+  @override
+  String get gLongPressEmpty =>
+      'Long-press an empty slot: create a task at that time';
+
+  @override
+  String get gWeekTap =>
+      'Tap «Week» again: switch to work week (Monday to Friday)';
+
+  @override
+  String get gInboxDrag =>
+      'Inbox: long-press a task and drop it on a calendar slot';
+
+  @override
+  String get gMonthDrag =>
+      'Month view: long-press a task and drop it on another day';
+
+  @override
+  String get nlTips =>
+      'Type the task with date, time, repeat, #category and !priority';
+
+  @override
+  String heatmapTitle(int year) {
+    return 'Year $year';
+  }
+
+  @override
+  String get heatLess => 'Less';
+
+  @override
+  String get heatMore => 'More';
 }

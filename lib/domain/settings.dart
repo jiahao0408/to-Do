@@ -2,7 +2,9 @@
 
 import 'notification_plan.dart';
 
-enum CalendarView { day, week, month, agenda }
+/// Vistas del calendario. `threeDays` = hoy, mañana y pasado; `workWeek` =
+/// lunes a viernes.
+enum CalendarView { day, threeDays, week, workWeek, month, agenda }
 
 enum AppThemeMode { system, light, dark }
 

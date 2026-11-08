@@ -128,6 +128,8 @@ class StatsScreen extends ConsumerWidget {
             ),
           ),
           const SizedBox(height: 16),
+          YearHeatmap(stats: stats, year: now.year),
+          const SizedBox(height: 16),
           Text(l.statsHabits, style: theme.textTheme.titleSmall),
           for (final h in stats.habits())
             ListTile(
@@ -159,6 +161,108 @@ class StatsScreen extends ConsumerWidget {
           const SizedBox(height: 24),
         ],
       ),
+    );
+  }
+}
+
+
+/// Mapa de calor anual: cada día coloreado según el % completado.
+class YearHeatmap extends StatelessWidget {
+  const YearHeatmap({super.key, required this.stats, required this.year});
+  final Stats stats;
+  final int year;
+
+  static const double _cell = 13;
+  static const double _gap = 3;
+
+  Color _color(BuildContext context, Rate? r, bool future) {
+    final cs = Theme.of(context).colorScheme;
+    if (future || r == null || r.total == 0) return cs.surfaceContainerHighest;
+    final ratio = r.ratio;
+    final alpha = ratio == 0 ? 0.12 : ratio < 0.34 ? 0.35 : ratio < 0.67 ? 0.6 : ratio < 1 ? 0.8 : 1.0;
+    return cs.primary.withValues(alpha: alpha);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l = context.l10n;
+    final f = Fmt.of(context);
+    final theme = Theme.of(context);
+    final first = DateTime(year, 1, 1);
+    final last = DateTime(year, 12, 31);
+    final rates = stats.dailyRates(first, addDays(last, 1));
+    final gridStart = startOfWeek(first); // columnas = semanas (lunes arriba)
+    final weeks = (daysBetween(gridStart, last) ~/ 7) + 1;
+    final today = stats.today;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(l.heatmapTitle(year), style: theme.textTheme.titleSmall),
+        const SizedBox(height: 8),
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          reverse: true, // empieza mostrando las semanas recientes
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              for (var w = 0; w < weeks; w++)
+                Padding(
+                  padding: const EdgeInsets.only(right: _gap),
+                  child: Column(
+                    children: [
+                      for (var d = 0; d < 7; d++)
+                        Builder(builder: (context) {
+                          final day = addDays(gridStart, w * 7 + d);
+                          if (day.year != year) return const SizedBox(width: _cell, height: _cell + _gap);
+                          final r = rates[formatDateKey(day)];
+                          final future = day.isAfter(today);
+                          return Padding(
+                            padding: const EdgeInsets.only(bottom: _gap),
+                            child: Tooltip(
+                              triggerMode: TooltipTriggerMode.tap,
+                              message: '${f.weekdayDayMonth(day)} · ${r == null ? l.noTasks : '${r.done}/${r.total}'}',
+                              child: Container(
+                                width: _cell,
+                                height: _cell,
+                                decoration: BoxDecoration(
+                                  color: _color(context, r, future),
+                                  borderRadius: BorderRadius.circular(3),
+                                  border: isSameDay(day, today)
+                                      ? Border.all(color: theme.colorScheme.onSurface, width: 1.5)
+                                      : null,
+                                ),
+                              ),
+                            ),
+                          );
+                        }),
+                    ],
+                  ),
+                ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 6),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Text(l.heatLess, style: theme.textTheme.labelSmall),
+            const SizedBox(width: 4),
+            for (final a in [0.12, 0.35, 0.6, 0.8, 1.0])
+              Container(
+                width: 11,
+                height: 11,
+                margin: const EdgeInsets.symmetric(horizontal: 1.5),
+                decoration: BoxDecoration(
+                  color: theme.colorScheme.primary.withValues(alpha: a),
+                  borderRadius: BorderRadius.circular(2),
+                ),
+              ),
+            const SizedBox(width: 4),
+            Text(l.heatMore, style: theme.textTheme.labelSmall),
+          ],
+        ),
+      ],
     );
   }
 }

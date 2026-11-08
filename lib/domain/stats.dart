@@ -56,6 +56,22 @@ class Stats {
           (addDays(today, -i), rate(addDays(today, -i), addDays(today, -i + 1))),
       ];
 
+  /// Tasa por día (clave `yyyy-MM-dd`) en [[from], [to]), sin el futuro.
+  /// Una sola pasada: sirve para el mapa de calor anual.
+  Map<String, Rate> dailyRates(DateTime from, DateTime to) {
+    final end = to.isAfter(addDays(today, 1)) ? addDays(today, 1) : to;
+    final done = <String, int>{};
+    final total = <String, int>{};
+    if (end.isAfter(from)) {
+      for (final o in snap.occurrencesBetween(from, end)) {
+        final k = formatDateKey(o.task.start!);
+        total[k] = (total[k] ?? 0) + 1;
+        if (o.completed) done[k] = (done[k] ?? 0) + 1;
+      }
+    }
+    return {for (final k in total.keys) k: Rate(done[k] ?? 0, total[k]!)};
+  }
+
   /// Racha de días seguidos completando todo. Un día sin tareas no rompe la
   /// racha ni suma. Hoy cuenta solo si ya está completo.
   (int current, int best) dayStreak({int lookback = 365}) {

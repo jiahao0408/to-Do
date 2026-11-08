@@ -27,6 +27,8 @@ Task taskFromRow(TaskRow r) => Task(
       tz: r.tz,
       createdAt: r.createdAt,
       updatedAt: r.updatedAt,
+      projectId: r.projectId,
+      icsUid: r.icsUid,
     );
 
 TasksCompanion taskToCompanion(Task t, {bool includeId = false}) =>
@@ -50,6 +52,8 @@ TasksCompanion taskToCompanion(Task t, {bool includeId = false}) =>
       tz: Value(t.tz),
       createdAt: Value(t.createdAt),
       updatedAt: Value(t.updatedAt),
+      projectId: Value(t.projectId),
+      icsUid: Value(t.icsUid),
     );
 
 Subtask subtaskFromRow(SubtaskRow r) =>
@@ -102,3 +106,14 @@ TaskTemplate templateFromRow(TemplateRow r) => TaskTemplate(
           TemplateItem.fromJson((j as Map).cast<String, Object?>()),
       ],
     );
+
+Project projectFromRow(ProjectRow r) => Project(
+      id: r.id,
+      name: r.name,
+      color: r.color,
+      dueDate: r.dueDate == null ? null : parseDateKey(r.dueDate!),
+      archived: r.archived,
+    );
+
+DayNote dayNoteFromRow(DayNoteRow r) =>
+    DayNote(date: parseDateKey(r.date), body: r.body, updatedAt: r.updatedAt);

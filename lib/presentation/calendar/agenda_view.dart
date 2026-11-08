@@ -32,7 +32,7 @@ class _AgendaViewState extends ConsumerState<AgendaView> {
     final now = ref.watch(clockProvider).now();
     final from = dateOnly(anchor);
     final to = addDays(from, _days);
-    final occ = snap.occurrencesBetween(from, to);
+    final occ = snap.calendarOccurrencesBetween(from, to);
 
     // Fijadas y cuentas atrás arriba (RF-11, RF-12).
     final pinned = <Occurrence>[
@@ -41,7 +41,7 @@ class _AgendaViewState extends ConsumerState<AgendaView> {
           Occurrence(task: t, series: t, occurrenceDate: null, completed: false),
     ];
     final countdowns = snap
-        .occurrencesBetween(dateOnly(now), addDays(dateOnly(now), 400))
+        .calendarOccurrencesBetween(dateOnly(now), addDays(dateOnly(now), 400))
         .where((o) => o.task.countdown && !o.completed)
         .take(5)
         .toList();

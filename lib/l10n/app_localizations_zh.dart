@@ -10,7 +10,7 @@ class AppLocalizationsZh extends AppLocalizations {
   AppLocalizationsZh([String locale = 'zh']) : super(locale);
 
   @override
-  String get appTitle => '日历';
+  String get appTitle => 'to Do';
 
   @override
   String get viewDay => '日';
@@ -934,4 +934,216 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get about => '关于';
+
+  @override
+  String get viewThreeDays => '3天';
+
+  @override
+  String get viewWorkWeek => '工作日';
+
+  @override
+  String get icsImport => '导入 .ics';
+
+  @override
+  String get icsExport => '导出 .ics';
+
+  @override
+  String get icsImportHint => '添加来自 Google 日历、Outlook 等应用的日程';
+
+  @override
+  String get icsExportHint => '把任务分享为日历文件';
+
+  @override
+  String get icsSelectAll => '全选';
+
+  @override
+  String get icsSelectNone => '全不选';
+
+  @override
+  String get icsAlreadyImported => '已导入过：勾选将替换';
+
+  @override
+  String get icsUnsupportedRule => '不支持的重复规则：只导入第一次';
+
+  @override
+  String get icsMultiDay => '多日活动：只导入第一天';
+
+  @override
+  String get icsCategoryFromFile => '按文件';
+
+  @override
+  String icsImportButton(int n) {
+    return '导入 $n 项';
+  }
+
+  @override
+  String icsImported(int n) {
+    return '已导入 $n 个任务';
+  }
+
+  @override
+  String get icsNothing => '文件中没有日程或任务';
+
+  @override
+  String icsError(String error) {
+    return '无法读取文件：$error';
+  }
+
+  @override
+  String get icsRange => '日期';
+
+  @override
+  String get icsAllDates => '全部';
+
+  @override
+  String get icsChooseRange => '选择范围';
+
+  @override
+  String get icsIncludeCompleted => '包括已完成';
+
+  @override
+  String get icsIncludeUndated => '包括无日期的任务（作为待办）';
+
+  @override
+  String icsWillExport(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: '将导出 $n 个任务',
+      zero: '没有可导出的任务',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get icsExportButton => '导出并分享';
+
+  @override
+  String get projects => '项目';
+
+  @override
+  String get project => '项目';
+
+  @override
+  String get newProject => '新建项目';
+
+  @override
+  String get projectName => '项目名称';
+
+  @override
+  String get noProject => '无项目';
+
+  @override
+  String get projectDue => '截止日期';
+
+  @override
+  String get noDueDate => '无截止日期';
+
+  @override
+  String deleteProjectConfirm(String name) {
+    return '删除「$name」？其任务将没有项目。';
+  }
+
+  @override
+  String get projectEmpty => '这个项目还没有任务';
+
+  @override
+  String get projectSeriesNote => '重复任务不计入进度';
+
+  @override
+  String get diary => '日记';
+
+  @override
+  String get dayNote => '今日笔记';
+
+  @override
+  String get dayNoteHint => '今天过得怎么样？';
+
+  @override
+  String get diaryEmpty => '还没有写过日记';
+
+  @override
+  String get searchDiary => '搜索日记';
+
+  @override
+  String get showInCalendar => '在日历中显示';
+
+  @override
+  String get manageCategories => '管理分类';
+
+  @override
+  String get countdownsAndPinned => '倒计时和置顶';
+
+  @override
+  String get nothingPinned => '没有置顶或倒计时';
+
+  @override
+  String get processInbox => '整理收集箱';
+
+  @override
+  String processInboxProgress(int i, int n) {
+    return '第 $i / $n 项';
+  }
+
+  @override
+  String get skip => '跳过';
+
+  @override
+  String get inboxDone => '收集箱已清空！';
+
+  @override
+  String get gestureGuide => '手势指南';
+
+  @override
+  String get gestures => '手势';
+
+  @override
+  String get naturalLanguage => '自然语言';
+
+  @override
+  String get gTapBlock => '点按任务：查看详情';
+
+  @override
+  String get gLongPressMove => '长按并移动：更改时间（周视图和3天视图中也可改日期）';
+
+  @override
+  String get gLongPress => '长按不移动：多选';
+
+  @override
+  String get gResize => '拖动任务块底边：更改时长';
+
+  @override
+  String get gPinch => '双指捏合：放大或缩小时间轴';
+
+  @override
+  String get gSwipePages => '左右滑动：切换到前后一天、一周或一个月';
+
+  @override
+  String get gSwipeList => '列表中：向右滑动完成，向左滑动删除或推迟';
+
+  @override
+  String get gLongPressEmpty => '长按空白时段：在该时间新建任务';
+
+  @override
+  String get gWeekTap => '再次点按「周」：切换为工作日（周一至周五）';
+
+  @override
+  String get gInboxDrag => '收集箱：长按任务并拖到日历空闲时段';
+
+  @override
+  String get gMonthDrag => '月视图：长按任务并拖到另一天';
+
+  @override
+  String get nlTips => '输入任务时可写日期、时间、重复、#分类 和 !优先级';
+
+  @override
+  String heatmapTitle(int year) {
+    return '$year 年';
+  }
+
+  @override
+  String get heatLess => '少';
+
+  @override
+  String get heatMore => '多';
 }

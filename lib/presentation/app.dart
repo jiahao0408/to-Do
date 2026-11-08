@@ -8,10 +8,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../domain/settings.dart';
 import '../domain/snapshot.dart';
 import '../l10n/app_localizations.dart';
+import '../services/ics_files.dart';
 import '../services/notification_service.dart';
 import '../services/widget_service.dart';
 import 'home/home_shell.dart';
 import 'providers.dart';
+import 'screens/ics_screens.dart';
 import 'task/task_detail.dart';
 
 final navigatorKey = GlobalKey<NavigatorState>();
@@ -43,10 +45,30 @@ class _AppState extends ConsumerState<App> with WidgetsBindingObserver {
     }
     WidgetService.instance.onOpenTask = _openTask;
     WidgetService.instance.init(ref.read(repositoryProvider));
+    _initIcsIntents();
+  }
+
+  StreamSubscription<String>? _icsSub;
+
+  /// .ics abiertos desde otras apps → vista previa de importación.
+  Future<void> _initIcsIntents() async {
+    final intents = IcsIntents.instance;
+    await intents.init();
+    _icsSub = intents.files.listen(_openIcs);
+    final initial = intents.takeInitial();
+    if (initial != null) {
+      await ref.read(snapshotStreamProvider.future);
+      _openIcs(initial);
+    }
+  }
+
+  void _openIcs(String path) {
+    navigatorKey.currentState?.push(MaterialPageRoute(builder: (_) => IcsImportScreen(path: path)));
   }
 
   @override
   void dispose() {
+    _icsSub?.cancel();
     WidgetsBinding.instance.removeObserver(this);
     _debounce?.cancel();
     super.dispose();

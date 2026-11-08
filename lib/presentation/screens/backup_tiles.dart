@@ -12,6 +12,7 @@ import '../../services/files.dart';
 import '../common/actions.dart';
 import '../common/format.dart';
 import '../providers.dart';
+import 'ics_screens.dart';
 
 class BackupTiles extends ConsumerWidget {
   const BackupTiles({super.key});
@@ -24,6 +25,18 @@ class BackupTiles extends ConsumerWidget {
     final l = context.l10n;
     return Column(
       children: [
+        ListTile(
+          leading: const Icon(Icons.event_available),
+          title: Text(l.icsImport),
+          subtitle: Text(l.icsImportHint),
+          onTap: () => pickAndImportIcs(context),
+        ),
+        ListTile(
+          leading: const Icon(Icons.ios_share),
+          title: Text(l.icsExport),
+          subtitle: Text(l.icsExportHint),
+          onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const IcsExportScreen())),
+        ),
         ListTile(
           leading: const Icon(Icons.upload_file),
           title: Text(l.exportBackup),

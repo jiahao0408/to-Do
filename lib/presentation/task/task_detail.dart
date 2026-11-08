@@ -101,6 +101,11 @@ class TaskDetailSheet extends ConsumerWidget {
                   avatar: CircleAvatar(backgroundColor: Color(cat.color), radius: 6),
                   label: Text(cat.name),
                 ),
+              if (snap.projectById(o.series.projectId) case final pr?)
+                Chip(
+                  avatar: Icon(Icons.folder, size: 18, color: Color(pr.color)),
+                  label: Text(pr.name),
+                ),
               Chip(label: Text('${l.priority}: ${priorityLabel(l, t.priority)}')),
               if (o.isSeries)
                 Chip(

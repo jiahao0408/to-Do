@@ -47,6 +47,8 @@ class BackupService {
         'timeEntries': rows(await db.select(db.timeEntries).get()),
         'templates': rows(await db.select(db.templates).get()),
         'settings': rows(await db.select(db.settings).get()),
+        'projects': rows(await db.select(db.projects).get()),
+        'dayNotes': rows(await db.select(db.dayNotes).get()),
       },
     };
   }
@@ -127,6 +129,7 @@ class BackupService {
       }
 
       await put(db.categories, 'categories', CategoryRow.fromJson);
+      await put(db.projects, 'projects', ProjectRow.fromJson);
       await put(db.tasks, 'tasks', TaskRow.fromJson);
       await put(db.subtasks, 'subtasks', SubtaskRow.fromJson);
       await put(db.reminders, 'reminders', ReminderRow.fromJson);
@@ -136,6 +139,7 @@ class BackupService {
       await put(db.timeEntries, 'timeEntries', TimeEntryRow.fromJson);
       await put(db.templates, 'templates', TemplateRow.fromJson);
       await put(db.settings, 'settings', SettingRow.fromJson);
+      await put(db.dayNotes, 'dayNotes', DayNoteRow.fromJson);
     });
   }
 

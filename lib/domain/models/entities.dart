@@ -162,3 +162,29 @@ class TaskTemplate {
   final String name;
   final List<TemplateItem> items;
 }
+
+/// v2: proyecto (aparte de la categoría), con fecha límite opcional.
+class Project {
+  const Project({this.id, required this.name, required this.color, this.dueDate, this.archived = false});
+  final int? id;
+  final String name;
+  final int color;
+  final DateTime? dueDate;
+  final bool archived;
+
+  Project copyWith({String? name, int? color, DateTime? Function()? dueDate, bool? archived}) => Project(
+        id: id,
+        name: name ?? this.name,
+        color: color ?? this.color,
+        dueDate: dueDate != null ? dueDate() : this.dueDate,
+        archived: archived ?? this.archived,
+      );
+}
+
+/// v2: nota del diario de un día.
+class DayNote {
+  const DayNote({required this.date, required this.body, required this.updatedAt});
+  final DateTime date;
+  final String body;
+  final DateTime updatedAt;
+}

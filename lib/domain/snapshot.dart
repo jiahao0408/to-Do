@@ -55,7 +55,19 @@ class AppSnapshot {
     required this.timeEntries,
     required this.templates,
     required this.settings,
+    this.projects = const [],
+    this.dayNotes = const [],
   }) {
+    for (final p in projects) {
+      _projectById[p.id!] = p;
+    }
+    for (final n in dayNotes) {
+      _noteByDate[formatDateKey(n.date)] = n;
+    }
+    final hidden = settings[hiddenCategoriesKey];
+    if (hidden != null && hidden.isNotEmpty) {
+      hiddenCategories = {for (final s in hidden.split(',')) ?int.tryParse(s)};
+    }
     for (final e in exceptions) {
       (_exceptionsBySeries[e.seriesId] ??= {})[e.dateKey] = e;
     }
@@ -105,6 +117,15 @@ class AppSnapshot {
   final List<TimeEntry> timeEntries;
   final List<TaskTemplate> templates;
   final Map<String, String> settings;
+  final List<Project> projects;
+  final List<DayNote> dayNotes;
+
+  /// Clave de ajustes con los ids de categorías ocultas en el calendario.
+  static const hiddenCategoriesKey = 'hiddenCategories';
+
+  /// Categorías ocultas en las vistas del calendario (no en avisos, widget
+  /// ni búsqueda).
+  Set<int> hiddenCategories = const {};
 
   final _exceptionsBySeries = <int, Map<String, SeriesException>>{};
   final _completionsBySeries = <int, Map<String, OccurrenceCompletion>>{};
@@ -113,6 +134,32 @@ class AppSnapshot {
   final _attachmentsByTask = <int, List<Attachment>>{};
   final _taskById = <int, Task>{};
   final _categoryById = <int, Category>{};
+  final _projectById = <int, Project>{};
+  final _noteByDate = <String, DayNote>{};
+
+  Project? projectById(int? id) => id == null ? null : _projectById[id];
+  DayNote? noteOn(DateTime day) => _noteByDate[formatDateKey(day)];
+
+  /// Tareas de un proyecto (las series cuentan una vez).
+  List<Task> tasksOfProject(int projectId) =>
+      tasks.where((t) => t.projectId == projectId && t.status != TaskStatus.discarded).toList();
+
+  /// Avance de un proyecto: tareas puntuales completadas / totales.
+  (int done, int total) projectProgress(int projectId) {
+    final list = tasksOfProject(projectId).where((t) => !t.isSeries);
+    return (list.where((t) => t.isCompleted).length, list.length);
+  }
+
+  bool _visible(Occurrence o) =>
+      o.task.categoryId == null || !hiddenCategories.contains(o.task.categoryId);
+
+  /// Como [occurrencesBetween] pero sin las categorías ocultas (vistas del
+  /// calendario).
+  List<Occurrence> calendarOccurrencesBetween(DateTime from, DateTime to) =>
+      occurrencesBetween(from, to).where(_visible).toList();
+
+  List<Occurrence> calendarOccurrencesOnDay(DateTime day) =>
+      occurrencesOnDay(day).where(_visible).toList();
 
   Task? taskById(int id) => _taskById[id];
   Category? categoryById(int? id) => id == null ? null : _categoryById[id];

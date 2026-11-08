@@ -47,6 +47,7 @@ class _TaskEditorState extends ConsumerState<TaskEditor> {
   late DateTime start;
   int durationMin = 60;
   int? categoryId;
+  int? projectId;
   Priority priority = Priority.medium;
   bool pinned = false;
   bool countdown = false;
@@ -74,6 +75,7 @@ class _TaskEditorState extends ConsumerState<TaskEditor> {
       start = t.start ?? _nextSlot(now);
       durationMin = t.durationMin ?? 60;
       categoryId = t.categoryId;
+      projectId = t.projectId;
       priority = t.priority;
       pinned = t.pinned;
       countdown = t.countdown;
@@ -130,6 +132,8 @@ class _TaskEditorState extends ConsumerState<TaskEditor> {
       tz: base?.tz ?? ref.read(timeZoneProvider),
       createdAt: base?.createdAt ?? now,
       updatedAt: now,
+      projectId: projectId,
+      icsUid: base?.icsUid ?? widget.occurrence?.series.icsUid,
     );
   }
 
@@ -360,6 +364,26 @@ class _TaskEditorState extends ConsumerState<TaskEditor> {
               ],
               onChanged: (v) => setState(() => categoryId = v),
             ),
+            if (snap.projects.isNotEmpty || projectId != null) ...[
+              const SizedBox(height: 8),
+              DropdownButtonFormField<int?>(
+                initialValue: snap.projectById(projectId) == null ? null : projectId,
+                decoration: InputDecoration(labelText: l.project),
+                items: [
+                  DropdownMenuItem(value: null, child: Text(l.noProject)),
+                  for (final p in snap.projects.where((p) => !p.archived))
+                    DropdownMenuItem(
+                      value: p.id,
+                      child: Row(children: [
+                        Icon(Icons.folder, size: 18, color: Color(p.color)),
+                        const SizedBox(width: 8),
+                        Text(p.name),
+                      ]),
+                    ),
+                ],
+                onChanged: (v) => setState(() => projectId = v),
+              ),
+            ],
             const SizedBox(height: 16),
             Text(l.priority, style: Theme.of(context).textTheme.titleSmall),
             const SizedBox(height: 4),

@@ -1,4 +1,4 @@
-# Calendario + To-Do (Flutter)
+# to Do — Calendario + tareas (Flutter)
 
 App móvil personal (Android e iOS) que combina calendario y lista de tareas, 100 % local y sin cuenta.
 Especificación: [Requisitos — App Calendario + To-Do](https://claude.ai/artifact/6iyHVc8BPKqx2BQnSdakuC).
@@ -140,6 +140,28 @@ Leyenda: ✅ hecho y probado (test o emulador) · ☑️ hecho, solo compilado �
 | --- | --- | --- |
 | RF-48 Texto natural | ✅ | es / en / zh, con vista previa (tests y emulador) |
 | RF-51 Widget | ⚠️ | Android: widget nativo con check interactivo, compilado pero no colocado en la pantalla de inicio. iOS: código de WidgetKit incluido, falta crear el target en Xcode (ver abajo) |
+
+## Novedades v2 (2026-11-08)
+
+Decididas por ti: cada punto recoge la opción que elegiste.
+
+| Función | Estado | Detalle |
+| --- | --- | --- |
+| Vista 3 días | ✅ | Hoy, mañana y pasado; al deslizar avanza 1 día. Pestaña propia (probado en el emulador) |
+| Vista entre semana | ✅ | Lunes a viernes. Se activa tocando otra vez «Semana» o con el botón de la cabecera (probado en el emulador) |
+| Importar .ics | ✅ | Vista previa con casillas y categoría destino (según el archivo, ninguna o una concreta). Los UID ya importados salen desmarcados; si los marcas, se reemplazan. Lee VEVENT/VTODO, RRULE, EXDATE, RECURRENCE-ID, VALARM, TZID/UTC/flotante. Las reglas no compatibles se avisan y se importa solo la primera ocurrencia (tests + emulador) |
+| Exportar .ics | ✅ | Diálogo con rango de fechas, categorías, completadas y sin fecha. Las tareas con fecha van como VEVENT (con TZID IANA, RRULE, EXDATE y RECURRENCE-ID) y las sin fecha como VTODO. Ida y vuelta probada en tests |
+| Abrir .ics con la app | ✅ Android / ☑️ iOS | «Abrir con» y «Compartir» en `text/calendar` llevan directo a la vista previa (probado en el emulador). En iOS está el código, sin probar |
+| Proyectos | ☑️ | Aparte de la categoría: nombre, color, fecha límite opcional y avance (tareas puntuales completadas / totales; las series no cuentan). Pantalla de proyecto y campo en el editor |
+| Diario | ☑️ | Una nota por día: botón en la cabecera de la vista día (relleno si hay nota) y pantalla «Diario» con búsqueda |
+| Mostrar/ocultar categorías | ✅ | Casillas en el menú. Solo afecta a las vistas del calendario; avisos, widget y búsqueda siguen viéndolo todo (test) |
+| Cuentas atrás y fijadas | ☑️ | Sección en el menú |
+| Procesar bandeja | ☑️ | Asistente tarea a tarea: hoy, mañana, hueco libre, elegir fecha, categoría, descartar o saltar |
+| Guía de gestos | ☑️ | Gestos y ejemplos de texto natural |
+| Mapa de calor anual | ☑️ | En Estadísticas, % completado por día; toca un día para ver su recuento |
+| Nombre «to Do» | ✅ | En Android, iOS y los tres idiomas |
+
+Esquema de la base de datos v2: columnas `tasks.projectId` y `tasks.icsUid`, y tablas `projects` y `day_notes`. La migración desde v1 se ha probado instalando encima de la v1 en el emulador sin perder datos, y las copias de seguridad de v1 se siguen importando (test).
 
 ## Decisiones tomadas
 

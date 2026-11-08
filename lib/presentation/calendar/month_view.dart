@@ -36,7 +36,7 @@ class _MonthGrid extends ConsumerWidget {
     final gridStart = startOfWeek(first, weekStartsMonday: settings.weekStartsMonday);
     final weeks = ((daysBetween(gridStart, first) + daysInMonth(first.year, first.month)) / 7).ceil();
     final snap = ref.watch(snapshotProvider);
-    final occ = snap.occurrencesBetween(gridStart, addDays(gridStart, weeks * 7));
+    final occ = snap.calendarOccurrencesBetween(gridStart, addDays(gridStart, weeks * 7));
     final byDay = <String, List<Occurrence>>{};
     for (final o in occ) {
       (byDay[formatDateKey(o.task.start!)] ??= []).add(o);

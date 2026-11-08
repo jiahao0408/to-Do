@@ -1,6 +1,6 @@
 {
   "@@locale": "es",
-  "appTitle": "Calendario",
+  "appTitle": "to Do",
   "viewDay": "Día",
   "viewWeek": "Semana",
   "viewMonth": "Mes",
@@ -27,7 +27,13 @@
   "endTime": "Fin",
   "duration": "Duración",
   "durationMinutes": "{n} min",
-  "@durationMinutes": {"placeholders": {"n": {"type": "int"}}},
+  "@durationMinutes": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
   "category": "Categoría",
   "noCategory": "Sin categoría",
   "priority": "Prioridad",
@@ -44,11 +50,29 @@
   "reminders": "Recordatorios",
   "reminderAtTime": "A la hora",
   "reminderMinutesBefore": "{n} min antes",
-  "@reminderMinutesBefore": {"placeholders": {"n": {"type": "int"}}},
+  "@reminderMinutesBefore": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
   "reminderHoursBefore": "{n, plural, =1{1 hora antes} other{{n} horas antes}}",
-  "@reminderHoursBefore": {"placeholders": {"n": {"type": "int"}}},
+  "@reminderHoursBefore": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
   "reminderDaysBefore": "{n, plural, =1{1 día antes} other{{n} días antes}}",
-  "@reminderDaysBefore": {"placeholders": {"n": {"type": "int"}}},
+  "@reminderDaysBefore": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
   "customReminder": "Personalizado…",
   "minutesBeforeLabel": "Minutos antes",
   "repeat": "Repetir",
@@ -67,7 +91,16 @@
   "close": "Cerrar",
   "ok": "Aceptar",
   "completedCount": "{done}/{total} completadas",
-  "@completedCount": {"placeholders": {"done": {"type": "int"}, "total": {"type": "int"}}},
+  "@completedCount": {
+    "placeholders": {
+      "done": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
   "taskCompleted": "Tarea completada",
   "taskUncompleted": "Tarea pendiente",
   "taskDeleted": "Tarea borrada",
@@ -76,15 +109,45 @@
   "taskSkipped": "Ocurrencia saltada",
   "taskDuplicated": "Tarea duplicada",
   "taskPostponed": "Pospuesta a {when}",
-  "@taskPostponed": {"placeholders": {"when": {"type": "String"}}},
+  "@taskPostponed": {
+    "placeholders": {
+      "when": {
+        "type": "String"
+      }
+    }
+  },
   "tasksCompleted": "{n, plural, =1{1 tarea completada} other{{n} tareas completadas}}",
-  "@tasksCompleted": {"placeholders": {"n": {"type": "int"}}},
+  "@tasksCompleted": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
   "tasksDeleted": "{n, plural, =1{1 tarea borrada} other{{n} tareas borradas}}",
-  "@tasksDeleted": {"placeholders": {"n": {"type": "int"}}},
+  "@tasksDeleted": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
   "tasksMoved": "{n, plural, =1{1 tarea movida} other{{n} tareas movidas}}",
-  "@tasksMoved": {"placeholders": {"n": {"type": "int"}}},
+  "@tasksMoved": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
   "overlapWarning": "Se solapa con «{title}»",
-  "@overlapWarning": {"placeholders": {"title": {"type": "String"}}},
+  "@overlapWarning": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
   "deleteConfirmTitle": "¿Borrar tarea?",
   "deleteConfirmBody": "Podrás deshacerlo durante unos segundos.",
   "scopeEditTitle": "Editar tarea repetida",
@@ -105,42 +168,132 @@
   "freqYearly": "Anual",
   "every": "Cada",
   "intervalUnit": "{unit, select, day{días} week{semanas} month{meses} year{años} other{}}",
-  "@intervalUnit": {"placeholders": {"unit": {"type": "String"}}},
+  "@intervalUnit": {
+    "placeholders": {
+      "unit": {
+        "type": "String"
+      }
+    }
+  },
   "onDays": "Días",
   "monthlyByDay": "El día {day}",
-  "@monthlyByDay": {"placeholders": {"day": {"type": "int"}}},
+  "@monthlyByDay": {
+    "placeholders": {
+      "day": {
+        "type": "int"
+      }
+    }
+  },
   "monthlyByPosition": "El {ordinal} {weekday}",
-  "@monthlyByPosition": {"placeholders": {"ordinal": {"type": "String"}, "weekday": {"type": "String"}}},
+  "@monthlyByPosition": {
+    "placeholders": {
+      "ordinal": {
+        "type": "String"
+      },
+      "weekday": {
+        "type": "String"
+      }
+    }
+  },
   "ordinal": "{n, select, 1{primer} 2{segundo} 3{tercer} 4{cuarto} 5{quinto} other{último}}",
-  "@ordinal": {"placeholders": {"n": {"type": "String"}}},
+  "@ordinal": {
+    "placeholders": {
+      "n": {
+        "type": "String"
+      }
+    }
+  },
   "endsLabel": "Termina",
   "endsNever": "Nunca",
   "endsUntil": "Hasta una fecha",
   "endsCount": "Tras N repeticiones",
   "repetitions": "Repeticiones",
   "rrEveryDay": "{n, plural, =1{Cada día} other{Cada {n} días}}",
-  "@rrEveryDay": {"placeholders": {"n": {"type": "int"}}},
+  "@rrEveryDay": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
   "rrEveryWeek": "{n, plural, =1{Cada semana} other{Cada {n} semanas}}",
-  "@rrEveryWeek": {"placeholders": {"n": {"type": "int"}}},
+  "@rrEveryWeek": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
   "rrEveryMonth": "{n, plural, =1{Cada mes} other{Cada {n} meses}}",
-  "@rrEveryMonth": {"placeholders": {"n": {"type": "int"}}},
+  "@rrEveryMonth": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
   "rrEveryYear": "{n, plural, =1{Cada año} other{Cada {n} años}}",
-  "@rrEveryYear": {"placeholders": {"n": {"type": "int"}}},
+  "@rrEveryYear": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
   "rrOnMonthDay": "el día {day}",
-  "@rrOnMonthDay": {"placeholders": {"day": {"type": "int"}}},
+  "@rrOnMonthDay": {
+    "placeholders": {
+      "day": {
+        "type": "int"
+      }
+    }
+  },
   "rrOnNth": "el {ordinal} {weekday}",
-  "@rrOnNth": {"placeholders": {"ordinal": {"type": "String"}, "weekday": {"type": "String"}}},
+  "@rrOnNth": {
+    "placeholders": {
+      "ordinal": {
+        "type": "String"
+      },
+      "weekday": {
+        "type": "String"
+      }
+    }
+  },
   "rrOnDate": "el {date}",
-  "@rrOnDate": {"placeholders": {"date": {"type": "String"}}},
+  "@rrOnDate": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
   "rrUntil": "hasta el {date}",
-  "@rrUntil": {"placeholders": {"date": {"type": "String"}}},
+  "@rrUntil": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
   "rrCount": "{n, plural, =1{1 vez} other{{n} veces}}",
-  "@rrCount": {"placeholders": {"n": {"type": "int"}}},
+  "@rrCount": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
   "listAnd": "y",
   "listSeparator": ", ",
   "overdueTitle": "Tareas atrasadas",
   "overdueBody": "{n, plural, =1{Tienes 1 tarea sin completar de días pasados.} other{Tienes {n} tareas sin completar de días pasados.}}",
-  "@overdueBody": {"placeholders": {"n": {"type": "int"}}},
+  "@overdueBody": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
   "moveToToday": "Mover a hoy",
   "reschedule": "Reprogramar",
   "discard": "Descartar",
@@ -159,7 +312,13 @@
   "clearFilters": "Quitar filtros",
   "noResults": "Sin resultados",
   "selectedCount": "{n} seleccionadas",
-  "@selectedCount": {"placeholders": {"n": {"type": "int"}}},
+  "@selectedCount": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
   "moveTo": "Mover a…",
   "changeCategory": "Cambiar categoría",
   "theme": "Tema",
@@ -200,11 +359,23 @@
   "backupExported": "Copia exportada",
   "backupImported": "Copia restaurada",
   "backupError": "Error: {error}",
-  "@backupError": {"placeholders": {"error": {"type": "String"}}},
+  "@backupError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
   "newCategory": "Nueva categoría",
   "categoryName": "Nombre",
   "deleteCategoryConfirm": "¿Borrar «{name}»? Sus tareas quedarán sin categoría.",
-  "@deleteCategoryConfirm": {"placeholders": {"name": {"type": "String"}}},
+  "@deleteCategoryConfirm": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "catUni": "Uni",
   "catWork": "Trabajo",
   "catPersonal": "Personal",
@@ -216,27 +387,81 @@
   "notifChannelReminders": "Recordatorios",
   "notifChannelSummaries": "Resúmenes",
   "startsIn": "Empieza en {n} min",
-  "@startsIn": {"placeholders": {"n": {"type": "int"}}},
+  "@startsIn": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
   "startsNow": "Empieza ahora",
   "startsAt": "A las {time}",
-  "@startsAt": {"placeholders": {"time": {"type": "String"}}},
+  "@startsAt": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
   "dailySummaryTitle": "Tu día",
   "dailySummaryBody": "{n, plural, =0{No tienes tareas hoy} =1{1 tarea hoy: {first}} other{{n} tareas hoy: {first}}}",
-  "@dailySummaryBody": {"placeholders": {"n": {"type": "int"}, "first": {"type": "String"}}},
+  "@dailySummaryBody": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      },
+      "first": {
+        "type": "String"
+      }
+    }
+  },
   "weeklySummaryTitle": "Tu semana",
   "weeklySummaryBody": "{n, plural, =0{Semana libre de tareas} =1{1 tarea esta semana} other{{n} tareas esta semana}}",
-  "@weeklySummaryBody": {"placeholders": {"n": {"type": "int"}}},
+  "@weeklySummaryBody": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
   "monthlySummaryTitle": "Tu mes",
   "monthlySummaryBody": "{n, plural, =1{1 tarea este mes} other{{n} tareas este mes}}{countdowns}",
-  "@monthlySummaryBody": {"placeholders": {"n": {"type": "int"}, "countdowns": {"type": "String"}}},
+  "@monthlySummaryBody": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      },
+      "countdowns": {
+        "type": "String"
+      }
+    }
+  },
   "daysLeft": "{n, plural, =0{Es hoy} =1{Falta 1 día} other{Faltan {n} días}}",
-  "@daysLeft": {"placeholders": {"n": {"type": "int"}}},
+  "@daysLeft": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
   "daysAgo": "{n, plural, =1{Hace 1 día} other{Hace {n} días}}",
-  "@daysAgo": {"placeholders": {"n": {"type": "int"}}},
+  "@daysAgo": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
   "suggestCompleteTask": "Has completado todas las subtareas. ¿Completar la tarea?",
   "quickAddHint": "¿Qué tienes que hacer?",
   "weekNumberShort": "S{n}",
-  "@weekNumberShort": {"placeholders": {"n": {"type": "int"}}},
+  "@weekNumberShort": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
   "noTasks": "Sin tareas",
   "pinnedSection": "Fijadas",
   "countdownSection": "Cuentas atrás",
@@ -255,7 +480,16 @@
   "timerStop": "Parar",
   "timerReset": "Reiniciar",
   "estimatedVsReal": "Estimado {est} · Real {real}",
-  "@estimatedVsReal": {"placeholders": {"est": {"type": "String"}, "real": {"type": "String"}}},
+  "@estimatedVsReal": {
+    "placeholders": {
+      "est": {
+        "type": "String"
+      },
+      "real": {
+        "type": "String"
+      }
+    }
+  },
   "applyTemplate": "Aplicar a un día",
   "newTemplate": "Nueva plantilla",
   "templateName": "Nombre de la plantilla",
@@ -269,15 +503,39 @@
   "statsToday": "Hoy",
   "statsStreak": "Racha",
   "statsStreakDays": "{n, plural, =1{1 día} other{{n} días}}",
-  "@statsStreakDays": {"placeholders": {"n": {"type": "int"}}},
+  "@statsStreakDays": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
   "statsBestStreak": "Mejor racha: {n}",
-  "@statsBestStreak": {"placeholders": {"n": {"type": "int"}}},
+  "@statsBestStreak": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
   "statsHabits": "Hábitos (tareas repetidas)",
   "statsTimeByCategory": "Estimado vs. real por categoría",
   "statsLast7Days": "Últimos 7 días",
   "statsWeeklySummary": "Resumen semanal",
   "statsWeeklySummaryBody": "{done} de {total} completadas · {minutes} min dedicados",
-  "@statsWeeklySummaryBody": {"placeholders": {"done": {"type": "int"}, "total": {"type": "int"}, "minutes": {"type": "int"}}},
+  "@statsWeeklySummaryBody": {
+    "placeholders": {
+      "done": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      },
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
   "reviewStep1": "Pendientes",
   "reviewStep1Body": "Tareas atrasadas o sin completar de la semana pasada",
   "reviewStep2": "Próxima semana",
@@ -291,7 +549,13 @@
   "finish": "Terminar",
   "placeInFreeSlot": "Colocar en hueco libre",
   "placedAt": "Colocada el {when}",
-  "@placedAt": {"placeholders": {"when": {"type": "String"}}},
+  "@placedAt": {
+    "placeholders": {
+      "when": {
+        "type": "String"
+      }
+    }
+  },
   "reviewReminder": "Toca tu revisión semanal",
   "allDoneCelebration": "¡Día completado!",
   "quickAddPreview": "Detectado",
@@ -302,5 +566,121 @@
   "notificationsDisabled": "Los avisos están desactivados en el sistema",
   "exactAlarmsDisabled": "Las alarmas exactas están desactivadas: los avisos pueden retrasarse",
   "openSystemSettings": "Abrir ajustes",
-  "about": "Acerca de"
+  "about": "Acerca de",
+  "viewThreeDays": "3 días",
+  "viewWorkWeek": "Entre semana",
+  "icsImport": "Importar .ics",
+  "icsExport": "Exportar .ics",
+  "icsImportHint": "Añade eventos de Google Calendar, Outlook u otras apps",
+  "icsExportHint": "Comparte tus tareas como archivo de calendario",
+  "icsSelectAll": "Todos",
+  "icsSelectNone": "Ninguno",
+  "icsAlreadyImported": "Ya importado: se reemplaza si lo marcas",
+  "icsUnsupportedRule": "Repetición no compatible: solo se importa la primera",
+  "icsMultiDay": "Varios días: se importa el primero",
+  "icsCategoryFromFile": "Según el archivo",
+  "icsImportButton": "{n, plural, =1{Importar 1} other{Importar {n}}}",
+  "@icsImportButton": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "icsImported": "{n, plural, =1{1 tarea importada} other{{n} tareas importadas}}",
+  "@icsImported": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "icsNothing": "El archivo no tiene eventos ni tareas",
+  "icsError": "No se pudo leer el archivo: {error}",
+  "@icsError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "icsRange": "Fechas",
+  "icsAllDates": "Todas",
+  "icsChooseRange": "Elegir rango",
+  "icsIncludeCompleted": "Incluir completadas",
+  "icsIncludeUndated": "Incluir tareas sin fecha (como tareas pendientes)",
+  "icsWillExport": "{n, plural, =0{No hay tareas que exportar} =1{Se exportará 1 tarea} other{Se exportarán {n} tareas}}",
+  "@icsWillExport": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "icsExportButton": "Exportar y compartir",
+  "projects": "Proyectos",
+  "project": "Proyecto",
+  "newProject": "Nuevo proyecto",
+  "projectName": "Nombre del proyecto",
+  "noProject": "Sin proyecto",
+  "projectDue": "Fecha límite",
+  "noDueDate": "Sin fecha límite",
+  "deleteProjectConfirm": "¿Borrar «{name}»? Sus tareas quedarán sin proyecto.",
+  "@deleteProjectConfirm": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "projectEmpty": "Este proyecto aún no tiene tareas",
+  "projectSeriesNote": "Las tareas repetidas no cuentan en el avance",
+  "diary": "Diario",
+  "dayNote": "Nota del día",
+  "dayNoteHint": "¿Cómo ha ido el día?",
+  "diaryEmpty": "Aún no has escrito en el diario",
+  "searchDiary": "Buscar en el diario",
+  "showInCalendar": "Mostrar en el calendario",
+  "manageCategories": "Gestionar categorías",
+  "countdownsAndPinned": "Cuentas atrás y fijadas",
+  "nothingPinned": "Nada fijado ni con cuenta atrás",
+  "processInbox": "Procesar bandeja",
+  "processInboxProgress": "{i} de {n}",
+  "@processInboxProgress": {
+    "placeholders": {
+      "i": {
+        "type": "int"
+      },
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "skip": "Saltar",
+  "inboxDone": "¡Bandeja vacía!",
+  "gestureGuide": "Guía de gestos",
+  "gestures": "Gestos",
+  "naturalLanguage": "Texto natural",
+  "gTapBlock": "Tocar una tarea: ver el detalle",
+  "gLongPressMove": "Mantener pulsada y mover: cambiar la hora (y el día en semana o 3 días)",
+  "gLongPress": "Mantener pulsada sin mover: selección múltiple",
+  "gResize": "Arrastrar el borde inferior de un bloque: cambiar la duración",
+  "gPinch": "Pellizcar con dos dedos: ampliar o reducir las horas",
+  "gSwipePages": "Deslizar a los lados: pasar al día, semana o mes anterior o siguiente",
+  "gSwipeList": "En listas: deslizar a la derecha completa; a la izquierda borra o pospone",
+  "gLongPressEmpty": "Mantener pulsado un hueco vacío: crear una tarea a esa hora",
+  "gWeekTap": "Tocar otra vez «Semana»: alternar con entre semana (lunes a viernes)",
+  "gInboxDrag": "Bandeja: mantener pulsada una tarea y soltarla en un hueco del calendario",
+  "gMonthDrag": "Vista mes: mantener pulsada una tarea y soltarla en otro día",
+  "nlTips": "Escribe la tarea con fecha, hora, repetición, #categoría y !prioridad",
+  "heatmapTitle": "Año {year}",
+  "@heatmapTitle": {
+    "placeholders": {
+      "year": {
+        "type": "int"
+      }
+    }
+  },
+  "heatLess": "Menos",
+  "heatMore": "Más"
 }

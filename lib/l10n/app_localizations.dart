@@ -103,7 +103,7 @@ abstract class AppLocalizations {
   /// No description provided for @appTitle.
   ///
   /// In es, this message translates to:
-  /// **'Calendario'**
+  /// **'to Do'**
   String get appTitle;
 
   /// No description provided for @viewDay.
@@ -1677,6 +1677,390 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Acerca de'**
   String get about;
+
+  /// No description provided for @viewThreeDays.
+  ///
+  /// In es, this message translates to:
+  /// **'3 días'**
+  String get viewThreeDays;
+
+  /// No description provided for @viewWorkWeek.
+  ///
+  /// In es, this message translates to:
+  /// **'Entre semana'**
+  String get viewWorkWeek;
+
+  /// No description provided for @icsImport.
+  ///
+  /// In es, this message translates to:
+  /// **'Importar .ics'**
+  String get icsImport;
+
+  /// No description provided for @icsExport.
+  ///
+  /// In es, this message translates to:
+  /// **'Exportar .ics'**
+  String get icsExport;
+
+  /// No description provided for @icsImportHint.
+  ///
+  /// In es, this message translates to:
+  /// **'Añade eventos de Google Calendar, Outlook u otras apps'**
+  String get icsImportHint;
+
+  /// No description provided for @icsExportHint.
+  ///
+  /// In es, this message translates to:
+  /// **'Comparte tus tareas como archivo de calendario'**
+  String get icsExportHint;
+
+  /// No description provided for @icsSelectAll.
+  ///
+  /// In es, this message translates to:
+  /// **'Todos'**
+  String get icsSelectAll;
+
+  /// No description provided for @icsSelectNone.
+  ///
+  /// In es, this message translates to:
+  /// **'Ninguno'**
+  String get icsSelectNone;
+
+  /// No description provided for @icsAlreadyImported.
+  ///
+  /// In es, this message translates to:
+  /// **'Ya importado: se reemplaza si lo marcas'**
+  String get icsAlreadyImported;
+
+  /// No description provided for @icsUnsupportedRule.
+  ///
+  /// In es, this message translates to:
+  /// **'Repetición no compatible: solo se importa la primera'**
+  String get icsUnsupportedRule;
+
+  /// No description provided for @icsMultiDay.
+  ///
+  /// In es, this message translates to:
+  /// **'Varios días: se importa el primero'**
+  String get icsMultiDay;
+
+  /// No description provided for @icsCategoryFromFile.
+  ///
+  /// In es, this message translates to:
+  /// **'Según el archivo'**
+  String get icsCategoryFromFile;
+
+  /// No description provided for @icsImportButton.
+  ///
+  /// In es, this message translates to:
+  /// **'{n, plural, =1{Importar 1} other{Importar {n}}}'**
+  String icsImportButton(int n);
+
+  /// No description provided for @icsImported.
+  ///
+  /// In es, this message translates to:
+  /// **'{n, plural, =1{1 tarea importada} other{{n} tareas importadas}}'**
+  String icsImported(int n);
+
+  /// No description provided for @icsNothing.
+  ///
+  /// In es, this message translates to:
+  /// **'El archivo no tiene eventos ni tareas'**
+  String get icsNothing;
+
+  /// No description provided for @icsError.
+  ///
+  /// In es, this message translates to:
+  /// **'No se pudo leer el archivo: {error}'**
+  String icsError(String error);
+
+  /// No description provided for @icsRange.
+  ///
+  /// In es, this message translates to:
+  /// **'Fechas'**
+  String get icsRange;
+
+  /// No description provided for @icsAllDates.
+  ///
+  /// In es, this message translates to:
+  /// **'Todas'**
+  String get icsAllDates;
+
+  /// No description provided for @icsChooseRange.
+  ///
+  /// In es, this message translates to:
+  /// **'Elegir rango'**
+  String get icsChooseRange;
+
+  /// No description provided for @icsIncludeCompleted.
+  ///
+  /// In es, this message translates to:
+  /// **'Incluir completadas'**
+  String get icsIncludeCompleted;
+
+  /// No description provided for @icsIncludeUndated.
+  ///
+  /// In es, this message translates to:
+  /// **'Incluir tareas sin fecha (como tareas pendientes)'**
+  String get icsIncludeUndated;
+
+  /// No description provided for @icsWillExport.
+  ///
+  /// In es, this message translates to:
+  /// **'{n, plural, =0{No hay tareas que exportar} =1{Se exportará 1 tarea} other{Se exportarán {n} tareas}}'**
+  String icsWillExport(int n);
+
+  /// No description provided for @icsExportButton.
+  ///
+  /// In es, this message translates to:
+  /// **'Exportar y compartir'**
+  String get icsExportButton;
+
+  /// No description provided for @projects.
+  ///
+  /// In es, this message translates to:
+  /// **'Proyectos'**
+  String get projects;
+
+  /// No description provided for @project.
+  ///
+  /// In es, this message translates to:
+  /// **'Proyecto'**
+  String get project;
+
+  /// No description provided for @newProject.
+  ///
+  /// In es, this message translates to:
+  /// **'Nuevo proyecto'**
+  String get newProject;
+
+  /// No description provided for @projectName.
+  ///
+  /// In es, this message translates to:
+  /// **'Nombre del proyecto'**
+  String get projectName;
+
+  /// No description provided for @noProject.
+  ///
+  /// In es, this message translates to:
+  /// **'Sin proyecto'**
+  String get noProject;
+
+  /// No description provided for @projectDue.
+  ///
+  /// In es, this message translates to:
+  /// **'Fecha límite'**
+  String get projectDue;
+
+  /// No description provided for @noDueDate.
+  ///
+  /// In es, this message translates to:
+  /// **'Sin fecha límite'**
+  String get noDueDate;
+
+  /// No description provided for @deleteProjectConfirm.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Borrar «{name}»? Sus tareas quedarán sin proyecto.'**
+  String deleteProjectConfirm(String name);
+
+  /// No description provided for @projectEmpty.
+  ///
+  /// In es, this message translates to:
+  /// **'Este proyecto aún no tiene tareas'**
+  String get projectEmpty;
+
+  /// No description provided for @projectSeriesNote.
+  ///
+  /// In es, this message translates to:
+  /// **'Las tareas repetidas no cuentan en el avance'**
+  String get projectSeriesNote;
+
+  /// No description provided for @diary.
+  ///
+  /// In es, this message translates to:
+  /// **'Diario'**
+  String get diary;
+
+  /// No description provided for @dayNote.
+  ///
+  /// In es, this message translates to:
+  /// **'Nota del día'**
+  String get dayNote;
+
+  /// No description provided for @dayNoteHint.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Cómo ha ido el día?'**
+  String get dayNoteHint;
+
+  /// No description provided for @diaryEmpty.
+  ///
+  /// In es, this message translates to:
+  /// **'Aún no has escrito en el diario'**
+  String get diaryEmpty;
+
+  /// No description provided for @searchDiary.
+  ///
+  /// In es, this message translates to:
+  /// **'Buscar en el diario'**
+  String get searchDiary;
+
+  /// No description provided for @showInCalendar.
+  ///
+  /// In es, this message translates to:
+  /// **'Mostrar en el calendario'**
+  String get showInCalendar;
+
+  /// No description provided for @manageCategories.
+  ///
+  /// In es, this message translates to:
+  /// **'Gestionar categorías'**
+  String get manageCategories;
+
+  /// No description provided for @countdownsAndPinned.
+  ///
+  /// In es, this message translates to:
+  /// **'Cuentas atrás y fijadas'**
+  String get countdownsAndPinned;
+
+  /// No description provided for @nothingPinned.
+  ///
+  /// In es, this message translates to:
+  /// **'Nada fijado ni con cuenta atrás'**
+  String get nothingPinned;
+
+  /// No description provided for @processInbox.
+  ///
+  /// In es, this message translates to:
+  /// **'Procesar bandeja'**
+  String get processInbox;
+
+  /// No description provided for @processInboxProgress.
+  ///
+  /// In es, this message translates to:
+  /// **'{i} de {n}'**
+  String processInboxProgress(int i, int n);
+
+  /// No description provided for @skip.
+  ///
+  /// In es, this message translates to:
+  /// **'Saltar'**
+  String get skip;
+
+  /// No description provided for @inboxDone.
+  ///
+  /// In es, this message translates to:
+  /// **'¡Bandeja vacía!'**
+  String get inboxDone;
+
+  /// No description provided for @gestureGuide.
+  ///
+  /// In es, this message translates to:
+  /// **'Guía de gestos'**
+  String get gestureGuide;
+
+  /// No description provided for @gestures.
+  ///
+  /// In es, this message translates to:
+  /// **'Gestos'**
+  String get gestures;
+
+  /// No description provided for @naturalLanguage.
+  ///
+  /// In es, this message translates to:
+  /// **'Texto natural'**
+  String get naturalLanguage;
+
+  /// No description provided for @gTapBlock.
+  ///
+  /// In es, this message translates to:
+  /// **'Tocar una tarea: ver el detalle'**
+  String get gTapBlock;
+
+  /// No description provided for @gLongPressMove.
+  ///
+  /// In es, this message translates to:
+  /// **'Mantener pulsada y mover: cambiar la hora (y el día en semana o 3 días)'**
+  String get gLongPressMove;
+
+  /// No description provided for @gLongPress.
+  ///
+  /// In es, this message translates to:
+  /// **'Mantener pulsada sin mover: selección múltiple'**
+  String get gLongPress;
+
+  /// No description provided for @gResize.
+  ///
+  /// In es, this message translates to:
+  /// **'Arrastrar el borde inferior de un bloque: cambiar la duración'**
+  String get gResize;
+
+  /// No description provided for @gPinch.
+  ///
+  /// In es, this message translates to:
+  /// **'Pellizcar con dos dedos: ampliar o reducir las horas'**
+  String get gPinch;
+
+  /// No description provided for @gSwipePages.
+  ///
+  /// In es, this message translates to:
+  /// **'Deslizar a los lados: pasar al día, semana o mes anterior o siguiente'**
+  String get gSwipePages;
+
+  /// No description provided for @gSwipeList.
+  ///
+  /// In es, this message translates to:
+  /// **'En listas: deslizar a la derecha completa; a la izquierda borra o pospone'**
+  String get gSwipeList;
+
+  /// No description provided for @gLongPressEmpty.
+  ///
+  /// In es, this message translates to:
+  /// **'Mantener pulsado un hueco vacío: crear una tarea a esa hora'**
+  String get gLongPressEmpty;
+
+  /// No description provided for @gWeekTap.
+  ///
+  /// In es, this message translates to:
+  /// **'Tocar otra vez «Semana»: alternar con entre semana (lunes a viernes)'**
+  String get gWeekTap;
+
+  /// No description provided for @gInboxDrag.
+  ///
+  /// In es, this message translates to:
+  /// **'Bandeja: mantener pulsada una tarea y soltarla en un hueco del calendario'**
+  String get gInboxDrag;
+
+  /// No description provided for @gMonthDrag.
+  ///
+  /// In es, this message translates to:
+  /// **'Vista mes: mantener pulsada una tarea y soltarla en otro día'**
+  String get gMonthDrag;
+
+  /// No description provided for @nlTips.
+  ///
+  /// In es, this message translates to:
+  /// **'Escribe la tarea con fecha, hora, repetición, #categoría y !prioridad'**
+  String get nlTips;
+
+  /// No description provided for @heatmapTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Año {year}'**
+  String heatmapTitle(int year);
+
+  /// No description provided for @heatLess.
+  ///
+  /// In es, this message translates to:
+  /// **'Menos'**
+  String get heatLess;
+
+  /// No description provided for @heatMore.
+  ///
+  /// In es, this message translates to:
+  /// **'Más'**
+  String get heatMore;
 }
 
 class _AppLocalizationsDelegate
