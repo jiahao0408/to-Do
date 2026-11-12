@@ -2,6 +2,7 @@
 
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
 import '../../domain/whale/whale_mood.dart';
@@ -15,6 +16,10 @@ class WhaleAssets {
   final Map<String, List<String>> _groups;
 
   static const empty = WhaleAssets._({});
+
+  /// Para tests: grupos con rutas completas.
+  @visibleForTesting
+  factory WhaleAssets.fromGroups(Map<String, List<String>> groups) => WhaleAssets._(groups);
   static const manifestPath = 'assets/whale/manifest.json';
 
   static Future<WhaleAssets> load(AssetBundle bundle) async {
