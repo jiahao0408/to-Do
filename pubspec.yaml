@@ -78,6 +78,14 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   generate: true
+  # Imágenes del pez (CC BY-NC-SA 4.0, ver assets/whale/LICENSE.md)
+  assets:
+    - assets/whale/manifest.json
+    - assets/whale/normal/
+    - assets/whale/celebrate/
+    - assets/whale/worried/
+    - assets/whale/sleep/
+    - assets/whale/reactions/
 
   # To add assets to your application, add an assets section, like this:
   # assets:

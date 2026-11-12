@@ -1,0 +1,52 @@
+{
+  "normal": [
+    "normal/deepseek-jushou-dazhaohu.webp",
+    "normal/deepseek-zuohao-yizi.webp",
+    "normal/deepseek-biye-ciallo.webp",
+    "normal/deepseek-hai-jing-mai-meng.webp",
+    "normal/deepseek-lanse-dafeiyu.webp",
+    "normal/deepseek-mo-yu.webp",
+    "normal/deepseek-shafa-quanquan.webp",
+    "normal/deepseek-dianfanbao-li.webp"
+  ],
+  "celebrate": [
+    "celebrate/deepseek-zhangkai-shuangshou-huanhu.webp",
+    "celebrate/deepseek-shuangshou-dianzan.webp",
+    "celebrate/deepseek-bixin.webp",
+    "celebrate/deepseek-zhayan-bixin.webp",
+    "celebrate/deepseek-zhenbi-huanhu.webp",
+    "celebrate/deepseek-xuanfu-dianzan.webp",
+    "celebrate/deepseek-jushou-jiayou.webp"
+  ],
+  "worried": [
+    "worried/deepseek-renzhu.webp",
+    "worried/deepseek-shangxiawen-bao-le.webp",
+    "worried/deepseek-da-ku.webp",
+    "worried/deepseek-kuqi.webp",
+    "worried/deepseek-juzhe-laba-ku.webp",
+    "worried/deepseek-maohan.webp",
+    "worried/deepseek-bao-tou-wei-qu.webp"
+  ],
+  "sleep": [
+    "sleep/deepseek-baozhe-jingyu-shuijiao.webp",
+    "sleep/deepseek-bao-jing-shui-jiao.webp",
+    "sleep/deepseek-pa-zhe-shui-jiao.webp",
+    "sleep/deepseek-kan-pingban-shuijiao.webp",
+    "sleep/deepseek-zhuo-qian-shui-zhao.webp"
+  ],
+  "pet": [
+    "reactions/deepseek-mo-tou.webp",
+    "reactions/deepseek-mo-tou-bian-ke-ai.webp"
+  ],
+  "poked": [
+    "reactions/deepseek-shuijiao-bei-chuo.webp"
+  ],
+  "eat": [
+    "reactions/deepseek-chi-baifan.webp",
+    "reactions/deepseek-ken-jitui.webp"
+  ],
+  "easter": [
+    "reactions/deepseek-dianfanbao-touchaoxia.webp",
+    "reactions/deepseek-ni-keng.webp"
+  ]
+}
