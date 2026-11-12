@@ -160,6 +160,7 @@ Decididas por ti: cada punto recoge la opción que elegiste.
 | Guía de gestos | ☑️ | Gestos y ejemplos de texto natural |
 | Mapa de calor anual | ☑️ | En Estadísticas, % completado por día; toca un día para ver su recuento |
 | Nombre «to Do» | ✅ | En Android, iOS y los tres idiomas |
+| Ballenita (鲸鱼娘) | ✅ | Mascota offline: su ánimo sigue tus tareas (dormida de 22:00 a 7:00, de celebración si completas todo el día, preocupada con atrasadas o hambre). Completar una tarea le da de comer (+15 %) y se va quedando con hambre (−50 % al día), pero nunca muere. Tocar = frase, mantener pulsado = caricia, 5 toques = sorpresa. Aparece en la esquina del calendario (arrastrable), en una pecera del menú y en su propia página. Se apaga en Ajustes › Ballenita. Probado en emulador y con tests |
 
 Esquema de la base de datos v2: columnas `tasks.projectId` y `tasks.icsUid`, y tablas `projects` y `day_notes`. La migración desde v1 se ha probado instalando encima de la v1 en el emulador sin perder datos, y las copias de seguridad de v1 se siguen importando (test).
 
@@ -192,3 +193,21 @@ En `ios/TodayWidget/` está el código de WidgetKit y del App Intent del check (
 - No se ha probado en iOS ni en un móvil físico; solo en el emulador de Android (API 37).
 - Al borrar una tarea, sus archivos adjuntos se quedan en la carpeta de la app; solo se borra la fila.
 - Para alarmas exactas uso `USE_EXACT_ALARM`, que Android concede a las apps de calendario. Google Play pide justificar ese permiso al publicar; si se quitara, los avisos serían inexactos (hasta 1 h de margen).
+
+
+## Imágenes de la ballenita
+
+Las imágenes de `assets/whale/` **no** son de este proyecto: son el personaje de fans 鲸鱼娘 DeepSeek.
+
+- Diseño original: 上善无形.
+- Segundo diseño: ZipZipPipe.
+- Recopilación: [EDMOK/blue-fish-archive](https://github.com/EDMOK/blue-fish-archive).
+- Licencia: **CC BY-NC-SA 4.0** (atribución, no comercial, compartir igual).
+
+Aquí están recortadas y convertidas a WebP. Detalles en [assets/whale/LICENSE.md](assets/whale/LICENSE.md).
+
+Para regenerarlas:
+1. Descarga los originales listados en `tool/whale_files.txt` a `tool/whale_originals/` (carpeta fuera de git).
+2. Ejecuta `python tool/whale_assets.py tool/whale_originals assets/whale`.
+
+Solo para uso personal y no comercial.
