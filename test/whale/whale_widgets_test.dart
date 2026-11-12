@@ -99,6 +99,25 @@ void main() {
     expect(find.byKey(const ValueKey('whale-bubble')), findsNothing);
   });
 
+  testWidgets('气泡在左边时从精灵左边缘开始，不会出屏', (tester) async {
+    await tester.pumpWidget(host(FakeWhale(view()), animations: false,
+        child: const Align(
+          alignment: Alignment.bottomLeft,
+          child: Padding(
+            padding: EdgeInsets.only(left: 12, bottom: 12),
+            child: WhaleSprite(size: 72, bubbleAlignment: Alignment.topLeft),
+          ),
+        )));
+    await tester.pump();
+    await tester.tap(find.byType(WhaleSprite));
+    await tester.pump();
+    final bubble = tester.getRect(find.byKey(const ValueKey('whale-bubble')));
+    final sprite = tester.getRect(find.byType(WhaleSprite));
+    expect(bubble.left, closeTo(sprite.left, 0.5));
+    expect(bubble.left, greaterThanOrEqualTo(0));
+    await tester.pump(const Duration(seconds: 4));
+  });
+
   testWidgets('长按调用 pet', (tester) async {
     final fake = FakeWhale(view());
     await tester.pumpWidget(host(fake, animations: false));

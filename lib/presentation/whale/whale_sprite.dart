@@ -260,6 +260,9 @@ class _WhaleSpriteState extends ConsumerState<WhaleSprite> with TickerProviderSt
               if (_bubble != null)
                 Positioned(
                   bottom: s + 6,
+                  // Pegada a un borde: el bocadillo crece hacia dentro de la pantalla.
+                  left: widget.bubbleAlignment.x < 0 ? 0 : null,
+                  right: widget.bubbleAlignment.x > 0 ? 0 : null,
                   child: _Bubble(key: const ValueKey('whale-bubble'), text: _bubble!, maxWidth: max(s * 2.2, 180)),
                 ),
             ],
