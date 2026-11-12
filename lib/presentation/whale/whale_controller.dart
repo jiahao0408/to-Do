@@ -48,6 +48,9 @@ final whaleProvider = NotifierProvider<WhaleController, WhaleView>(WhaleControll
 
 class WhaleController extends Notifier<WhaleView> {
   WhaleState? _state;
+
+  /// Lo último que se escribió en settings (o se leyó al arrancar).
+  WhaleState? _saved;
   AppSnapshot? _snap;
   bool _wasEnabled = true;
   Timer? _minute;
@@ -96,7 +99,8 @@ class WhaleController extends Notifier<WhaleView> {
     _snap = snap;
     final settings = AppSettings(snap.settings);
     final count = completedCount(snap);
-    var st = _state ?? WhaleState.fromSettings(snap.settings) ?? WhaleState.initial(now, count);
+    if (_state == null) _saved = WhaleState.fromSettings(snap.settings);
+    var st = _state ?? _saved ?? WhaleState.initial(now, count);
     WhaleReaction? reaction = _stateOrNull?.reaction;
     var tick = _stateOrNull?.reactionTick ?? 0;
 
@@ -116,9 +120,13 @@ class WhaleController extends Notifier<WhaleView> {
         tick++;
       }
     }
+    // Solo se guarda cuando cambia la «recta» de la bajada: la base (comer,
+    // desmarcar, importar) o el interruptor. Guardar emite una foto nueva y
+    // volvería a entrar aquí: guardar siempre sería un bucle cada 2 s.
+    final saved = _saved;
+    if (saved == null || saved.baseline != st.baseline || enabled != _wasEnabled) _scheduleSave();
     _wasEnabled = enabled;
     _state = st;
-    _scheduleSave();
 
     final today = snap.occurrencesOnDay(now);
     final pending = today.where((o) => !o.completed).toList();
@@ -157,6 +165,7 @@ class WhaleController extends Notifier<WhaleView> {
     _save = null;
     final st = _state;
     if (st == null) return;
+    _saved = st;
     for (final e in st.toSettings().entries) {
       _repo.setSetting(e.key, e.value);
     }

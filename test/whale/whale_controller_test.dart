@@ -145,4 +145,22 @@ void main() {
     expect(ctx.nextTitle, 'Inglés');
     expect(ctx.nextStart, DateTime(2026, 11, 12, 15));
   });
+
+  test('guardar no crea un bucle: sin cambios, no hay escrituras nuevas', () async {
+    await Future.delayed(const Duration(milliseconds: 2500)); // primer guardado
+    var emissions = 0;
+    final sub = db.tableUpdates().listen((_) => emissions++);
+    await Future.delayed(const Duration(milliseconds: 5000));
+    await sub.cancel();
+    expect(emissions, 0);
+  }, timeout: const Timeout(Duration(seconds: 20)));
+
+  test('al completar una tarea, la nueva base se guarda', () async {
+    final id = await service.create(task('a'));
+    await settle();
+    await complete(id, true);
+    await Future.delayed(const Duration(milliseconds: 2500));
+    expect(await repo.getSetting('whale.completedBaseline'), '1');
+    expect(double.parse((await repo.getSetting('whale.fullness'))!), 85);
+  }, timeout: const Timeout(Duration(seconds: 20)));
 }
