@@ -682,5 +682,93 @@
     }
   },
   "heatLess": "Menos",
-  "heatMore": "Más"
+  "heatMore": "Más",
+  "whaleNormal1": "{n, plural, =0{Hoy no te queda nada pendiente} =1{Hoy te queda 1 cosa} other{Hoy te quedan {n} cosas}}",
+  "@whaleNormal1": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "whaleNormal2": "Lo siguiente: {title} a las {time}",
+  "@whaleNormal2": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "whaleNormal3": "Un ratito de descanso y seguimos",
+  "whaleNormal4": "¡Aquí estoy, nadando contigo!",
+  "whaleCelebrate1": "¡Todo hecho! Hoy has estado genial",
+  "whaleCelebrate2": "Día completado, me lo he comido todo",
+  "whaleCelebrate3": "¡Qué día tan productivo!",
+  "whaleWorried1": "{n, plural, =1{Hay 1 tarea atrasada… ¿la miramos?} other{Hay {n} tareas atrasadas… ¿las miramos?}}",
+  "@whaleWorried1": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "whaleWorried2": "Lo atrasado me pone nerviosa…",
+  "whaleHungry1": "Tengo hambre… completa una tarea y dame de comer",
+  "whaleHungry2": "Mi barriguita está vacía…",
+  "whaleSleep1": "Zzz…",
+  "whaleSleep2": "Mañana seguimos…",
+  "whalePet1": "Jeje",
+  "whalePet2": "Otra vez, otra vez",
+  "whalePet3": "Qué gustito…",
+  "whalePoked1": "Mmm… ¿qué hora es?",
+  "whalePoked2": "Cinco minutitos más…",
+  "whaleEat1": "¡Qué rico!",
+  "whaleEat2": "¡Otra tarea, otra!",
+  "whaleEat3": "Ñam, ñam",
+  "whaleTitle": "Ballenita",
+  "whaleFullness": "Saciedad {p}%",
+  "@whaleFullness": {
+    "placeholders": {
+      "p": {
+        "type": "int"
+      }
+    }
+  },
+  "whaleTodayDone": "Hoy: {done}/{total} hechas",
+  "@whaleTodayDone": {
+    "placeholders": {
+      "done": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "whaleMoodNormal": "Tranquila",
+  "whaleMoodCelebrate": "De celebración",
+  "whaleMoodWorried": "Preocupada",
+  "whaleMoodSleep": "Durmiendo",
+  "whalePetButton": "Acariciar",
+  "whalePokeButton": "Darle un toque",
+  "whaleShow": "Mostrar a la ballenita",
+  "whaleFloating": "En la esquina del calendario",
+  "whaleDrawer": "Pecera en el menú",
+  "whaleTank": "Página de la pecera",
+  "whaleAbout": "Sobre el personaje",
+  "whaleCredits": "Original 上善无形 · segundo diseño ZipZipPipe · fuente EDMOK/blue-fish-archive · CC BY-NC-SA 4.0",
+  "whaleSemantics": "Ballenita, {mood}, saciedad {p}%",
+  "@whaleSemantics": {
+    "placeholders": {
+      "mood": {
+        "type": "String"
+      },
+      "p": {
+        "type": "int"
+      }
+    }
+  }
 }

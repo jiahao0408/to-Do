@@ -1,9 +1,17 @@
 // 鲸鱼娘：饱腹度、心情与台词（领域层）。
+import 'dart:math';
+
 import 'package:flutter_test/flutter_test.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:todo_calendar/domain/models/entities.dart';
 import 'package:todo_calendar/domain/models/task.dart';
 import 'package:todo_calendar/domain/snapshot.dart';
+import 'package:flutter/widgets.dart' show Locale;
+import 'package:todo_calendar/domain/whale/whale_lines.dart';
 import 'package:todo_calendar/domain/whale/whale_mood.dart';
+import 'package:todo_calendar/l10n/app_localizations.dart';
+import 'package:todo_calendar/presentation/common/format.dart';
+import 'package:todo_calendar/presentation/whale/whale_copy.dart';
 import 'package:todo_calendar/domain/whale/whale_state.dart';
 
 AppSnapshot snap({
@@ -39,6 +47,8 @@ Task task(int id, DateTime start, {bool done = false, String? rrule, int? cat}) 
     );
 
 void main() {
+  setUpAll(() => initializeDateFormatting());
+
   group('WhaleState', () {
     test('新养的从 70 开始', () {
       final s = WhaleState.initial(t0, 3);
@@ -153,6 +163,53 @@ void main() {
         settings: {AppSnapshot.hiddenCategoriesKey: '7'},
       );
       expect(at(12, 0, s: s), WhaleMood.worried);
+    });
+  });
+
+
+  group('台词', () {
+    test('pickLine 不连续重复', () {
+      for (var seed = 0; seed <= 20; seed++) {
+        expect(pickLine(['a', 'b'], Random(seed), last: 'a'), 'b');
+      }
+    });
+
+    test('只有一句时可以重复', () {
+      expect(pickLine(['a'], Random(1), last: 'a'), 'a');
+    });
+
+    test('kindForMood：着急 + 饿 + 无逾期 → hungry；着急 + 逾期 → worried', () {
+      const hungry = WhaleContext(remainingToday: 0, overdue: 0, fullness: 10);
+      const late = WhaleContext(remainingToday: 0, overdue: 2, fullness: 10);
+      expect(kindForMood(WhaleMood.worried, hungry), WhaleLineKind.hungry);
+      expect(kindForMood(WhaleMood.worried, late), WhaleLineKind.worried);
+      expect(kindForMood(WhaleMood.sleep, hungry), WhaleLineKind.sleep);
+      expect(kindForMood(WhaleMood.celebrate, hungry), WhaleLineKind.celebrate);
+      expect(kindForMood(WhaleMood.normal, hungry), WhaleLineKind.normal);
+    });
+
+    test('whaleCandidates 在没有下一件任务时不含「下一件」', () {
+      final l = lookupAppLocalizations(const Locale('zh'));
+      final f = Fmt('zh');
+      const noNext = WhaleContext(remainingToday: 3, overdue: 0, fullness: 70);
+      final a = whaleCandidates(l, f, WhaleLineKind.normal, noNext);
+      expect(a, isNotEmpty);
+      expect(a.any((s) => s.contains('下一件')), isFalse);
+      expect(a.any((s) => s.contains('3')), isTrue);
+      final withNext = WhaleContext(
+          remainingToday: 3, overdue: 0, fullness: 70, nextTitle: '英语课', nextStart: DateTime(2026, 11, 12, 19));
+      final b = whaleCandidates(l, f, WhaleLineKind.normal, withNext);
+      expect(b.any((s) => s.contains('英语课') && s.contains('19:00')), isTrue);
+    });
+
+    test('每种台词在三种语言里都非空', () {
+      for (final code in ['es', 'en', 'zh']) {
+        final l = lookupAppLocalizations(Locale(code));
+        const c = WhaleContext(remainingToday: 0, overdue: 1, fullness: 10);
+        for (final k in WhaleLineKind.values) {
+          expect(whaleCandidates(l, Fmt(code), k, c), isNotEmpty, reason: '$code $k');
+        }
+      }
     });
   });
 }

@@ -2,7 +2,9 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:todo_calendar/presentation/whale/whale_assets.dart';
 
 void main() {
   const groups = {'normal', 'celebrate', 'worried', 'sleep', 'pet', 'poked', 'eat', 'easter'};
@@ -41,4 +43,42 @@ void main() {
       expect(text, contains(s));
     }
   });
+
+  group('WhaleAssets.load', () {
+    TestWidgetsFlutterBinding.ensureInitialized();
+
+    test('从 rootBundle 读取，每种心情至少 1 张，路径带 assets/whale/', () async {
+      final a = await WhaleAssets.load(rootBundle);
+      for (final m in WhaleMood.values) {
+        expect(a.forMood(m), isNotEmpty, reason: '$m');
+        expect(a.forMood(m).every((p) => p.startsWith('assets/whale/')), isTrue);
+      }
+      for (final r in WhaleReaction.values) {
+        expect(a.forReaction(r), isNotEmpty, reason: '$r');
+      }
+    });
+
+    test('清单是坏 JSON 时返回空列表、不抛异常', () async {
+      final a = await WhaleAssets.load(_TextBundle('not json {'));
+      expect(a.forMood(WhaleMood.normal), isEmpty);
+      expect(a.forReaction(WhaleReaction.pet), isEmpty);
+    });
+
+    test('清单缺失时返回空列表', () async {
+      final a = await WhaleAssets.load(_TextBundle(null));
+      expect(a.forMood(WhaleMood.sleep), isEmpty);
+    });
+  });
+}
+
+class _TextBundle extends CachingAssetBundle {
+  _TextBundle(this.text);
+  final String? text;
+
+  @override
+  Future<ByteData> load(String key) async {
+    final t = text;
+    if (t == null) throw Exception('missing $key');
+    return ByteData.sublistView(Uint8List.fromList(utf8.encode(t)));
+  }
 }

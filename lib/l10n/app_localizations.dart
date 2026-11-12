@@ -2061,6 +2061,228 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Más'**
   String get heatMore;
+
+  /// No description provided for @whaleNormal1.
+  ///
+  /// In es, this message translates to:
+  /// **'{n, plural, =0{Hoy no te queda nada pendiente} =1{Hoy te queda 1 cosa} other{Hoy te quedan {n} cosas}}'**
+  String whaleNormal1(int n);
+
+  /// No description provided for @whaleNormal2.
+  ///
+  /// In es, this message translates to:
+  /// **'Lo siguiente: {title} a las {time}'**
+  String whaleNormal2(String title, String time);
+
+  /// No description provided for @whaleNormal3.
+  ///
+  /// In es, this message translates to:
+  /// **'Un ratito de descanso y seguimos'**
+  String get whaleNormal3;
+
+  /// No description provided for @whaleNormal4.
+  ///
+  /// In es, this message translates to:
+  /// **'¡Aquí estoy, nadando contigo!'**
+  String get whaleNormal4;
+
+  /// No description provided for @whaleCelebrate1.
+  ///
+  /// In es, this message translates to:
+  /// **'¡Todo hecho! Hoy has estado genial'**
+  String get whaleCelebrate1;
+
+  /// No description provided for @whaleCelebrate2.
+  ///
+  /// In es, this message translates to:
+  /// **'Día completado, me lo he comido todo'**
+  String get whaleCelebrate2;
+
+  /// No description provided for @whaleCelebrate3.
+  ///
+  /// In es, this message translates to:
+  /// **'¡Qué día tan productivo!'**
+  String get whaleCelebrate3;
+
+  /// No description provided for @whaleWorried1.
+  ///
+  /// In es, this message translates to:
+  /// **'{n, plural, =1{Hay 1 tarea atrasada… ¿la miramos?} other{Hay {n} tareas atrasadas… ¿las miramos?}}'**
+  String whaleWorried1(int n);
+
+  /// No description provided for @whaleWorried2.
+  ///
+  /// In es, this message translates to:
+  /// **'Lo atrasado me pone nerviosa…'**
+  String get whaleWorried2;
+
+  /// No description provided for @whaleHungry1.
+  ///
+  /// In es, this message translates to:
+  /// **'Tengo hambre… completa una tarea y dame de comer'**
+  String get whaleHungry1;
+
+  /// No description provided for @whaleHungry2.
+  ///
+  /// In es, this message translates to:
+  /// **'Mi barriguita está vacía…'**
+  String get whaleHungry2;
+
+  /// No description provided for @whaleSleep1.
+  ///
+  /// In es, this message translates to:
+  /// **'Zzz…'**
+  String get whaleSleep1;
+
+  /// No description provided for @whaleSleep2.
+  ///
+  /// In es, this message translates to:
+  /// **'Mañana seguimos…'**
+  String get whaleSleep2;
+
+  /// No description provided for @whalePet1.
+  ///
+  /// In es, this message translates to:
+  /// **'Jeje'**
+  String get whalePet1;
+
+  /// No description provided for @whalePet2.
+  ///
+  /// In es, this message translates to:
+  /// **'Otra vez, otra vez'**
+  String get whalePet2;
+
+  /// No description provided for @whalePet3.
+  ///
+  /// In es, this message translates to:
+  /// **'Qué gustito…'**
+  String get whalePet3;
+
+  /// No description provided for @whalePoked1.
+  ///
+  /// In es, this message translates to:
+  /// **'Mmm… ¿qué hora es?'**
+  String get whalePoked1;
+
+  /// No description provided for @whalePoked2.
+  ///
+  /// In es, this message translates to:
+  /// **'Cinco minutitos más…'**
+  String get whalePoked2;
+
+  /// No description provided for @whaleEat1.
+  ///
+  /// In es, this message translates to:
+  /// **'¡Qué rico!'**
+  String get whaleEat1;
+
+  /// No description provided for @whaleEat2.
+  ///
+  /// In es, this message translates to:
+  /// **'¡Otra tarea, otra!'**
+  String get whaleEat2;
+
+  /// No description provided for @whaleEat3.
+  ///
+  /// In es, this message translates to:
+  /// **'Ñam, ñam'**
+  String get whaleEat3;
+
+  /// No description provided for @whaleTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Ballenita'**
+  String get whaleTitle;
+
+  /// No description provided for @whaleFullness.
+  ///
+  /// In es, this message translates to:
+  /// **'Saciedad {p}%'**
+  String whaleFullness(int p);
+
+  /// No description provided for @whaleTodayDone.
+  ///
+  /// In es, this message translates to:
+  /// **'Hoy: {done}/{total} hechas'**
+  String whaleTodayDone(int done, int total);
+
+  /// No description provided for @whaleMoodNormal.
+  ///
+  /// In es, this message translates to:
+  /// **'Tranquila'**
+  String get whaleMoodNormal;
+
+  /// No description provided for @whaleMoodCelebrate.
+  ///
+  /// In es, this message translates to:
+  /// **'De celebración'**
+  String get whaleMoodCelebrate;
+
+  /// No description provided for @whaleMoodWorried.
+  ///
+  /// In es, this message translates to:
+  /// **'Preocupada'**
+  String get whaleMoodWorried;
+
+  /// No description provided for @whaleMoodSleep.
+  ///
+  /// In es, this message translates to:
+  /// **'Durmiendo'**
+  String get whaleMoodSleep;
+
+  /// No description provided for @whalePetButton.
+  ///
+  /// In es, this message translates to:
+  /// **'Acariciar'**
+  String get whalePetButton;
+
+  /// No description provided for @whalePokeButton.
+  ///
+  /// In es, this message translates to:
+  /// **'Darle un toque'**
+  String get whalePokeButton;
+
+  /// No description provided for @whaleShow.
+  ///
+  /// In es, this message translates to:
+  /// **'Mostrar a la ballenita'**
+  String get whaleShow;
+
+  /// No description provided for @whaleFloating.
+  ///
+  /// In es, this message translates to:
+  /// **'En la esquina del calendario'**
+  String get whaleFloating;
+
+  /// No description provided for @whaleDrawer.
+  ///
+  /// In es, this message translates to:
+  /// **'Pecera en el menú'**
+  String get whaleDrawer;
+
+  /// No description provided for @whaleTank.
+  ///
+  /// In es, this message translates to:
+  /// **'Página de la pecera'**
+  String get whaleTank;
+
+  /// No description provided for @whaleAbout.
+  ///
+  /// In es, this message translates to:
+  /// **'Sobre el personaje'**
+  String get whaleAbout;
+
+  /// No description provided for @whaleCredits.
+  ///
+  /// In es, this message translates to:
+  /// **'Original 上善无形 · segundo diseño ZipZipPipe · fuente EDMOK/blue-fish-archive · CC BY-NC-SA 4.0'**
+  String get whaleCredits;
+
+  /// No description provided for @whaleSemantics.
+  ///
+  /// In es, this message translates to:
+  /// **'Ballenita, {mood}, saciedad {p}%'**
+  String whaleSemantics(String mood, int p);
 }
 
 class _AppLocalizationsDelegate

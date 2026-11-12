@@ -16,3 +16,6 @@ WhaleMood moodFor({required AppSnapshot snap, required DateTime now, required do
   if (snap.overdue(now).isNotEmpty || fullness < WhaleState.kHungry) return WhaleMood.worried;
   return WhaleMood.normal;
 }
+
+/// Reacciones puntuales a la interacción.
+enum WhaleReaction { pet, poked, eat, easter }

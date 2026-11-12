@@ -1240,4 +1240,141 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get heatMore => 'More';
+
+  @override
+  String whaleNormal1(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: '$n things left today',
+      one: '1 thing left today',
+      zero: 'Nothing left for today',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String whaleNormal2(String title, String time) {
+    return 'Next: $title at $time';
+  }
+
+  @override
+  String get whaleNormal3 => 'A little break and we keep going';
+
+  @override
+  String get whaleNormal4 => 'Here I am, swimming with you!';
+
+  @override
+  String get whaleCelebrate1 => 'All done! You were great today';
+
+  @override
+  String get whaleCelebrate2 => 'Day complete, I ate it all';
+
+  @override
+  String get whaleCelebrate3 => 'What a productive day!';
+
+  @override
+  String whaleWorried1(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: '$n tasks are overdue… shall we look?',
+      one: '1 task is overdue… shall we look?',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get whaleWorried2 => 'Overdue stuff makes me nervous…';
+
+  @override
+  String get whaleHungry1 => 'I\'m hungry… finish a task and feed me';
+
+  @override
+  String get whaleHungry2 => 'My tummy is empty…';
+
+  @override
+  String get whaleSleep1 => 'Zzz…';
+
+  @override
+  String get whaleSleep2 => 'Let\'s continue tomorrow…';
+
+  @override
+  String get whalePet1 => 'Hehe';
+
+  @override
+  String get whalePet2 => 'Again, again';
+
+  @override
+  String get whalePet3 => 'So nice…';
+
+  @override
+  String get whalePoked1 => 'Mm… what time is it?';
+
+  @override
+  String get whalePoked2 => 'Five more minutes…';
+
+  @override
+  String get whaleEat1 => 'Yummy!';
+
+  @override
+  String get whaleEat2 => 'Another task, another!';
+
+  @override
+  String get whaleEat3 => 'Nom nom';
+
+  @override
+  String get whaleTitle => 'Whale';
+
+  @override
+  String whaleFullness(int p) {
+    return 'Fullness $p%';
+  }
+
+  @override
+  String whaleTodayDone(int done, int total) {
+    return 'Today: $done/$total done';
+  }
+
+  @override
+  String get whaleMoodNormal => 'Calm';
+
+  @override
+  String get whaleMoodCelebrate => 'Celebrating';
+
+  @override
+  String get whaleMoodWorried => 'Worried';
+
+  @override
+  String get whaleMoodSleep => 'Sleeping';
+
+  @override
+  String get whalePetButton => 'Pat';
+
+  @override
+  String get whalePokeButton => 'Poke';
+
+  @override
+  String get whaleShow => 'Show the whale';
+
+  @override
+  String get whaleFloating => 'Calendar corner';
+
+  @override
+  String get whaleDrawer => 'Tank in the menu';
+
+  @override
+  String get whaleTank => 'Tank page';
+
+  @override
+  String get whaleAbout => 'About the character';
+
+  @override
+  String get whaleCredits =>
+      'Original 上善无形 · redesign ZipZipPipe · source EDMOK/blue-fish-archive · CC BY-NC-SA 4.0';
+
+  @override
+  String whaleSemantics(String mood, int p) {
+    return 'Whale, $mood, fullness $p%';
+  }
 }

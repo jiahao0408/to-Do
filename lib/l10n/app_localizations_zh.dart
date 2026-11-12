@@ -1146,4 +1146,134 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get heatMore => '多';
+
+  @override
+  String whaleNormal1(int n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: '今天还剩 $n 件事',
+      zero: '今天没有剩下的事了',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String whaleNormal2(String title, String time) {
+    return '下一件：$title $time';
+  }
+
+  @override
+  String get whaleNormal3 => '摸鱼一下下就好';
+
+  @override
+  String get whaleNormal4 => '我在这儿陪你游～';
+
+  @override
+  String get whaleCelebrate1 => '全部完成！今天好棒';
+
+  @override
+  String get whaleCelebrate2 => '今天的我也很能干';
+
+  @override
+  String get whaleCelebrate3 => '吃得饱饱的！';
+
+  @override
+  String whaleWorried1(int n) {
+    return '有 $n 件逾期了…一起处理一下？';
+  }
+
+  @override
+  String get whaleWorried2 => '逾期的事让我好着急…';
+
+  @override
+  String get whaleHungry1 => '饿饿…完成一件喂喂我';
+
+  @override
+  String get whaleHungry2 => '肚子空空的…';
+
+  @override
+  String get whaleSleep1 => 'Zzz…';
+
+  @override
+  String get whaleSleep2 => '明天再说…';
+
+  @override
+  String get whalePet1 => '嘿嘿';
+
+  @override
+  String get whalePet2 => '再摸一下';
+
+  @override
+  String get whalePet3 => '好舒服…';
+
+  @override
+  String get whalePoked1 => '唔…几点了';
+
+  @override
+  String get whalePoked2 => '再睡五分钟…';
+
+  @override
+  String get whaleEat1 => '好吃！';
+
+  @override
+  String get whaleEat2 => '再来一件！';
+
+  @override
+  String get whaleEat3 => '啊呜啊呜';
+
+  @override
+  String get whaleTitle => '鲸鱼娘';
+
+  @override
+  String whaleFullness(int p) {
+    return '饱腹度 $p%';
+  }
+
+  @override
+  String whaleTodayDone(int done, int total) {
+    return '今天完成 $done/$total';
+  }
+
+  @override
+  String get whaleMoodNormal => '平常';
+
+  @override
+  String get whaleMoodCelebrate => '庆祝';
+
+  @override
+  String get whaleMoodWorried => '着急';
+
+  @override
+  String get whaleMoodSleep => '睡觉';
+
+  @override
+  String get whalePetButton => '摸摸头';
+
+  @override
+  String get whalePokeButton => '戳一下';
+
+  @override
+  String get whaleShow => '显示鲸鱼娘';
+
+  @override
+  String get whaleFloating => '日历角落';
+
+  @override
+  String get whaleDrawer => '菜单鱼缸';
+
+  @override
+  String get whaleTank => '鱼缸页面';
+
+  @override
+  String get whaleAbout => '关于形象';
+
+  @override
+  String get whaleCredits =>
+      '原设 上善无形 · 二设 ZipZipPipe · 来源 EDMOK/blue-fish-archive · CC BY-NC-SA 4.0';
+
+  @override
+  String whaleSemantics(String mood, int p) {
+    return '鲸鱼娘，$mood，饱腹度 $p%';
+  }
 }
