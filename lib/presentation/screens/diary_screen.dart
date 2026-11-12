@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../domain/time.dart';
 import '../common/format.dart';
 import '../providers.dart';
+import '../common/ph_icons.dart';
 
 /// Abre el editor de la nota de [day].
 Future<void> openDayNote(BuildContext context, DateTime day) => Navigator.of(context)
@@ -88,7 +89,7 @@ class _DiaryScreenState extends ConsumerState<DiaryScreen> {
     return Scaffold(
       appBar: AppBar(title: Text(l.diary)),
       floatingActionButton: FloatingActionButton.extended(
-        icon: Icon(hasToday ? Icons.edit_note : Icons.add),
+        icon: Icon(hasToday ? PhosphorIconsRegular.notePencil : PhosphorIconsRegular.plus),
         label: Text('${l.dayNote} · ${l.today}'),
         onPressed: () => openDayNote(context, now),
       ),
@@ -98,7 +99,7 @@ class _DiaryScreenState extends ConsumerState<DiaryScreen> {
             padding: const EdgeInsets.all(12),
             child: TextField(
               decoration: InputDecoration(
-                prefixIcon: const Icon(Icons.search),
+                prefixIcon: const Icon(PhosphorIconsRegular.magnifyingGlass),
                 hintText: l.searchDiary,
                 border: const OutlineInputBorder(),
                 isDense: true,
@@ -114,7 +115,7 @@ class _DiaryScreenState extends ConsumerState<DiaryScreen> {
                     itemBuilder: (_, i) {
                       final n = notes[i];
                       return ListTile(
-                        leading: const Icon(Icons.book_outlined),
+                        leading: const Icon(PhosphorIconsRegular.bookOpenText),
                         title: Text(f.fullDate(n.date)),
                         subtitle: Text(n.body, maxLines: 3, overflow: TextOverflow.ellipsis),
                         onTap: () => openDayNote(context, n.date),

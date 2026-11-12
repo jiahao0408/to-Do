@@ -10,6 +10,7 @@ import '../common/format.dart';
 import '../common/task_tile.dart';
 import '../providers.dart';
 import '../task/quick_add.dart';
+import '../common/ph_icons.dart';
 
 Occurrence _occ(Task t) =>
     Occurrence(task: t, series: t, occurrenceDate: null, completed: t.isCompleted);
@@ -25,7 +26,7 @@ class InboxScreen extends ConsumerWidget {
       appBar: AppBar(title: Text(l.inbox)),
       floatingActionButton: FloatingActionButton(
         onPressed: () => showQuickAdd(context, unscheduled: true),
-        child: const Icon(Icons.add),
+        child: const Icon(PhosphorIconsRegular.plus),
       ),
       body: inbox.isEmpty
           ? Center(child: Text(l.inboxEmpty))
@@ -60,13 +61,13 @@ class InboxPanel extends ConsumerWidget {
               Row(
                 children: [
                   const SizedBox(width: 16),
-                  const Icon(Icons.inbox_outlined, size: 18),
+                  const Icon(PhosphorIconsRegular.tray, size: 18),
                   const SizedBox(width: 8),
                   Expanded(
                     child: Text(inbox.isEmpty ? l.inboxEmpty : l.dragToCalendar,
                         style: theme.textTheme.labelMedium, maxLines: 1, overflow: TextOverflow.ellipsis),
                   ),
-                  IconButton(icon: const Icon(Icons.close), onPressed: onClose),
+                  IconButton(icon: const Icon(PhosphorIconsRegular.x), onPressed: onClose),
                 ],
               ),
               Expanded(

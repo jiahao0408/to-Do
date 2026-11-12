@@ -10,6 +10,7 @@ import '../common/actions.dart';
 import '../common/format.dart';
 import '../providers.dart';
 import 'task_editor.dart';
+import '../common/ph_icons.dart';
 
 Future<void> showQuickAdd(BuildContext context, {DateTime? start, bool unscheduled = false}) {
   return showModalBottomSheet(
@@ -127,21 +128,21 @@ class _QuickAddSheetState extends ConsumerState<QuickAddSheet> {
     final chips = <Widget>[];
     if (task != null) {
       if (task.start != null) {
-        chips.add(_chip(Icons.event,
+        chips.add(_chip(PhosphorIconsRegular.calendarBlank,
             task.allDay ? f.weekdayDayMonth(task.start!) : f.dateTime(task.start!), p?.date != null || p?.time != null));
       } else {
-        chips.add(_chip(Icons.inbox_outlined, l.unscheduled, false));
+        chips.add(_chip(PhosphorIconsRegular.tray, l.unscheduled, false));
       }
-      if (p?.durationMin != null) chips.add(_chip(Icons.timelapse, f.duration(p!.durationMin!), true));
+      if (p?.durationMin != null) chips.add(_chip(PhosphorIconsRegular.timer, f.duration(p!.durationMin!), true));
       final rule = RecurrenceRule.tryParse(task.rrule);
       if (rule != null) {
-        chips.add(_chip(Icons.repeat, describeRule(l, f, rule, task.start!), true));
+        chips.add(_chip(PhosphorIconsRegular.repeat, describeRule(l, f, rule, task.start!), true));
       }
       if (p?.priority != null) {
-        chips.add(_chip(Icons.flag, priorityLabel(l, p!.priority!), true, color: priorityColor(p.priority!)));
+        chips.add(_chip(PhosphorIconsFill.flag, priorityLabel(l, p!.priority!), true, color: priorityColor(p.priority!)));
       }
       final cat = snap.categoryById(p?.categoryId);
-      if (cat != null) chips.add(_chip(Icons.label_outline, cat.name, true, color: Color(cat.color)));
+      if (cat != null) chips.add(_chip(PhosphorIconsRegular.tag, cat.name, true, color: Color(cat.color)));
     }
 
     return SafeArea(
@@ -179,7 +180,7 @@ class _QuickAddSheetState extends ConsumerState<QuickAddSheet> {
             Row(
               children: [
                 TextButton.icon(
-                  icon: const Icon(Icons.tune),
+                  icon: const Icon(PhosphorIconsRegular.slidersHorizontal),
                   label: Text(l.moreOptions),
                   onPressed: _openEditor,
                 ),

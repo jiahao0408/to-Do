@@ -21,6 +21,7 @@ import 'building_painter.dart';
 import 'building_widgets.dart';
 import 'iso.dart';
 import 'villager_painter.dart';
+import '../common/ph_icons.dart';
 
 /// Lo que hace falta para pintar un solar.
 class VillageLot {
@@ -88,7 +89,7 @@ class _VillageScreenState extends ConsumerState<VillageScreen> with SingleTicker
         actions: [
           IconButton(
             tooltip: l.newProject,
-            icon: const Icon(Icons.add_home_outlined),
+            icon: const Icon(PhosphorIconsRegular.plusCircle),
             onPressed: () => editProject(context, ref),
           ),
         ],
@@ -124,7 +125,7 @@ class _VillageScreenState extends ConsumerState<VillageScreen> with SingleTicker
             Text(context.l10n.villageHint, textAlign: TextAlign.center, style: Theme.of(context).textTheme.bodySmall),
             const SizedBox(height: 16),
             FilledButton.icon(
-              icon: const Icon(Icons.add),
+              icon: const Icon(PhosphorIconsRegular.plus),
               label: Text(context.l10n.newProject),
               onPressed: () => editProject(context, ref),
             ),
@@ -367,12 +368,12 @@ class _VillagerPanel extends ConsumerWidget {
                 const SizedBox(height: 8),
                 Wrap(spacing: 8, children: [
                   FilledButton.tonalIcon(
-                    icon: const Icon(Icons.waving_hand_outlined, size: 18),
+                    icon: const Icon(PhosphorIconsRegular.handWaving, size: 18),
                     label: Text(l.villagerPetButton),
                     onPressed: ctrl.pet,
                   ),
                   OutlinedButton.icon(
-                    icon: const Icon(Icons.touch_app_outlined, size: 18),
+                    icon: const Icon(PhosphorIconsRegular.handTap, size: 18),
                     label: Text(l.villagerPokeButton),
                     onPressed: ctrl.poke,
                   ),

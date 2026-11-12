@@ -8,6 +8,7 @@ import '../../domain/time.dart';
 import '../common/actions.dart';
 import '../common/format.dart';
 import '../providers.dart';
+import '../common/ph_icons.dart';
 
 class TemplatesScreen extends ConsumerWidget {
   const TemplatesScreen({super.key});
@@ -22,7 +23,7 @@ class TemplatesScreen extends ConsumerWidget {
       floatingActionButton: FloatingActionButton(
         tooltip: l.newTemplate,
         onPressed: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const TemplateEditor())),
-        child: const Icon(Icons.add),
+        child: const Icon(PhosphorIconsRegular.plus),
       ),
       body: templates.isEmpty
           ? Center(child: Padding(padding: const EdgeInsets.all(32), child: Text(l.noTemplates, textAlign: TextAlign.center)))
@@ -30,7 +31,7 @@ class TemplatesScreen extends ConsumerWidget {
               children: [
                 for (final t in templates)
                   ListTile(
-                    leading: const Icon(Icons.dashboard_customize_outlined),
+                    leading: const Icon(PhosphorIconsRegular.squaresFour),
                     title: Text(t.name),
                     subtitle: Text(t.items
                         .map((i) => i.startMinute == null
@@ -42,7 +43,7 @@ class TemplatesScreen extends ConsumerWidget {
                         .push(MaterialPageRoute(builder: (_) => TemplateEditor(template: t))),
                     trailing: IconButton(
                       tooltip: l.applyTemplate,
-                      icon: const Icon(Icons.playlist_add),
+                      icon: const Icon(PhosphorIconsRegular.listPlus),
                       onPressed: () => applyTemplateFlow(context, ref, t),
                     ),
                   ),
@@ -141,7 +142,7 @@ class _TemplateEditorState extends ConsumerState<TemplateEditor> {
               if (start != null)
                 ListTile(
                   contentPadding: EdgeInsets.zero,
-                  leading: const Icon(Icons.schedule),
+                  leading: const Icon(PhosphorIconsRegular.clock),
                   title: Text(f.time(DateTime(2000, 1, 1, 0, start!))),
                   trailing: DropdownButton<int>(
                     value: duration,
@@ -201,7 +202,7 @@ class _TemplateEditorState extends ConsumerState<TemplateEditor> {
         actions: [
           if (widget.template != null)
             IconButton(
-              icon: const Icon(Icons.delete_outline),
+              icon: const Icon(PhosphorIconsRegular.trash),
               tooltip: l.delete,
               onPressed: () async {
                 await repo.deleteTemplate(widget.template!.id!);
@@ -220,7 +221,7 @@ class _TemplateEditorState extends ConsumerState<TemplateEditor> {
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () => _editItem(),
-        icon: const Icon(Icons.add),
+        icon: const Icon(PhosphorIconsRegular.plus),
         label: Text(l.addItem),
       ),
       body: ListView(
@@ -238,7 +239,7 @@ class _TemplateEditorState extends ConsumerState<TemplateEditor> {
               subtitle: items[i].durationMin == null ? null : Text(f.duration(items[i].durationMin!)),
               onTap: () => _editItem(i),
               trailing: IconButton(
-                icon: const Icon(Icons.close),
+                icon: const Icon(PhosphorIconsRegular.x),
                 onPressed: () => setState(() => items.removeAt(i)),
               ),
             ),

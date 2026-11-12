@@ -10,6 +10,7 @@ import '../../domain/time.dart';
 import '../common/actions.dart';
 import '../common/format.dart';
 import '../providers.dart';
+import '../common/ph_icons.dart';
 
 class ProcessInboxScreen extends ConsumerStatefulWidget {
   const ProcessInboxScreen({super.key});
@@ -47,7 +48,7 @@ class _ProcessInboxScreenState extends ConsumerState<ProcessInboxScreen> {
         appBar: AppBar(title: Text(l.processInbox)),
         body: Center(
           child: Column(mainAxisSize: MainAxisSize.min, children: [
-            const Icon(Icons.inbox, size: 64),
+            const Icon(PhosphorIconsFill.tray, size: 64),
             const SizedBox(height: 12),
             Text(l.inboxDone, style: theme.textTheme.titleLarge),
             const SizedBox(height: 24),
@@ -103,7 +104,7 @@ class _ProcessInboxScreenState extends ConsumerState<ProcessInboxScreen> {
                   const SizedBox(height: 8),
                   Wrap(spacing: 6, children: [
                     Chip(
-                      avatar: Icon(Icons.flag, size: 16, color: priorityColor(t.priority)),
+                      avatar: Icon(PhosphorIconsFill.flag, size: 16, color: priorityColor(t.priority)),
                       label: Text(priorityLabel(l, t.priority)),
                     ),
                     if (cat != null)
@@ -117,16 +118,16 @@ class _ProcessInboxScreenState extends ConsumerState<ProcessInboxScreen> {
             ),
           ),
           const SizedBox(height: 16),
-          action(Icons.today, '${l.today} · ${f.weekdayDayMonth(today)}', () => _schedule(t, today, allDay: true)),
+          action(PhosphorIconsRegular.calendarDot, '${l.today} · ${f.weekdayDayMonth(today)}', () => _schedule(t, today, allDay: true)),
           const SizedBox(height: 8),
-          action(Icons.wb_sunny_outlined, '${l.postponeTomorrow} · ${f.weekdayDayMonth(addDays(today, 1))}',
+          action(PhosphorIconsRegular.sun, '${l.postponeTomorrow} · ${f.weekdayDayMonth(addDays(today, 1))}',
               () => _schedule(t, addDays(today, 1), allDay: true)),
           const SizedBox(height: 8),
           if (slot != null) ...[
-            action(Icons.auto_awesome, '${l.placeInFreeSlot} · ${f.dateTime(slot)}', () => _schedule(t, slot)),
+            action(PhosphorIconsFill.sparkle, '${l.placeInFreeSlot} · ${f.dateTime(slot)}', () => _schedule(t, slot)),
             const SizedBox(height: 8),
           ],
-          action(Icons.event, l.postponePickDate, () async {
+          action(PhosphorIconsRegular.calendarBlank, l.postponePickDate, () async {
             final d = await showDatePicker(
               context: context,
               initialDate: today,
@@ -142,7 +143,7 @@ class _ProcessInboxScreenState extends ConsumerState<ProcessInboxScreen> {
             }
           }),
           const SizedBox(height: 8),
-          action(Icons.label_outline, l.changeCategory, () async {
+          action(PhosphorIconsRegular.tag, l.changeCategory, () async {
             final cats = snap.categories;
             final picked = await showDialog<int>(
               context: context,
@@ -169,7 +170,7 @@ class _ProcessInboxScreenState extends ConsumerState<ProcessInboxScreen> {
           Row(
             children: [
               TextButton.icon(
-                icon: Icon(Icons.block, color: theme.colorScheme.error),
+                icon: Icon(PhosphorIconsRegular.prohibit, color: theme.colorScheme.error),
                 label: Text(l.discard, style: TextStyle(color: theme.colorScheme.error)),
                 onPressed: () async {
                   final ui = Ui.of(context);
@@ -179,7 +180,7 @@ class _ProcessInboxScreenState extends ConsumerState<ProcessInboxScreen> {
               ),
               const Spacer(),
               TextButton.icon(
-                icon: const Icon(Icons.skip_next),
+                icon: const Icon(PhosphorIconsRegular.skipForward),
                 label: Text(l.skip),
                 onPressed: () => setState(() => _skipped.add(t.id!)),
               ),

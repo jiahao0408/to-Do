@@ -14,6 +14,7 @@ import '../providers.dart';
 import '../task/task_editor.dart';
 import '../village/building_widgets.dart';
 import 'categories_screen.dart';
+import '../common/ph_icons.dart';
 
 /// Crea o edita un proyecto. Devuelve el id guardado.
 Future<int?> editProject(BuildContext context, WidgetRef ref, [Project? project]) async {
@@ -53,11 +54,11 @@ Future<int?> editProject(BuildContext context, WidgetRef ref, [Project? project]
             const SizedBox(height: 8),
             ListTile(
               contentPadding: EdgeInsets.zero,
-              leading: const Icon(Icons.flag_outlined),
+              leading: const Icon(PhosphorIconsRegular.flag),
               title: Text(due == null ? l.noDueDate : '${l.projectDue}: ${f.fullDate(due!)}'),
               trailing: due == null
                   ? null
-                  : IconButton(icon: const Icon(Icons.close), onPressed: () => setState(() => due = null)),
+                  : IconButton(icon: const Icon(PhosphorIconsRegular.x), onPressed: () => setState(() => due = null)),
               onTap: () async {
                 final now = DateTime.now();
                 final d = await showDatePicker(
@@ -179,12 +180,12 @@ class ProjectScreen extends ConsumerWidget {
         actions: [
           IconButton(
             tooltip: l.edit,
-            icon: const Icon(Icons.edit_outlined),
+            icon: const Icon(PhosphorIconsRegular.pencilSimple),
             onPressed: () => editProject(context, ref, project),
           ),
           IconButton(
             tooltip: l.delete,
-            icon: const Icon(Icons.delete_outline),
+            icon: const Icon(PhosphorIconsRegular.trash),
             onPressed: () async {
               final ok = await showDialog<bool>(
                 context: context,
@@ -214,7 +215,7 @@ class ProjectScreen extends ConsumerWidget {
               updatedAt: now,
             ),
             draftReminders: const []),
-        child: const Icon(Icons.add),
+        child: const Icon(PhosphorIconsRegular.plus),
       ),
       body: ListView(
         children: [
@@ -224,7 +225,7 @@ class ProjectScreen extends ConsumerWidget {
           ),
           if (project.dueDate != null)
             ListTile(
-              leading: Icon(Icons.flag, color: Color(project.color)),
+              leading: Icon(PhosphorIconsFill.flag, color: Color(project.color)),
               title: Text('${l.projectDue}: ${f.fullDate(project.dueDate!)}'),
               subtitle: daysBetween(now, project.dueDate!) >= 0
                   ? Text(l.daysLeft(daysBetween(now, project.dueDate!)))

@@ -17,6 +17,7 @@ import '../common/task_tile.dart';
 import '../providers.dart';
 import '../task/quick_add.dart';
 import '../task/task_detail.dart';
+import '../common/ph_icons.dart';
 
 const double kHourLabelWidth = 48;
 
@@ -588,7 +589,7 @@ class _AllDayStrip extends ConsumerWidget {
               width: kHourLabelWidth,
               child: Padding(
                 padding: const EdgeInsets.all(4),
-                child: Icon(Icons.wb_sunny_outlined, size: 16, color: theme.colorScheme.onSurfaceVariant),
+                child: Icon(PhosphorIconsRegular.sun, size: 16, color: theme.colorScheme.onSurfaceVariant),
               ),
             ),
             for (var i = 0; i < days.length; i++)

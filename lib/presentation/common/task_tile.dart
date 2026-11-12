@@ -5,6 +5,7 @@ import '../../domain/snapshot.dart';
 import '../../domain/time.dart';
 import '../providers.dart';
 import 'format.dart';
+import 'ph_icons.dart';
 
 Color categoryColorOf(WidgetRef ref, int? categoryId, BuildContext context) {
   final c = ref.watch(snapshotProvider).categoryById(categoryId);
@@ -50,7 +51,7 @@ class CompleteCheck extends StatelessWidget {
             duration: animate ? const Duration(milliseconds: 200) : Duration.zero,
             transitionBuilder: (c, a) => ScaleTransition(scale: a, child: c),
             child: completed
-                ? Icon(Icons.check, key: const ValueKey(1), size: size * 0.7, color: Colors.white)
+                ? Icon(PhosphorIconsRegular.check, key: const ValueKey(1), size: size * 0.7, color: Colors.white)
                 : const SizedBox.shrink(key: ValueKey(0)),
           ),
         ),
@@ -130,12 +131,12 @@ class TaskTile extends ConsumerWidget {
       trailing: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          if (t.pinned) const Icon(Icons.push_pin, size: 16),
-          if (occurrence.isSeries) const Icon(Icons.repeat, size: 16),
+          if (t.pinned) const Icon(PhosphorIconsFill.pushPin, size: 16),
+          if (occurrence.isSeries) const Icon(PhosphorIconsRegular.repeat, size: 16),
           if (snap.remindersOf(occurrence.taskId).isNotEmpty)
-            const Icon(Icons.notifications_none, size: 16),
+            const Icon(PhosphorIconsRegular.bell, size: 16),
           const SizedBox(width: 4),
-          Icon(Icons.flag, size: 18, color: priorityColor(t.priority)),
+          Icon(PhosphorIconsFill.flag, size: 18, color: priorityColor(t.priority)),
         ],
       ),
     );

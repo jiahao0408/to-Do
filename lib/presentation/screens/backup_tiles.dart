@@ -13,6 +13,7 @@ import '../common/actions.dart';
 import '../common/format.dart';
 import '../providers.dart';
 import 'ics_screens.dart';
+import '../common/ph_icons.dart';
 
 class BackupTiles extends ConsumerWidget {
   const BackupTiles({super.key});
@@ -26,19 +27,19 @@ class BackupTiles extends ConsumerWidget {
     return Column(
       children: [
         ListTile(
-          leading: const Icon(Icons.event_available),
+          leading: const Icon(PhosphorIconsRegular.calendarCheck),
           title: Text(l.icsImport),
           subtitle: Text(l.icsImportHint),
           onTap: () => pickAndImportIcs(context),
         ),
         ListTile(
-          leading: const Icon(Icons.ios_share),
+          leading: const Icon(PhosphorIconsRegular.export),
           title: Text(l.icsExport),
           subtitle: Text(l.icsExportHint),
           onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const IcsExportScreen())),
         ),
         ListTile(
-          leading: const Icon(Icons.upload_file),
+          leading: const Icon(PhosphorIconsRegular.fileArrowUp),
           title: Text(l.exportBackup),
           subtitle: Text(l.exportBackupHint),
           onTap: () async {
@@ -59,7 +60,7 @@ class BackupTiles extends ConsumerWidget {
           },
         ),
         ListTile(
-          leading: const Icon(Icons.download),
+          leading: const Icon(PhosphorIconsRegular.downloadSimple),
           title: Text(l.importBackup),
           subtitle: Text(l.importBackupHint),
           onTap: () async {

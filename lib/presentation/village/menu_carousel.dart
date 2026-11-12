@@ -19,6 +19,7 @@ import 'village_screen.dart';
 import 'villager_controller.dart';
 import 'villager_copy.dart';
 import 'villager_sprite.dart';
+import '../common/ph_icons.dart';
 
 class MenuCarousel extends ConsumerStatefulWidget {
   const MenuCarousel({super.key});
@@ -170,7 +171,7 @@ class _TodayPage extends ConsumerWidget {
     return Padding(
       padding: const EdgeInsets.all(12),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        _Title(Icons.today_outlined, l.cardToday,
+        _Title(PhosphorIconsRegular.calendarCheck, l.cardToday,
             trailing: Text('$done/${today.length}', style: theme.textTheme.labelLarge)),
         const SizedBox(height: 8),
         _bar(context, today.isEmpty ? 0 : done / today.length, theme.colorScheme.primary),
@@ -207,7 +208,7 @@ class _StreakPage extends ConsumerWidget {
       child: Padding(
         padding: const EdgeInsets.all(12),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          _Title(Icons.local_fire_department_outlined, l.cardStreak,
+          _Title(PhosphorIconsRegular.fire, l.cardStreak,
               trailing: Text(l.statsBestStreak(best), style: theme.textTheme.labelSmall)),
           const SizedBox(height: 4),
           Text(l.statsStreakDays(current), style: theme.textTheme.headlineSmall),
@@ -256,7 +257,7 @@ class _GoalPage extends ConsumerWidget {
         child: Padding(
           padding: const EdgeInsets.all(12),
           child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            _Title(Icons.flag_outlined, l.cardGoal),
+            _Title(PhosphorIconsRegular.flag, l.cardGoal),
             const Spacer(),
             Text(l.goalPick, style: theme.textTheme.bodyMedium),
             const Spacer(),
@@ -270,7 +271,7 @@ class _GoalPage extends ConsumerWidget {
       child: Padding(
         padding: const EdgeInsets.all(12),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          _Title(Icons.flag_outlined, l.cardGoal,
+          _Title(PhosphorIconsRegular.flag, l.cardGoal,
               trailing: Text('${(goal.ratio * 100).round()} %', style: theme.textTheme.labelLarge)),
           const SizedBox(height: 6),
           Text(goal.title, maxLines: 1, overflow: TextOverflow.ellipsis, style: theme.textTheme.titleMedium),
@@ -307,7 +308,7 @@ class _VillagerPage extends ConsumerWidget {
           const SizedBox(width: 12),
           Expanded(
             child: Column(crossAxisAlignment: CrossAxisAlignment.start, mainAxisAlignment: MainAxisAlignment.center, children: [
-              _Title(Icons.construction_outlined, l.villagerTitle),
+              _Title(PhosphorIconsRegular.hammer, l.villagerTitle),
               const SizedBox(height: 6),
               _bar(context, v.state.fullness / 100, kVillagerBlue),
               const SizedBox(height: 2),

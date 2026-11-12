@@ -11,6 +11,7 @@ import '../common/task_tile.dart';
 import '../providers.dart';
 import '../task/postpone.dart';
 import '../task/task_detail.dart';
+import '../common/ph_icons.dart';
 
 class AgendaView extends ConsumerStatefulWidget {
   const AgendaView({super.key});
@@ -64,7 +65,7 @@ class _AgendaViewState extends ConsumerState<AgendaView> {
       section(l.countdownSection);
       for (final o in countdowns) {
         children.add(ListTile(
-          leading: const Icon(Icons.hourglass_bottom),
+          leading: const Icon(PhosphorIconsRegular.hourglassMedium),
           title: Text(o.task.title),
           subtitle: Text(f.fullDate(o.task.start!)),
           trailing: Text(l.daysLeft(daysBetween(now, o.task.start!)),
@@ -130,13 +131,13 @@ class SwipeableTaskTile extends ConsumerWidget {
         color: Colors.green,
         alignment: Alignment.centerLeft,
         padding: const EdgeInsets.only(left: 24),
-        child: const Icon(Icons.check, color: Colors.white),
+        child: const Icon(PhosphorIconsRegular.check, color: Colors.white),
       ),
       secondaryBackground: Container(
         color: leftPostpones ? Colors.orange : theme.colorScheme.error,
         alignment: Alignment.centerRight,
         padding: const EdgeInsets.only(right: 24),
-        child: Icon(leftPostpones ? Icons.snooze : Icons.delete, color: Colors.white),
+        child: Icon(leftPostpones ? PhosphorIconsRegular.alarm : PhosphorIconsRegular.trash, color: Colors.white),
       ),
       confirmDismiss: (dir) async {
         if (dir == DismissDirection.startToEnd) {

@@ -6,6 +6,7 @@ import '../../domain/stats.dart';
 import '../../domain/time.dart';
 import '../common/format.dart';
 import '../providers.dart';
+import '../common/ph_icons.dart';
 
 class StatsScreen extends ConsumerWidget {
   const StatsScreen({super.key});
@@ -71,14 +72,14 @@ class StatsScreen extends ConsumerWidget {
           ]),
           Card(
             child: ListTile(
-              leading: const Icon(Icons.local_fire_department, color: Colors.deepOrange, size: 36),
+              leading: const Icon(PhosphorIconsFill.fire, color: Colors.deepOrange, size: 36),
               title: Text('${l.statsStreak}: ${l.statsStreakDays(streak)}', style: theme.textTheme.titleMedium),
               subtitle: Text(l.statsBestStreak(best)),
             ),
           ),
           Card(
             child: ListTile(
-              leading: const Icon(Icons.summarize_outlined),
+              leading: const Icon(PhosphorIconsRegular.listChecks),
               title: Text(l.statsWeeklySummary),
               subtitle: Text(l.statsWeeklySummaryBody(stats.weekRate.done, stats.weekRate.total, weekMinutes)),
             ),
@@ -133,7 +134,7 @@ class StatsScreen extends ConsumerWidget {
           Text(l.statsHabits, style: theme.textTheme.titleSmall),
           for (final h in stats.habits())
             ListTile(
-              leading: const Icon(Icons.repeat),
+              leading: const Icon(PhosphorIconsRegular.repeat),
               title: Text(h.task.title),
               subtitle: LinearProgressIndicator(value: h.rate.ratio),
               trailing: Column(

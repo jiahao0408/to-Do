@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 
 import '../common/format.dart';
+import '../common/ph_icons.dart';
 
 class GestureGuideScreen extends StatelessWidget {
   const GestureGuideScreen({super.key});
@@ -11,17 +12,17 @@ class GestureGuideScreen extends StatelessWidget {
     final l = context.l10n;
     final theme = Theme.of(context);
     final gestures = <(IconData, String)>[
-      (Icons.touch_app, l.gTapBlock),
-      (Icons.open_with, l.gLongPressMove),
-      (Icons.checklist, l.gLongPress),
-      (Icons.height, l.gResize),
-      (Icons.pinch, l.gPinch),
-      (Icons.swipe, l.gSwipePages),
-      (Icons.swipe_right, l.gSwipeList),
-      (Icons.add_box_outlined, l.gLongPressEmpty),
-      (Icons.view_week_outlined, l.gWeekTap),
-      (Icons.inbox_outlined, l.gInboxDrag),
-      (Icons.calendar_month_outlined, l.gMonthDrag),
+      (PhosphorIconsFill.handTap, l.gTapBlock),
+      (PhosphorIconsRegular.arrowsOutCardinal, l.gLongPressMove),
+      (PhosphorIconsRegular.listChecks, l.gLongPress),
+      (PhosphorIconsRegular.arrowsVertical, l.gResize),
+      (PhosphorIconsRegular.handGrabbing, l.gPinch),
+      (PhosphorIconsRegular.handSwipeRight, l.gSwipePages),
+      (PhosphorIconsRegular.handSwipeRight, l.gSwipeList),
+      (PhosphorIconsRegular.plusSquare, l.gLongPressEmpty),
+      (PhosphorIconsRegular.columns, l.gWeekTap),
+      (PhosphorIconsRegular.tray, l.gInboxDrag),
+      (PhosphorIconsRegular.calendar, l.gMonthDrag),
     ];
     // Ejemplos en los tres idiomas: el intérprete los entiende mezclados.
     const examples = [
@@ -54,7 +55,7 @@ class GestureGuideScreen extends StatelessWidget {
           for (final e in examples)
             ListTile(
               dense: true,
-              leading: const Icon(Icons.keyboard_outlined),
+              leading: const Icon(PhosphorIconsRegular.keyboard),
               title: Text(e, style: const TextStyle(fontFamily: 'monospace')),
             ),
           const SizedBox(height: 24),

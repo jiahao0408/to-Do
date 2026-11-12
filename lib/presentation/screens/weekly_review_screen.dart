@@ -12,6 +12,7 @@ import '../common/actions.dart';
 import '../common/format.dart';
 import '../providers.dart';
 import '../task/postpone.dart';
+import '../common/ph_icons.dart';
 
 class WeeklyReviewScreen extends ConsumerStatefulWidget {
   const WeeklyReviewScreen({super.key});
@@ -62,7 +63,7 @@ class _WeeklyReviewScreenState extends ConsumerState<WeeklyReviewScreen> {
                     trailing: Wrap(children: [
                       IconButton(
                         tooltip: l.moveToToday,
-                        icon: const Icon(Icons.today),
+                        icon: const Icon(PhosphorIconsRegular.calendarDot),
                         onPressed: () async {
                           final ui = Ui.of(context);
                           final s = o.task.allDay ? today : withTimeOf(today, o.task.start!);
@@ -71,12 +72,12 @@ class _WeeklyReviewScreenState extends ConsumerState<WeeklyReviewScreen> {
                       ),
                       IconButton(
                         tooltip: l.reschedule,
-                        icon: const Icon(Icons.snooze),
+                        icon: const Icon(PhosphorIconsRegular.alarm),
                         onPressed: () => showPostponeSheet(context, o),
                       ),
                       IconButton(
                         tooltip: l.discard,
-                        icon: const Icon(Icons.block),
+                        icon: const Icon(PhosphorIconsRegular.prohibit),
                         onPressed: () async {
                           final ui = Ui.of(context);
                           ui.undo(await ui.service.discard(o), l.discard);
@@ -109,7 +110,7 @@ class _WeeklyReviewScreenState extends ConsumerState<WeeklyReviewScreen> {
                   ListTile(
                     title: Text(t.title),
                     trailing: FilledButton.tonalIcon(
-                      icon: const Icon(Icons.auto_awesome),
+                      icon: const Icon(PhosphorIconsFill.sparkle),
                       label: Text(l.placeInFreeSlot),
                       onPressed: () => _place(t),
                     ),

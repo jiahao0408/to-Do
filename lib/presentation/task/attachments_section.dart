@@ -13,6 +13,7 @@ import '../../domain/models/entities.dart';
 import '../../services/files.dart';
 import '../common/format.dart';
 import '../providers.dart';
+import '../common/ph_icons.dart';
 
 final attachmentsDirProvider = FutureProvider<Directory>((ref) => attachmentsDirectory());
 
@@ -64,23 +65,23 @@ class AttachmentsSection extends ConsumerWidget {
         children: [
           Row(
             children: [
-              const Icon(Icons.attach_file, size: 20),
+              const Icon(PhosphorIconsRegular.paperclip, size: 20),
               const SizedBox(width: 8),
               Text(l.attachments, style: theme.textTheme.titleSmall),
               const Spacer(),
               IconButton(
                 tooltip: l.addPhoto,
-                icon: const Icon(Icons.photo_camera_outlined),
+                icon: const Icon(PhosphorIconsRegular.camera),
                 onPressed: () => _pickImage(ref, ImageSource.camera),
               ),
               IconButton(
                 tooltip: l.addFromGallery,
-                icon: const Icon(Icons.photo_library_outlined),
+                icon: const Icon(PhosphorIconsRegular.images),
                 onPressed: () => _pickImage(ref, ImageSource.gallery),
               ),
               IconButton(
                 tooltip: l.addFile,
-                icon: const Icon(Icons.upload_file),
+                icon: const Icon(PhosphorIconsRegular.fileArrowUp),
                 onPressed: () => _pickFile(ref),
               ),
             ],
@@ -132,7 +133,7 @@ class AttachmentsSection extends ConsumerWidget {
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  const Icon(Icons.insert_drive_file_outlined),
+                                  const Icon(PhosphorIconsRegular.file),
                                   Text(a.name, maxLines: 2, overflow: TextOverflow.ellipsis,
                                       textAlign: TextAlign.center, style: theme.textTheme.labelSmall),
                                 ],

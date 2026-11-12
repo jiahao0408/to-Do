@@ -12,6 +12,7 @@ import '../common/actions.dart';
 import '../common/format.dart';
 import '../providers.dart';
 import 'recurrence_editor.dart';
+import '../common/ph_icons.dart';
 
 /// Abre el editor. Con [occurrence] edita; si no, crea con los valores de
 /// [draft] (p. ej. fecha/hora del hueco pulsado).
@@ -267,7 +268,7 @@ class _TaskEditorState extends ConsumerState<TaskEditor> {
             SwitchListTile(
               contentPadding: EdgeInsets.zero,
               title: Text(l.noDate),
-              secondary: const Icon(Icons.inbox_outlined),
+              secondary: const Icon(PhosphorIconsRegular.tray),
               value: !hasDate,
               onChanged: (v) => setState(() => hasDate = !v),
             ),
@@ -275,13 +276,13 @@ class _TaskEditorState extends ConsumerState<TaskEditor> {
               SwitchListTile(
                 contentPadding: EdgeInsets.zero,
                 title: Text(l.allDay),
-                secondary: const Icon(Icons.wb_sunny_outlined),
+                secondary: const Icon(PhosphorIconsRegular.sun),
                 value: allDay,
                 onChanged: (v) => setState(() => allDay = v),
               ),
               ListTile(
                 contentPadding: EdgeInsets.zero,
-                leading: const Icon(Icons.event),
+                leading: const Icon(PhosphorIconsRegular.calendarBlank),
                 title: Text(f.fullDate(start)),
                 onTap: _pickDate,
               ),
@@ -291,7 +292,7 @@ class _TaskEditorState extends ConsumerState<TaskEditor> {
                     Expanded(
                       child: ListTile(
                         contentPadding: EdgeInsets.zero,
-                        leading: const Icon(Icons.schedule),
+                        leading: const Icon(PhosphorIconsRegular.clock),
                         title: Text('${l.startTime} ${f.time(start)}'),
                         onTap: _pickStartTime,
                       ),
@@ -320,7 +321,7 @@ class _TaskEditorState extends ConsumerState<TaskEditor> {
                 ),
               ListTile(
                 contentPadding: EdgeInsets.zero,
-                leading: const Icon(Icons.repeat),
+                leading: const Icon(PhosphorIconsRegular.repeat),
                 title: Text(rule == null ? l.noRepeat : describeRule(l, f, rule, start)),
                 onTap: () async {
                   final r = await showRecurrenceEditor(context, rule, start);
@@ -375,7 +376,7 @@ class _TaskEditorState extends ConsumerState<TaskEditor> {
                     DropdownMenuItem(
                       value: p.id,
                       child: Row(children: [
-                        Icon(Icons.folder, size: 18, color: Color(p.color)),
+                        Icon(PhosphorIconsFill.folder, size: 18, color: Color(p.color)),
                         const SizedBox(width: 8),
                         Text(p.name),
                       ]),
@@ -393,7 +394,7 @@ class _TaskEditorState extends ConsumerState<TaskEditor> {
                   ButtonSegment(
                     value: p,
                     label: Text(priorityLabel(l, p)),
-                    icon: Icon(Icons.flag, color: priorityColor(p)),
+                    icon: Icon(PhosphorIconsFill.flag, color: priorityColor(p)),
                   ),
               ],
               selected: {priority},
@@ -426,7 +427,7 @@ class _TaskEditorState extends ConsumerState<TaskEditor> {
                     value: subtasks[i].done,
                     title: Text(subtasks[i].title),
                     secondary: IconButton(
-                      icon: const Icon(Icons.close),
+                      icon: const Icon(PhosphorIconsRegular.x),
                       onPressed: () => setState(() => subtasks.removeAt(i)),
                     ),
                     onChanged: (v) =>
@@ -438,7 +439,7 @@ class _TaskEditorState extends ConsumerState<TaskEditor> {
               controller: _subtaskCtrl,
               decoration: InputDecoration(
                 hintText: l.addSubtask,
-                prefixIcon: const Icon(Icons.add),
+                prefixIcon: const Icon(PhosphorIconsRegular.plus),
               ),
               onSubmitted: (v) {
                 if (v.trim().isEmpty) return;
@@ -451,21 +452,21 @@ class _TaskEditorState extends ConsumerState<TaskEditor> {
             const SizedBox(height: 16),
             TextFormField(
               controller: locationCtrl,
-              decoration: InputDecoration(labelText: l.location, prefixIcon: const Icon(Icons.place_outlined)),
+              decoration: InputDecoration(labelText: l.location, prefixIcon: const Icon(PhosphorIconsRegular.mapPin)),
             ),
             TextFormField(
               controller: urlCtrl,
               keyboardType: TextInputType.url,
-              decoration: InputDecoration(labelText: l.link, prefixIcon: const Icon(Icons.link)),
+              decoration: InputDecoration(labelText: l.link, prefixIcon: const Icon(PhosphorIconsRegular.link)),
             ),
             TextFormField(
               controller: estimateCtrl,
               keyboardType: TextInputType.number,
-              decoration: InputDecoration(labelText: l.estimate, prefixIcon: const Icon(Icons.timelapse)),
+              decoration: InputDecoration(labelText: l.estimate, prefixIcon: const Icon(PhosphorIconsRegular.timer)),
             ),
             SwitchListTile(
               contentPadding: EdgeInsets.zero,
-              secondary: const Icon(Icons.push_pin_outlined),
+              secondary: const Icon(PhosphorIconsRegular.pushPin),
               title: Text(l.pinned),
               value: pinned,
               onChanged: (v) => setState(() => pinned = v),
@@ -473,7 +474,7 @@ class _TaskEditorState extends ConsumerState<TaskEditor> {
             if (hasDate)
               SwitchListTile(
                 contentPadding: EdgeInsets.zero,
-                secondary: const Icon(Icons.hourglass_bottom),
+                secondary: const Icon(PhosphorIconsRegular.hourglassMedium),
                 title: Text(l.countdownLabel),
                 value: countdown,
                 onChanged: (v) => setState(() => countdown = v),

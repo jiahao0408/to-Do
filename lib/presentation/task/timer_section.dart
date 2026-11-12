@@ -7,6 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../domain/snapshot.dart';
 import '../common/format.dart';
 import '../providers.dart';
+import '../common/ph_icons.dart';
 
 class TimerSection extends ConsumerStatefulWidget {
   const TimerSection({super.key, required this.occurrence});
@@ -70,7 +71,7 @@ class _TimerSectionState extends ConsumerState<TimerSection> {
             children: [
               Row(
                 children: [
-                  Icon(Icons.timer_outlined, color: running != null ? theme.colorScheme.primary : null),
+                  Icon(PhosphorIconsRegular.timer, color: running != null ? theme.colorScheme.primary : null),
                   const SizedBox(width: 8),
                   Text(l.timer, style: theme.textTheme.titleSmall),
                   const Spacer(),
@@ -93,18 +94,18 @@ class _TimerSectionState extends ConsumerState<TimerSection> {
                 children: [
                   if (running == null)
                     FilledButton.tonalIcon(
-                      icon: const Icon(Icons.play_arrow),
+                      icon: const Icon(PhosphorIconsFill.play),
                       label: Text(l.timerStart),
                       onPressed: () => repo.startTimer(o.taskId, o.occurrenceDate),
                     )
                   else ...[
                     FilledButton.tonalIcon(
-                      icon: const Icon(Icons.pause),
+                      icon: const Icon(PhosphorIconsFill.pause),
                       label: Text(l.timerPause),
                       onPressed: () => repo.stopTimer(running.id!),
                     ),
                     OutlinedButton.icon(
-                      icon: const Icon(Icons.stop),
+                      icon: const Icon(PhosphorIconsFill.stop),
                       label: Text(l.timerStop),
                       onPressed: () async {
                         await repo.stopTimer(running.id!);
@@ -117,7 +118,7 @@ class _TimerSectionState extends ConsumerState<TimerSection> {
                   ],
                   if (entries.isNotEmpty && running == null)
                     TextButton.icon(
-                      icon: const Icon(Icons.restart_alt),
+                      icon: const Icon(PhosphorIconsRegular.arrowCounterClockwise),
                       label: Text(l.timerReset),
                       onPressed: () => repo.deleteTimeEntriesOf(o.taskId),
                     ),

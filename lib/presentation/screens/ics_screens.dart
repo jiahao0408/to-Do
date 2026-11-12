@@ -14,6 +14,7 @@ import '../../services/ics_files.dart';
 import '../common/actions.dart';
 import '../common/format.dart';
 import '../providers.dart';
+import '../common/ph_icons.dart';
 
 /// Elige un .ics y abre la vista previa.
 Future<void> pickAndImportIcs(BuildContext context) async {
@@ -171,10 +172,10 @@ class _IcsImportScreenState extends ConsumerState<IcsImportScreen> {
                   title: Text(it.title.isEmpty ? '—' : it.title),
                   subtitle: Text([when, if (it.categoryName != null) it.categoryName!, ...notes].join(' · ')),
                   secondary: Icon(it.isTodo
-                      ? Icons.check_box_outlined
+                      ? PhosphorIconsRegular.checkSquare
                       : rule != null
-                          ? Icons.repeat
-                          : Icons.event),
+                          ? PhosphorIconsRegular.repeat
+                          : PhosphorIconsRegular.calendarBlank),
                 );
               },
             ),
@@ -194,7 +195,7 @@ class _IcsImportScreenState extends ConsumerState<IcsImportScreen> {
                 child: FilledButton.icon(
                   icon: _busy
                       ? const SizedBox(width: 18, height: 18, child: CircularProgressIndicator(strokeWidth: 2))
-                      : const Icon(Icons.download),
+                      : const Icon(PhosphorIconsRegular.downloadSimple),
                   label: Text(l.icsImportButton(_selected.length)),
                   onPressed: _selected.isEmpty || _busy ? null : _import,
                 ),
@@ -319,7 +320,7 @@ class _IcsExportScreenState extends ConsumerState<IcsExportScreen> {
         child: Padding(
           padding: const EdgeInsets.all(12),
           child: FilledButton.icon(
-            icon: const Icon(Icons.ios_share),
+            icon: const Icon(PhosphorIconsRegular.export),
             label: Text(l.icsExportButton),
             onPressed: count == 0 ? null : _export,
           ),

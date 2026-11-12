@@ -8,6 +8,7 @@ import '../common/format.dart';
 import '../providers.dart';
 import 'backup_tiles.dart';
 import 'categories_screen.dart';
+import '../common/ph_icons.dart';
 
 class SettingsScreen extends ConsumerWidget {
   const SettingsScreen({super.key});
@@ -42,27 +43,27 @@ class SettingsScreen extends ConsumerWidget {
         children: [
           header(l.appearanceSection),
           ListTile(
-            leading: const Icon(Icons.brightness_6_outlined),
+            leading: const Icon(PhosphorIconsRegular.circleHalf),
             title: Text(l.theme),
             trailing: SegmentedButton<AppThemeMode>(
               showSelectedIcon: false,
               segments: [
-                ButtonSegment(value: AppThemeMode.system, icon: const Icon(Icons.phone_android), tooltip: l.themeSystem),
-                ButtonSegment(value: AppThemeMode.light, icon: const Icon(Icons.light_mode), tooltip: l.themeLight),
-                ButtonSegment(value: AppThemeMode.dark, icon: const Icon(Icons.dark_mode), tooltip: l.themeDark),
+                ButtonSegment(value: AppThemeMode.system, icon: const Icon(PhosphorIconsRegular.deviceMobile), tooltip: l.themeSystem),
+                ButtonSegment(value: AppThemeMode.light, icon: const Icon(PhosphorIconsRegular.sun), tooltip: l.themeLight),
+                ButtonSegment(value: AppThemeMode.dark, icon: const Icon(PhosphorIconsRegular.moon), tooltip: l.themeDark),
               ],
               selected: {s.themeMode},
               onSelectionChanged: (v) => set(AppSettings.kTheme, v.first.name),
             ),
           ),
           SwitchListTile(
-            secondary: const Icon(Icons.wallpaper),
+            secondary: const Icon(PhosphorIconsRegular.palette),
             title: Text(l.dynamicColor),
             value: s.dynamicColor,
             onChanged: (v) => setBool(AppSettings.kDynamicColor, v),
           ),
           ListTile(
-            leading: const Icon(Icons.palette_outlined),
+            leading: const Icon(PhosphorIconsRegular.palette),
             title: Text(l.accentColor),
             enabled: !s.dynamicColor,
             trailing: CircleAvatar(backgroundColor: Color(s.accentColor), radius: 12),
@@ -72,7 +73,7 @@ class SettingsScreen extends ConsumerWidget {
             },
           ),
           ListTile(
-            leading: const Icon(Icons.language),
+            leading: const Icon(PhosphorIconsRegular.globe),
             title: Text(l.language),
             trailing: DropdownButton<String>(
               value: s.localeCode ?? 'system',
@@ -88,7 +89,7 @@ class SettingsScreen extends ConsumerWidget {
           ),
           header(l.calendarSection),
           ListTile(
-            leading: const Icon(Icons.view_week_outlined),
+            leading: const Icon(PhosphorIconsRegular.columns),
             title: Text(l.weekStart),
             trailing: SegmentedButton<bool>(
               showSelectedIcon: false,
@@ -101,20 +102,20 @@ class SettingsScreen extends ConsumerWidget {
             ),
           ),
           SwitchListTile(
-            secondary: const Icon(Icons.numbers),
+            secondary: const Icon(PhosphorIconsRegular.hash),
             title: Text(l.showWeekNumbers),
             value: s.showWeekNumbers,
             onChanged: (v) => setBool(AppSettings.kShowWeekNumbers, v),
           ),
           ListTile(
-            leading: const Icon(Icons.label_outline),
+            leading: const Icon(PhosphorIconsRegular.tag),
             title: Text(l.categories),
-            trailing: const Icon(Icons.chevron_right),
+            trailing: const Icon(PhosphorIconsRegular.caretRight),
             onTap: () => Navigator.of(context)
                 .push(MaterialPageRoute(builder: (_) => const CategoriesScreen())),
           ),
           ListTile(
-            leading: const Icon(Icons.rate_review_outlined),
+            leading: const Icon(PhosphorIconsRegular.notePencil),
             title: Text(l.reviewDay),
             trailing: DropdownButton<int>(
               value: s.reviewWeekday,
@@ -127,7 +128,7 @@ class SettingsScreen extends ConsumerWidget {
           ),
           header(l.notificationsSection),
           ListTile(
-            leading: const Icon(Icons.notifications_outlined),
+            leading: const Icon(PhosphorIconsRegular.bell),
             title: Text(l.defaultReminder),
             trailing: DropdownButton<int>(
               value: s.defaultReminder,
@@ -141,7 +142,7 @@ class SettingsScreen extends ConsumerWidget {
             ),
           ),
           SwitchListTile(
-            secondary: const Icon(Icons.wb_sunny_outlined),
+            secondary: const Icon(PhosphorIconsRegular.sun),
             title: Text(l.dailySummary),
             subtitle: Text('${l.summaryTime}: ${hm(sum.dailyMinute)}'),
             value: sum.dailyEnabled,
@@ -151,7 +152,7 @@ class SettingsScreen extends ConsumerWidget {
             },
           ),
           SwitchListTile(
-            secondary: const Icon(Icons.date_range_outlined),
+            secondary: const Icon(PhosphorIconsRegular.calendarDots),
             title: Text(l.weeklySummary),
             subtitle: Text('${f.weekdayName(sum.weeklyWeekday)} · ${hm(sum.weeklyMinute)}'),
             value: sum.weeklyEnabled,
@@ -173,7 +174,7 @@ class SettingsScreen extends ConsumerWidget {
             },
           ),
           SwitchListTile(
-            secondary: const Icon(Icons.calendar_month_outlined),
+            secondary: const Icon(PhosphorIconsRegular.calendar),
             title: Text(l.monthlySummary),
             subtitle: Text('${l.summaryTime}: ${hm(sum.monthlyMinute)}'),
             value: sum.monthlyEnabled,
@@ -184,19 +185,19 @@ class SettingsScreen extends ConsumerWidget {
           ),
           header(l.interactionSection),
           SwitchListTile(
-            secondary: const Icon(Icons.vibration),
+            secondary: const Icon(PhosphorIconsRegular.vibrate),
             title: Text(l.haptics),
             value: s.haptics,
             onChanged: (v) => setBool(AppSettings.kHaptics, v),
           ),
           SwitchListTile(
-            secondary: const Icon(Icons.animation),
+            secondary: const Icon(PhosphorIconsRegular.filmStrip),
             title: Text(l.animations),
             value: s.animations,
             onChanged: (v) => setBool(AppSettings.kAnimations, v),
           ),
           ListTile(
-            leading: const Icon(Icons.swipe_left_outlined),
+            leading: const Icon(PhosphorIconsRegular.handSwipeLeft),
             title: Text(l.swipeLeftAction),
             trailing: SegmentedButton<SwipeLeftAction>(
               showSelectedIcon: false,
@@ -210,7 +211,7 @@ class SettingsScreen extends ConsumerWidget {
           ),
           header(l.villageSection),
           SwitchListTile(
-            secondary: const Icon(Icons.holiday_village_outlined),
+            secondary: const Icon(PhosphorIconsRegular.buildings),
             title: Text(l.villagerShow),
             value: s.villagerEnabled,
             onChanged: (v) => setBool(AppSettings.kVillagerEnabled, v),
@@ -231,7 +232,7 @@ class SettingsScreen extends ConsumerWidget {
           ],
           header(l.menuCardSection),
           SwitchListTile(
-            secondary: const Icon(Icons.view_carousel_outlined),
+            secondary: const Icon(PhosphorIconsRegular.cardsThree),
             title: Text(l.menuCardShow),
             value: s.villagerDrawer,
             onChanged: (v) => setBool(AppSettings.kVillagerDrawer, v),
@@ -292,7 +293,7 @@ class SettingsScreen extends ConsumerWidget {
                     DropdownMenuItem(
                       value: 'p:${p.id}',
                       child: Row(mainAxisSize: MainAxisSize.min, children: [
-                        Icon(Icons.folder, size: 16, color: Color(p.color)),
+                        Icon(PhosphorIconsFill.folder, size: 16, color: Color(p.color)),
                         const SizedBox(width: 6),
                         Text(p.name),
                       ]),

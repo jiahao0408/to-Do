@@ -21,6 +21,7 @@ import '../screens/weekly_review_screen.dart';
 import '../task/task_detail.dart';
 import '../village/menu_carousel.dart';
 import '../village/village_screen.dart';
+import '../common/ph_icons.dart';
 
 class AppDrawer extends ConsumerWidget {
   const AppDrawer({super.key});
@@ -107,10 +108,10 @@ class AppDrawer extends ConsumerWidget {
               child: Text(f.fullDate(now), style: theme.textTheme.bodySmall),
             ),
             const MenuCarousel(),
-            item(Icons.inbox_outlined, l.inbox, () => open(const InboxScreen()),
+            item(PhosphorIconsRegular.tray, l.inbox, () => open(const InboxScreen()),
                 trailing: inboxCount > 0 ? Badge(label: Text('$inboxCount')) : null),
-            if (inboxCount > 0) item(Icons.playlist_add_check, l.processInbox, () => open(const ProcessInboxScreen())),
-            item(Icons.search, l.search, () => open(const SearchScreen())),
+            if (inboxCount > 0) item(PhosphorIconsRegular.listChecks, l.processInbox, () => open(const ProcessInboxScreen())),
+            item(PhosphorIconsRegular.magnifyingGlass, l.search, () => open(const SearchScreen())),
             const Divider(),
 
             // ---- Cuentas atrás y fijadas
@@ -121,9 +122,9 @@ class AppDrawer extends ConsumerWidget {
                 child: Text(l.nothingPinned, style: theme.textTheme.bodySmall),
               ),
             for (final o in countdowns)
-              item(Icons.hourglass_bottom, o.task.title, () => openTask(o),
+              item(PhosphorIconsRegular.hourglassMedium, o.task.title, () => openTask(o),
                   trailing: Text(l.daysLeft(daysBetween(now, o.task.start!)), style: theme.textTheme.labelMedium)),
-            for (final o in pinned) item(Icons.push_pin_outlined, o.task.title, () => openTask(o)),
+            for (final o in pinned) item(PhosphorIconsRegular.pushPin, o.task.title, () => openTask(o)),
             const Divider(),
 
             // ---- Proyectos
@@ -131,7 +132,7 @@ class AppDrawer extends ConsumerWidget {
               l.projects,
               trailing: IconButton(
                 tooltip: l.newProject,
-                icon: const Icon(Icons.add),
+                icon: const Icon(PhosphorIconsRegular.plus),
                 onPressed: () async {
                   final id = await editProject(context, ref);
                   if (id != null && context.mounted) open(ProjectScreen(projectId: id));
@@ -142,7 +143,7 @@ class AppDrawer extends ConsumerWidget {
               ListTile(
                 contentPadding: const EdgeInsets.symmetric(horizontal: 24),
                 visualDensity: VisualDensity.compact,
-                leading: Icon(Icons.folder, color: Color(p.color)),
+                leading: Icon(PhosphorIconsFill.folder, color: Color(p.color)),
                 title: Text(p.name, maxLines: 1, overflow: TextOverflow.ellipsis),
                 subtitle: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -169,19 +170,19 @@ class AppDrawer extends ConsumerWidget {
                 value: !hidden.contains(c.id),
                 onChanged: (v) => toggleCategory(c.id!, v ?? true),
               ),
-            item(Icons.label_outline, l.manageCategories, () => open(const CategoriesScreen())),
+            item(PhosphorIconsRegular.tag, l.manageCategories, () => open(const CategoriesScreen())),
             const Divider(),
 
             // ---- Herramientas
-            item(Icons.book_outlined, l.diary, () => open(const DiaryScreen())),
+            item(PhosphorIconsRegular.bookOpenText, l.diary, () => open(const DiaryScreen())),
             if (settings.villagerEnabled && settings.villagerTank)
-              item(Icons.holiday_village_outlined, l.villageTitle, () => open(const VillageScreen())),
-            item(Icons.dashboard_customize_outlined, l.templates, () => open(const TemplatesScreen())),
-            item(Icons.insights_outlined, l.statistics, () => open(const StatsScreen())),
-            item(Icons.rate_review_outlined, l.weeklyReview, () => open(const WeeklyReviewScreen())),
+              item(PhosphorIconsRegular.buildings, l.villageTitle, () => open(const VillageScreen())),
+            item(PhosphorIconsRegular.squaresFour, l.templates, () => open(const TemplatesScreen())),
+            item(PhosphorIconsRegular.chartLineUp, l.statistics, () => open(const StatsScreen())),
+            item(PhosphorIconsRegular.notePencil, l.weeklyReview, () => open(const WeeklyReviewScreen())),
             const Divider(),
-            item(Icons.gesture, l.gestureGuide, () => open(const GestureGuideScreen())),
-            item(Icons.settings_outlined, l.settings, () => open(const SettingsScreen())),
+            item(PhosphorIconsRegular.hand, l.gestureGuide, () => open(const GestureGuideScreen())),
+            item(PhosphorIconsRegular.gear, l.settings, () => open(const SettingsScreen())),
           ],
         ),
       ),

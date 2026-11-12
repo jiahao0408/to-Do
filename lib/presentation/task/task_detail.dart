@@ -13,6 +13,7 @@ import 'attachments_section.dart';
 import 'postpone.dart';
 import 'task_editor.dart';
 import 'timer_section.dart';
+import '../common/ph_icons.dart';
 
 Future<void> showTaskDetail(BuildContext context, Occurrence o) {
   return showModalBottomSheet(
@@ -79,7 +80,7 @@ class TaskDetailSheet extends ConsumerWidget {
                   ),
                 ),
               ),
-              Icon(Icons.flag, color: priorityColor(t.priority)),
+              Icon(PhosphorIconsFill.flag, color: priorityColor(t.priority)),
             ],
           ),
           const SizedBox(height: 12),
@@ -89,13 +90,13 @@ class TaskDetailSheet extends ConsumerWidget {
             children: [
               if (t.start != null)
                 Chip(
-                  avatar: const Icon(Icons.schedule, size: 18),
+                  avatar: const Icon(PhosphorIconsRegular.clock, size: 18),
                   label: Text(t.allDay
                       ? '${f.fullDate(t.start!)} · ${l.allDayShort}'
                       : '${f.weekdayDayMonth(t.start!)} ${f.time(t.start!)}–${f.time(t.end!)}'),
                 )
               else
-                Chip(avatar: const Icon(Icons.inbox, size: 18), label: Text(l.unscheduled)),
+                Chip(avatar: const Icon(PhosphorIconsFill.tray, size: 18), label: Text(l.unscheduled)),
               if (cat != null)
                 Chip(
                   avatar: CircleAvatar(backgroundColor: Color(cat.color), radius: 6),
@@ -103,24 +104,24 @@ class TaskDetailSheet extends ConsumerWidget {
                 ),
               if (snap.projectById(o.series.projectId) case final pr?)
                 Chip(
-                  avatar: Icon(Icons.folder, size: 18, color: Color(pr.color)),
+                  avatar: Icon(PhosphorIconsFill.folder, size: 18, color: Color(pr.color)),
                   label: Text(pr.name),
                 ),
               Chip(label: Text('${l.priority}: ${priorityLabel(l, t.priority)}')),
               if (o.isSeries)
                 Chip(
-                  avatar: const Icon(Icons.repeat, size: 18),
+                  avatar: const Icon(PhosphorIconsRegular.repeat, size: 18),
                   label: Text(describeRule(l, f, o.series.rule!, o.series.start!)),
                 ),
               if (t.countdown && t.start != null && daysBetween(now, t.start!) >= 0)
                 Chip(
-                  avatar: const Icon(Icons.hourglass_bottom, size: 18),
+                  avatar: const Icon(PhosphorIconsRegular.hourglassMedium, size: 18),
                   label: Text(l.daysLeft(daysBetween(now, t.start!))),
                 ),
-              if (t.pinned) Chip(avatar: const Icon(Icons.push_pin, size: 18), label: Text(l.pinned)),
+              if (t.pinned) Chip(avatar: const Icon(PhosphorIconsFill.pushPin, size: 18), label: Text(l.pinned)),
               for (final r in reminders)
                 Chip(
-                  avatar: const Icon(Icons.notifications_none, size: 18),
+                  avatar: const Icon(PhosphorIconsRegular.bell, size: 18),
                   label: Text(reminderLabel(l, r.minutesBefore)),
                 ),
             ],
@@ -132,16 +133,16 @@ class TaskDetailSheet extends ConsumerWidget {
           if (t.location.isNotEmpty)
             ListTile(
               contentPadding: EdgeInsets.zero,
-              leading: const Icon(Icons.place_outlined),
+              leading: const Icon(PhosphorIconsRegular.mapPin),
               title: Text(t.location),
-              trailing: const Icon(Icons.map_outlined),
+              trailing: const Icon(PhosphorIconsRegular.mapTrifold),
               onTap: () => openUrl(
                   'https://www.google.com/maps/search/?api=1&query=${Uri.encodeComponent(t.location)}'),
             ),
           if (t.url.isNotEmpty)
             ListTile(
               contentPadding: EdgeInsets.zero,
-              leading: const Icon(Icons.link),
+              leading: const Icon(PhosphorIconsRegular.link),
               title: Text(t.url, maxLines: 1, overflow: TextOverflow.ellipsis),
               onTap: () => openUrl(t.url),
             ),
@@ -193,7 +194,7 @@ class TaskDetailSheet extends ConsumerWidget {
             runSpacing: 8,
             children: [
               FilledButton.icon(
-                icon: const Icon(Icons.edit),
+                icon: const Icon(PhosphorIconsRegular.pencilSimple),
                 label: Text(l.edit),
                 onPressed: () {
                   final nav = Navigator.of(context);
@@ -202,7 +203,7 @@ class TaskDetailSheet extends ConsumerWidget {
                 },
               ),
               OutlinedButton.icon(
-                icon: const Icon(Icons.snooze),
+                icon: const Icon(PhosphorIconsRegular.alarm),
                 label: Text(l.postpone),
                 onPressed: () async {
                   final nav = Navigator.of(context);
@@ -211,13 +212,13 @@ class TaskDetailSheet extends ConsumerWidget {
                 },
               ),
               OutlinedButton.icon(
-                icon: const Icon(Icons.copy),
+                icon: const Icon(PhosphorIconsRegular.copy),
                 label: Text(l.duplicate),
                 onPressed: () => duplicateOccurrence(context, o),
               ),
               if (o.isSeries)
                 OutlinedButton.icon(
-                  icon: const Icon(Icons.skip_next),
+                  icon: const Icon(PhosphorIconsRegular.skipForward),
                   label: Text(l.skipOccurrence),
                   onPressed: () async {
                     final ui = Ui.of(context);
@@ -230,7 +231,7 @@ class TaskDetailSheet extends ConsumerWidget {
                   },
                 ),
               OutlinedButton.icon(
-                icon: Icon(Icons.delete_outline, color: theme.colorScheme.error),
+                icon: Icon(PhosphorIconsRegular.trash, color: theme.colorScheme.error),
                 label: Text(l.delete, style: TextStyle(color: theme.colorScheme.error)),
                 onPressed: () async {
                   final nav = Navigator.of(context);

@@ -9,6 +9,7 @@ import '../providers.dart';
 import 'date_pager.dart';
 import '../screens/diary_screen.dart';
 import 'timeline.dart';
+import '../common/ph_icons.dart';
 
 class DayView extends ConsumerWidget {
   const DayView({super.key});
@@ -76,7 +77,7 @@ class _DayHeader extends ConsumerWidget {
           IconButton(
             tooltip: l.dayNote,
             icon: Icon(
-              ref.watch(snapshotProvider).noteOn(day) == null ? Icons.note_add_outlined : Icons.sticky_note_2,
+              ref.watch(snapshotProvider).noteOn(day) == null ? PhosphorIconsRegular.notePencil : PhosphorIconsRegular.note,
               color: ref.watch(snapshotProvider).noteOn(day) == null ? null : theme.colorScheme.primary,
             ),
             onPressed: () => openDayNote(context, day),
@@ -164,7 +165,7 @@ class _WeekHeader extends ConsumerWidget {
                   visualDensity: VisualDensity.compact,
                   iconSize: 20,
                   tooltip: toggle == CalendarView.workWeek ? l.viewWorkWeek : l.viewWeek,
-                  icon: Icon(toggle == CalendarView.workWeek ? Icons.work_outline : Icons.date_range),
+                  icon: Icon(toggle == CalendarView.workWeek ? PhosphorIconsRegular.briefcase : PhosphorIconsRegular.calendarDots),
                   onPressed: () => ref.read(calendarProvider.notifier).setView(toggle!),
                 ),
               if (showWeek)

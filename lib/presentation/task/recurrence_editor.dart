@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import '../../domain/recurrence/recurrence_rule.dart';
 import '../../domain/time.dart';
 import '../common/format.dart';
+import '../common/ph_icons.dart';
 
 /// Devuelve la regla elegida, o `''` si se quitó la repetición, o null si
 /// se canceló.
@@ -217,7 +218,7 @@ class _RecurrenceEditorState extends State<RecurrenceEditor> {
                         : null,
                     secondary: end == RecurrenceEnd.until
                         ? IconButton(
-                            icon: const Icon(Icons.event),
+                            icon: const Icon(PhosphorIconsRegular.calendarBlank),
                             onPressed: () async {
                               final d = await showDatePicker(
                                 context: context,

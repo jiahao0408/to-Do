@@ -22,6 +22,7 @@ import '../task/quick_add.dart';
 import '../village/villager_floating.dart';
 import 'app_drawer.dart';
 import 'extra_destinations.dart';
+import '../common/ph_icons.dart';
 
 class HomeShell extends ConsumerStatefulWidget {
   const HomeShell({super.key});
@@ -59,7 +60,7 @@ class _HomeShellState extends ConsumerState<HomeShell> {
     final ok = await showDialog<bool>(
       context: context,
       builder: (ctx) => AlertDialog(
-        icon: const Icon(Icons.notifications_active_outlined),
+        icon: const Icon(PhosphorIconsRegular.bellRinging),
         title: Text(l.notifPermissionTitle),
         content: Text(l.notifPermissionBody),
         actions: [
@@ -185,23 +186,23 @@ class _HomeShellState extends ConsumerState<HomeShell> {
               : FloatingActionButton(
                   tooltip: l.newTask,
                   onPressed: () => showQuickAdd(context),
-                  child: const Icon(Icons.add),
+                  child: const Icon(PhosphorIconsRegular.plus),
                 ),
           bottomNavigationBar: NavigationBar(
             selectedIndex: _navIndex(state.view),
             onDestinationSelected: _onNav,
             labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
             destinations: [
-              NavigationDestination(icon: const Icon(Icons.view_day_outlined), selectedIcon: const Icon(Icons.view_day), label: l.viewDay),
-              NavigationDestination(icon: const Icon(Icons.view_column_outlined), selectedIcon: const Icon(Icons.view_column), label: l.viewThreeDays),
+              NavigationDestination(icon: const Icon(PhosphorIconsRegular.square), selectedIcon: const Icon(PhosphorIconsFill.square), label: l.viewDay),
+              NavigationDestination(icon: const Icon(PhosphorIconsRegular.squareSplitHorizontal), selectedIcon: const Icon(PhosphorIconsFill.squareSplitHorizontal), label: l.viewThreeDays),
               NavigationDestination(
-                icon: const Icon(Icons.view_week_outlined),
-                selectedIcon: Icon(state.view == CalendarView.workWeek ? Icons.work : Icons.view_week),
+                icon: const Icon(PhosphorIconsRegular.columns),
+                selectedIcon: Icon(state.view == CalendarView.workWeek ? PhosphorIconsFill.briefcase : PhosphorIconsFill.columns),
                 label: state.view == CalendarView.workWeek ? l.viewWorkWeek : l.viewWeek,
                 tooltip: '${l.viewWeek} / ${l.viewWorkWeek}',
               ),
-              NavigationDestination(icon: const Icon(Icons.calendar_month_outlined), selectedIcon: const Icon(Icons.calendar_month), label: l.viewMonth),
-              NavigationDestination(icon: const Icon(Icons.view_agenda_outlined), selectedIcon: const Icon(Icons.view_agenda), label: l.viewAgenda),
+              NavigationDestination(icon: const Icon(PhosphorIconsRegular.calendar), selectedIcon: const Icon(PhosphorIconsFill.calendar), label: l.viewMonth),
+              NavigationDestination(icon: const Icon(PhosphorIconsRegular.rows), selectedIcon: const Icon(PhosphorIconsFill.rows), label: l.viewAgenda),
             ],
           ),
         ),
@@ -216,13 +217,13 @@ class _HomeShellState extends ConsumerState<HomeShell> {
       actions: [
         IconButton(
           tooltip: l.today,
-          icon: const Icon(Icons.today),
+          icon: const Icon(PhosphorIconsRegular.calendarDot),
           onPressed: () => ref.read(calendarProvider.notifier).today(),
         ),
-        IconButton(tooltip: l.goToDate, icon: const Icon(Icons.event_outlined), onPressed: _goToDate),
+        IconButton(tooltip: l.goToDate, icon: const Icon(PhosphorIconsRegular.calendarBlank), onPressed: _goToDate),
         IconButton(
           tooltip: l.search,
-          icon: const Icon(Icons.search),
+          icon: const Icon(PhosphorIconsRegular.magnifyingGlass),
           onPressed: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const SearchScreen())),
         ),
         IconButton(
@@ -230,7 +231,7 @@ class _HomeShellState extends ConsumerState<HomeShell> {
           icon: Badge(
             isLabelVisible: inboxCount > 0,
             label: Text('$inboxCount'),
-            child: const Icon(Icons.inbox_outlined),
+            child: const Icon(PhosphorIconsRegular.tray),
           ),
           onPressed: () {
             if (timeline) {
@@ -259,12 +260,12 @@ class _HomeShellState extends ConsumerState<HomeShell> {
     final l = context.l10n;
     final sel = ref.read(selectionProvider.notifier);
     return AppBar(
-      leading: IconButton(icon: const Icon(Icons.close), onPressed: sel.clear),
+      leading: IconButton(icon: const Icon(PhosphorIconsRegular.x), onPressed: sel.clear),
       title: Text(l.selectedCount(count)),
       actions: [
         IconButton(
           tooltip: l.complete,
-          icon: const Icon(Icons.done_all),
+          icon: const Icon(PhosphorIconsRegular.checks),
           onPressed: () async {
             final ui = Ui.of(context);
             final list = ref.read(selectionProvider).toList();
@@ -277,7 +278,7 @@ class _HomeShellState extends ConsumerState<HomeShell> {
         ),
         IconButton(
           tooltip: l.moveTo,
-          icon: const Icon(Icons.drive_file_move_outline),
+          icon: const Icon(PhosphorIconsRegular.folderSimpleUser),
           onPressed: () async {
             final ui = Ui.of(context);
             final list = ref.read(selectionProvider).toList();
@@ -295,7 +296,7 @@ class _HomeShellState extends ConsumerState<HomeShell> {
         ),
         IconButton(
           tooltip: l.changeCategory,
-          icon: const Icon(Icons.label_outline),
+          icon: const Icon(PhosphorIconsRegular.tag),
           onPressed: () async {
             final ui = Ui.of(context);
             final list = ref.read(selectionProvider).toList();
@@ -329,7 +330,7 @@ class _HomeShellState extends ConsumerState<HomeShell> {
         ),
         IconButton(
           tooltip: l.delete,
-          icon: const Icon(Icons.delete_outline),
+          icon: const Icon(PhosphorIconsRegular.trash),
           onPressed: () async {
             final ui = Ui.of(context);
             final list = ref.read(selectionProvider).toList();

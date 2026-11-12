@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 
 import 'actions.dart';
 import 'format.dart';
+import 'ph_icons.dart';
 
 class CelebrationOverlay extends StatefulWidget {
   const CelebrationOverlay({super.key, required this.child});
@@ -79,7 +80,7 @@ class _CelebrationOverlayState extends State<CelebrationOverlay> with SingleTick
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                const Icon(Icons.celebration, size: 32),
+                                const Icon(PhosphorIconsRegular.confetti, size: 32),
                                 const SizedBox(width: 12),
                                 Text(context.l10n.allDoneCelebration,
                                     style: Theme.of(context).textTheme.titleLarge),

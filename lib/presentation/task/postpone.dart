@@ -7,6 +7,7 @@ import '../../domain/time.dart';
 import '../common/actions.dart';
 import '../common/format.dart';
 import '../providers.dart';
+import '../common/ph_icons.dart';
 
 Future<void> showPostponeSheet(BuildContext context, Occurrence o) async {
   final ui = Ui.of(context);
@@ -27,10 +28,10 @@ Future<void> showPostponeSheet(BuildContext context, Occurrence o) async {
         mainAxisSize: MainAxisSize.min,
         children: [
           for (final (opt, label, icon) in [
-            (PostponeOption.plusHour, l.postponePlusHour, Icons.schedule),
-            (PostponeOption.thisAfternoon, l.postponeThisAfternoon, Icons.wb_twilight),
-            (PostponeOption.tomorrow, l.postponeTomorrow, Icons.today),
-            (PostponeOption.nextWeek, l.postponeNextWeek, Icons.next_week),
+            (PostponeOption.plusHour, l.postponePlusHour, PhosphorIconsRegular.clock),
+            (PostponeOption.thisAfternoon, l.postponeThisAfternoon, PhosphorIconsRegular.sunHorizon),
+            (PostponeOption.tomorrow, l.postponeTomorrow, PhosphorIconsRegular.calendarDot),
+            (PostponeOption.nextWeek, l.postponeNextWeek, PhosphorIconsRegular.calendarPlus),
           ])
             ListTile(
               leading: Icon(icon),
@@ -39,7 +40,7 @@ Future<void> showPostponeSheet(BuildContext context, Occurrence o) async {
               onTap: () => Navigator.pop(ctx, opt),
             ),
           ListTile(
-            leading: const Icon(Icons.event),
+            leading: const Icon(PhosphorIconsRegular.calendarBlank),
             title: Text(l.postponePickDate),
             onTap: () => Navigator.pop(ctx, 'pick'),
           ),

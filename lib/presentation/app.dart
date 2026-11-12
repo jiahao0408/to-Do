@@ -1,4 +1,4 @@
-﻿import 'dart:async';
+import 'dart:async';
 
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +14,7 @@ import '../services/widget_service.dart';
 import 'home/home_shell.dart';
 import 'providers.dart';
 import 'screens/ics_screens.dart';
+import 'theme.dart';
 import 'task/task_detail.dart';
 
 final navigatorKey = GlobalKey<NavigatorState>();
@@ -101,12 +102,6 @@ class _AppState extends ConsumerState<App> with WidgetsBindingObserver {
     });
   }
 
-  ThemeData _theme(ColorScheme scheme) => ThemeData(
-        colorScheme: scheme,
-        useMaterial3: true,
-        visualDensity: VisualDensity.standard,
-      );
-
   @override
   Widget build(BuildContext context) {
     ref.listen(snapshotStreamProvider, (_, next) {
@@ -134,8 +129,8 @@ class _AppState extends ConsumerState<App> with WidgetsBindingObserver {
         navigatorKey: navigatorKey,
         onGenerateTitle: (ctx) => AppLocalizations.of(ctx).appTitle,
         debugShowCheckedModeBanner: false,
-        theme: _theme(light),
-        darkTheme: _theme(dark),
+        theme: appTheme(light),
+        darkTheme: appTheme(dark),
         themeMode: mode,
         locale: locale,
         supportedLocales: AppLocalizations.supportedLocales,

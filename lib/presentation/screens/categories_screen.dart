@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../domain/models/entities.dart';
 import '../common/format.dart';
 import '../providers.dart';
+import '../common/ph_icons.dart';
 
 const kPalette = <int>[
   0xFF3F51B5, 0xFF2196F3, 0xFF00BCD4, 0xFF009688, 0xFF4CAF50, 0xFF8BC34A,
@@ -27,7 +28,7 @@ Future<int?> pickColor(BuildContext context, int current) {
               child: CircleAvatar(
                 backgroundColor: Color(c),
                 radius: 18,
-                child: c == current ? const Icon(Icons.check, color: Colors.white) : null,
+                child: c == current ? const Icon(PhosphorIconsRegular.check, color: Colors.white) : null,
               ),
             ),
         ],
@@ -94,7 +95,7 @@ class CategoriesScreen extends ConsumerWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () => _edit(context, ref),
         tooltip: l.newCategory,
-        child: const Icon(Icons.add),
+        child: const Icon(PhosphorIconsRegular.plus),
       ),
       body: ListView(
         children: [
@@ -104,7 +105,7 @@ class CategoriesScreen extends ConsumerWidget {
               title: Text(c.name),
               onTap: () => _edit(context, ref, c),
               trailing: IconButton(
-                icon: const Icon(Icons.delete_outline),
+                icon: const Icon(PhosphorIconsRegular.trash),
                 tooltip: l.delete,
                 onPressed: () async {
                   final ok = await showDialog<bool>(

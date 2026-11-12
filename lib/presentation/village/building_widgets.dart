@@ -7,6 +7,7 @@ import '../../l10n/app_localizations.dart';
 import '../common/format.dart';
 import 'building_painter.dart';
 import 'iso.dart';
+import '../common/ph_icons.dart';
 
 String buildingName(AppLocalizations l, BuildingType t) => switch (t) {
       BuildingType.house => l.buildingHouse,
@@ -91,7 +92,7 @@ Future<String?> pickBuilding(BuildContext context, {required Color color, String
           const SizedBox(height: 8),
           ListTile(
             contentPadding: EdgeInsets.zero,
-            leading: const Icon(Icons.auto_awesome_outlined),
+            leading: const Icon(PhosphorIconsRegular.sparkle),
             title: Text(l.buildingAuto),
             selected: current == null || current.isEmpty,
             onTap: () => Navigator.pop(ctx, ''),

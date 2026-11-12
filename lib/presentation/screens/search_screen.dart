@@ -9,6 +9,7 @@ import '../../domain/time.dart';
 import '../calendar/agenda_view.dart';
 import '../common/format.dart';
 import '../providers.dart';
+import '../common/ph_icons.dart';
 
 enum StatusFilter { pending, completed, overdue }
 
@@ -109,7 +110,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
         actions: [
           if (_query.isNotEmpty)
             IconButton(
-              icon: const Icon(Icons.clear),
+              icon: const Icon(PhosphorIconsRegular.x),
               onPressed: () => setState(() {
                 _ctrl.clear();
                 _query = '';
@@ -129,7 +130,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                   Padding(
                     padding: const EdgeInsets.only(right: 6),
                     child: ActionChip(
-                      avatar: const Icon(Icons.filter_alt_off, size: 18),
+                      avatar: const Icon(PhosphorIconsRegular.funnelX, size: 18),
                       label: Text(l.clearFilters),
                       onPressed: () => setState(() {
                         _categories.clear();
@@ -148,7 +149,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                 for (final p in Priority.values)
                   _chip(priorityLabel(l, p), _priorities.contains(p),
                       (v) => setState(() => v ? _priorities.add(p) : _priorities.remove(p)),
-                      icon: Icon(Icons.flag, size: 16, color: priorityColor(p))),
+                      icon: Icon(PhosphorIconsFill.flag, size: 16, color: priorityColor(p))),
                 for (final c in snap.categories)
                   _chip(c.name, _categories.contains(c.id),
                       (v) => setState(() => v ? _categories.add(c.id) : _categories.remove(c.id)),
@@ -165,7 +166,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                     );
                     setState(() => _range = r);
                   },
-                  icon: const Icon(Icons.date_range, size: 16),
+                  icon: const Icon(PhosphorIconsRegular.calendarDots, size: 16),
                 ),
               ],
             ),
