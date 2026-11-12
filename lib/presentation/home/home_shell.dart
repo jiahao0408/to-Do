@@ -1,5 +1,6 @@
 // Pantalla principal: selector de vista siempre visible, navegación (RF-32),
 // barra de selección múltiple (RF-33), bandeja (RF-02) y avisos de inicio.
+import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -174,7 +175,16 @@ class _HomeShellState extends ConsumerState<HomeShell> {
             children: [
               Expanded(
                 child: Stack(children: [
-                  Positioned.fill(child: body),
+                  Positioned.fill(
+                    child: ref.watch(settingsProvider).animations && !MediaQuery.disableAnimationsOf(context)
+                        ? PageTransitionSwitcher(
+                            duration: const Duration(milliseconds: 280),
+                            transitionBuilder: (child, a, b) =>
+                                FadeThroughTransition(animation: a, secondaryAnimation: b, fillColor: Colors.transparent, child: child),
+                            child: body,
+                          )
+                        : body,
+                  ),
                   VillagerFloating(hidden: selecting || (_inboxOpen && timeline)),
                 ]),
               ),

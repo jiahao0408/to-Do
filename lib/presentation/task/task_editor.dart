@@ -16,12 +16,13 @@ import '../common/ph_icons.dart';
 
 /// Abre el editor. Con [occurrence] edita; si no, crea con los valores de
 /// [draft] (p. ej. fecha/hora del hueco pulsado).
-Future<void> openTaskEditor(BuildContext context, {Occurrence? occurrence, Task? draft,
-    List<int>? draftReminders}) {
-  return Navigator.of(context).push(MaterialPageRoute(
-    fullscreenDialog: true,
-    builder: (_) => TaskEditor(occurrence: occurrence, draft: draft, draftReminders: draftReminders),
-  ));
+Future<void> openTaskEditor(BuildContext context, {Occurrence? occurrence, Task? draft, List<int>? draftReminders}) {
+  return Navigator.of(context).push(
+    MaterialPageRoute(
+      fullscreenDialog: true,
+      builder: (_) => TaskEditor(occurrence: occurrence, draft: draft, draftReminders: draftReminders),
+    ),
+  );
 }
 
 class TaskEditor extends ConsumerStatefulWidget {
@@ -89,8 +90,7 @@ class _TaskEditorState extends ConsumerState<TaskEditor> {
       reminders = snap.remindersOf(id).map((r) => r.minutesBefore).toList()..sort();
       subtasks = [...snap.subtasksOf(id)];
     } else {
-      reminders = widget.draftReminders ??
-          (settings.defaultReminder >= 0 ? [settings.defaultReminder] : []);
+      reminders = widget.draftReminders ?? (settings.defaultReminder >= 0 ? [settings.defaultReminder] : []);
     }
   }
 
@@ -151,9 +151,10 @@ class _TaskEditorState extends ConsumerState<TaskEditor> {
       final subs = [...subtasks];
       final rems = [...reminders];
       Navigator.pop(context);
-      final point = await ui.repo.withUndo(const [], () async => [
-            await service.create(task, subtasks: subs, reminders: rems),
-          ]);
+      final point = await ui.repo.withUndo(
+        const [],
+        () async => [await service.create(task, subtasks: subs, reminders: rems)],
+      );
       ui.undo(point, overlap ?? l.taskSaved);
       return;
     }
@@ -225,9 +226,7 @@ class _TaskEditorState extends ConsumerState<TaskEditor> {
         ),
         actions: [
           TextButton(onPressed: () => Navigator.pop(ctx), child: Text(l.cancel)),
-          FilledButton(
-              onPressed: () => Navigator.pop(ctx, int.tryParse(ctrl.text)),
-              child: Text(l.ok)),
+          FilledButton(onPressed: () => Navigator.pop(ctx, int.tryParse(ctrl.text)), child: Text(l.ok)),
         ],
       ),
     );
@@ -247,9 +246,7 @@ class _TaskEditorState extends ConsumerState<TaskEditor> {
     return Scaffold(
       appBar: AppBar(
         title: Text(editing ? l.editTask : l.newTask),
-        actions: [
-          TextButton(onPressed: _save, child: Text(l.save)),
-        ],
+        actions: [TextButton(onPressed: _save, child: Text(l.save))],
       ),
       body: Form(
         key: _form,
@@ -264,223 +261,286 @@ class _TaskEditorState extends ConsumerState<TaskEditor> {
               decoration: InputDecoration(labelText: l.title),
               validator: (v) => (v == null || v.trim().isEmpty) ? l.titleRequired : null,
             ),
-            const SizedBox(height: 8),
-            SwitchListTile(
-              contentPadding: EdgeInsets.zero,
-              title: Text(l.noDate),
-              secondary: const Icon(PhosphorIconsRegular.tray),
-              value: !hasDate,
-              onChanged: (v) => setState(() => hasDate = !v),
-            ),
-            if (hasDate) ...[
-              SwitchListTile(
-                contentPadding: EdgeInsets.zero,
-                title: Text(l.allDay),
-                secondary: const Icon(PhosphorIconsRegular.sun),
-                value: allDay,
-                onChanged: (v) => setState(() => allDay = v),
-              ),
-              ListTile(
-                contentPadding: EdgeInsets.zero,
-                leading: const Icon(PhosphorIconsRegular.calendarBlank),
-                title: Text(f.fullDate(start)),
-                onTap: _pickDate,
-              ),
-              if (!allDay)
-                Row(
-                  children: [
-                    Expanded(
-                      child: ListTile(
-                        contentPadding: EdgeInsets.zero,
-                        leading: const Icon(PhosphorIconsRegular.clock),
-                        title: Text('${l.startTime} ${f.time(start)}'),
-                        onTap: _pickStartTime,
-                      ),
-                    ),
-                    Expanded(
-                      child: ListTile(
-                        contentPadding: EdgeInsets.zero,
-                        title: Text('${l.endTime} ${f.time(end)}'),
-                        subtitle: Text(f.duration(durationMin)),
-                        onTap: _pickEndTime,
-                      ),
-                    ),
-                  ],
-                ),
-              if (!allDay)
-                Wrap(
-                  spacing: 6,
-                  children: [
-                    for (final m in [15, 30, 45, 60, 90, 120])
-                      ChoiceChip(
-                        label: Text(f.duration(m)),
-                        selected: durationMin == m,
-                        onSelected: (_) => setState(() => durationMin = m),
-                      ),
-                  ],
-                ),
-              ListTile(
-                contentPadding: EdgeInsets.zero,
-                leading: const Icon(PhosphorIconsRegular.repeat),
-                title: Text(rule == null ? l.noRepeat : describeRule(l, f, rule, start)),
-                onTap: () async {
-                  final r = await showRecurrenceEditor(context, rule, start);
-                  if (r != null) setState(() => rrule = r.isEmpty ? null : r);
-                },
-              ),
-              const Divider(),
-              Text(l.reminders, style: Theme.of(context).textTheme.titleSmall),
-              const SizedBox(height: 4),
-              Wrap(
-                spacing: 6,
-                runSpacing: 4,
-                children: [
-                  for (final m in {...presets, ...reminders}.toList()..sort())
-                    FilterChip(
-                      label: Text(reminderLabel(l, m)),
-                      selected: reminders.contains(m),
-                      onSelected: (v) => setState(() {
-                        reminders = v ? ([...reminders, m]..sort()) : (reminders..remove(m));
-                      }),
-                    ),
-                  ActionChip(label: Text(l.customReminder), onPressed: _addCustomReminder),
-                ],
-              ),
-            ],
-            const Divider(height: 24),
-            DropdownButtonFormField<int?>(
-              initialValue: snap.categoryById(categoryId) == null ? null : categoryId,
-              decoration: InputDecoration(labelText: l.category),
-              items: [
-                DropdownMenuItem(value: null, child: Text(l.noCategory)),
-                for (final c in snap.categories)
-                  DropdownMenuItem(
-                    value: c.id,
-                    child: Row(children: [
-                      CircleAvatar(radius: 7, backgroundColor: Color(c.color)),
-                      const SizedBox(width: 8),
-                      Text(c.name),
-                    ]),
-                  ),
-              ],
-              onChanged: (v) => setState(() => categoryId = v),
-            ),
-            if (snap.projects.isNotEmpty || projectId != null) ...[
-              const SizedBox(height: 8),
-              DropdownButtonFormField<int?>(
-                initialValue: snap.projectById(projectId) == null ? null : projectId,
-                decoration: InputDecoration(labelText: l.project),
-                items: [
-                  DropdownMenuItem(value: null, child: Text(l.noProject)),
-                  for (final p in snap.projects.where((p) => !p.archived))
-                    DropdownMenuItem(
-                      value: p.id,
-                      child: Row(children: [
-                        Icon(PhosphorIconsFill.folder, size: 18, color: Color(p.color)),
-                        const SizedBox(width: 8),
-                        Text(p.name),
-                      ]),
-                    ),
-                ],
-                onChanged: (v) => setState(() => projectId = v),
-              ),
-            ],
-            const SizedBox(height: 16),
-            Text(l.priority, style: Theme.of(context).textTheme.titleSmall),
-            const SizedBox(height: 4),
-            SegmentedButton<Priority>(
-              segments: [
-                for (final p in Priority.values)
-                  ButtonSegment(
-                    value: p,
-                    label: Text(priorityLabel(l, p)),
-                    icon: Icon(PhosphorIconsFill.flag, color: priorityColor(p)),
-                  ),
-              ],
-              selected: {priority},
-              onSelectionChanged: (v) => setState(() => priority = v.first),
-            ),
-            const SizedBox(height: 16),
-            TextFormField(
-              controller: notesCtrl,
-              maxLines: null,
-              minLines: 2,
-              textCapitalization: TextCapitalization.sentences,
-              decoration: InputDecoration(labelText: l.notes, border: const OutlineInputBorder()),
-            ),
-            const SizedBox(height: 16),
-            Text(l.subtasks, style: Theme.of(context).textTheme.titleSmall),
-            ReorderableListView(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              buildDefaultDragHandles: true,
-              onReorderItem: (a, b) => setState(() {
-                final s = subtasks.removeAt(a);
-                subtasks.insert(b, s);
-              }),
+            EditorCard(
+              icon: PhosphorIconsRegular.calendarBlank,
+              title: l.whenSection,
               children: [
-                for (var i = 0; i < subtasks.length; i++)
-                  CheckboxListTile(
-                    key: ValueKey('sub-$i-${subtasks[i].title}'),
+                SwitchListTile(
+                  contentPadding: EdgeInsets.zero,
+                  title: Text(l.noDate),
+                  secondary: const Icon(PhosphorIconsRegular.tray),
+                  value: !hasDate,
+                  onChanged: (v) => setState(() => hasDate = !v),
+                ),
+                if (hasDate) ...[
+                  SwitchListTile(
                     contentPadding: EdgeInsets.zero,
-                    controlAffinity: ListTileControlAffinity.leading,
-                    value: subtasks[i].done,
-                    title: Text(subtasks[i].title),
-                    secondary: IconButton(
-                      icon: const Icon(PhosphorIconsRegular.x),
-                      onPressed: () => setState(() => subtasks.removeAt(i)),
+                    title: Text(l.allDay),
+                    secondary: const Icon(PhosphorIconsRegular.sun),
+                    value: allDay,
+                    onChanged: (v) => setState(() => allDay = v),
+                  ),
+                  ListTile(
+                    contentPadding: EdgeInsets.zero,
+                    leading: const Icon(PhosphorIconsRegular.calendarBlank),
+                    title: Text(f.fullDate(start)),
+                    onTap: _pickDate,
+                  ),
+                  if (!allDay)
+                    Row(
+                      children: [
+                        Expanded(
+                          child: ListTile(
+                            contentPadding: EdgeInsets.zero,
+                            leading: const Icon(PhosphorIconsRegular.clock),
+                            title: Text('${l.startTime} ${f.time(start)}'),
+                            onTap: _pickStartTime,
+                          ),
+                        ),
+                        Expanded(
+                          child: ListTile(
+                            contentPadding: EdgeInsets.zero,
+                            title: Text('${l.endTime} ${f.time(end)}'),
+                            subtitle: Text(f.duration(durationMin)),
+                            onTap: _pickEndTime,
+                          ),
+                        ),
+                      ],
                     ),
-                    onChanged: (v) =>
-                        setState(() => subtasks[i] = subtasks[i].copyWith(done: v ?? false)),
+                  if (!allDay)
+                    Wrap(
+                      spacing: 6,
+                      children: [
+                        for (final m in [15, 30, 45, 60, 90, 120])
+                          ChoiceChip(
+                            label: Text(f.duration(m)),
+                            selected: durationMin == m,
+                            onSelected: (_) => setState(() => durationMin = m),
+                          ),
+                      ],
+                    ),
+                  ListTile(
+                    contentPadding: EdgeInsets.zero,
+                    leading: const Icon(PhosphorIconsRegular.repeat),
+                    title: Text(rule == null ? l.noRepeat : describeRule(l, f, rule, start)),
+                    onTap: () async {
+                      final r = await showRecurrenceEditor(context, rule, start);
+                      if (r != null) setState(() => rrule = r.isEmpty ? null : r);
+                    },
+                  ),
+                  const Divider(),
+                  Text(l.reminders, style: Theme.of(context).textTheme.titleSmall),
+                  const SizedBox(height: 4),
+                  Wrap(
+                    spacing: 6,
+                    runSpacing: 4,
+                    children: [
+                      for (final m in {...presets, ...reminders}.toList()..sort())
+                        FilterChip(
+                          label: Text(reminderLabel(l, m)),
+                          selected: reminders.contains(m),
+                          onSelected: (v) => setState(() {
+                            reminders = v ? ([...reminders, m]..sort()) : (reminders..remove(m));
+                          }),
+                        ),
+                      ActionChip(label: Text(l.customReminder), onPressed: _addCustomReminder),
+                    ],
+                  ),
+                ],
+              ],
+            ),
+            EditorCard(
+              icon: PhosphorIconsRegular.tag,
+              title: l.organizeSection,
+              children: [
+                DropdownButtonFormField<int?>(
+                  initialValue: snap.categoryById(categoryId) == null ? null : categoryId,
+                  decoration: InputDecoration(labelText: l.category),
+                  items: [
+                    DropdownMenuItem(value: null, child: Text(l.noCategory)),
+                    for (final c in snap.categories)
+                      DropdownMenuItem(
+                        value: c.id,
+                        child: Row(
+                          children: [
+                            CircleAvatar(radius: 7, backgroundColor: Color(c.color)),
+                            const SizedBox(width: 8),
+                            Text(c.name),
+                          ],
+                        ),
+                      ),
+                  ],
+                  onChanged: (v) => setState(() => categoryId = v),
+                ),
+                if (snap.projects.isNotEmpty || projectId != null) ...[
+                  const SizedBox(height: 8),
+                  DropdownButtonFormField<int?>(
+                    initialValue: snap.projectById(projectId) == null ? null : projectId,
+                    decoration: InputDecoration(labelText: l.project),
+                    items: [
+                      DropdownMenuItem(value: null, child: Text(l.noProject)),
+                      for (final p in snap.projects.where((p) => !p.archived))
+                        DropdownMenuItem(
+                          value: p.id,
+                          child: Row(
+                            children: [
+                              Icon(PhosphorIconsFill.folder, size: 18, color: Color(p.color)),
+                              const SizedBox(width: 8),
+                              Text(p.name),
+                            ],
+                          ),
+                        ),
+                    ],
+                    onChanged: (v) => setState(() => projectId = v),
+                  ),
+                ],
+                const SizedBox(height: 16),
+                Text(l.priority, style: Theme.of(context).textTheme.titleSmall),
+                const SizedBox(height: 4),
+                SegmentedButton<Priority>(
+                  segments: [
+                    for (final p in Priority.values)
+                      ButtonSegment(
+                        value: p,
+                        label: Text(priorityLabel(l, p)),
+                        icon: Icon(PhosphorIconsFill.flag, color: priorityColor(p)),
+                      ),
+                  ],
+                  selected: {priority},
+                  onSelectionChanged: (v) => setState(() => priority = v.first),
+                ),
+              ],
+            ),
+            EditorCard(
+              icon: PhosphorIconsRegular.notePencil,
+              title: l.detailsSection,
+              children: [
+                TextFormField(
+                  controller: notesCtrl,
+                  maxLines: null,
+                  minLines: 2,
+                  textCapitalization: TextCapitalization.sentences,
+                  decoration: InputDecoration(labelText: l.notes),
+                ),
+                const SizedBox(height: 16),
+                Text(l.subtasks, style: Theme.of(context).textTheme.titleSmall),
+                ReorderableListView(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  buildDefaultDragHandles: true,
+                  onReorderItem: (a, b) => setState(() {
+                    final s = subtasks.removeAt(a);
+                    subtasks.insert(b, s);
+                  }),
+                  children: [
+                    for (var i = 0; i < subtasks.length; i++)
+                      CheckboxListTile(
+                        key: ValueKey('sub-$i-${subtasks[i].title}'),
+                        contentPadding: EdgeInsets.zero,
+                        controlAffinity: ListTileControlAffinity.leading,
+                        value: subtasks[i].done,
+                        title: Text(subtasks[i].title),
+                        secondary: IconButton(
+                          icon: const Icon(PhosphorIconsRegular.x),
+                          onPressed: () => setState(() => subtasks.removeAt(i)),
+                        ),
+                        onChanged: (v) => setState(() => subtasks[i] = subtasks[i].copyWith(done: v ?? false)),
+                      ),
+                  ],
+                ),
+                TextField(
+                  controller: _subtaskCtrl,
+                  decoration: InputDecoration(
+                    hintText: l.addSubtask,
+                    prefixIcon: const Icon(PhosphorIconsRegular.plus),
+                  ),
+                  onSubmitted: (v) {
+                    if (v.trim().isEmpty) return;
+                    setState(() {
+                      subtasks.add(Subtask(taskId: 0, title: v.trim(), order: subtasks.length));
+                      _subtaskCtrl.clear();
+                    });
+                  },
+                ),
+              ],
+            ),
+            EditorCard(
+              icon: PhosphorIconsRegular.slidersHorizontal,
+              title: l.moreSection,
+              children: [
+                TextFormField(
+                  controller: locationCtrl,
+                  decoration: InputDecoration(
+                    labelText: l.location,
+                    prefixIcon: const Icon(PhosphorIconsRegular.mapPin),
+                  ),
+                ),
+                const SizedBox(height: 8),
+                TextFormField(
+                  controller: urlCtrl,
+                  keyboardType: TextInputType.url,
+                  decoration: InputDecoration(labelText: l.link, prefixIcon: const Icon(PhosphorIconsRegular.link)),
+                ),
+                const SizedBox(height: 8),
+                TextFormField(
+                  controller: estimateCtrl,
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                    labelText: l.estimate,
+                    prefixIcon: const Icon(PhosphorIconsRegular.timer),
+                  ),
+                ),
+                SwitchListTile(
+                  contentPadding: EdgeInsets.zero,
+                  secondary: const Icon(PhosphorIconsRegular.pushPin),
+                  title: Text(l.pinned),
+                  value: pinned,
+                  onChanged: (v) => setState(() => pinned = v),
+                ),
+                if (hasDate)
+                  SwitchListTile(
+                    contentPadding: EdgeInsets.zero,
+                    secondary: const Icon(PhosphorIconsRegular.hourglassMedium),
+                    title: Text(l.countdownLabel),
+                    value: countdown,
+                    onChanged: (v) => setState(() => countdown = v),
                   ),
               ],
             ),
-            TextField(
-              controller: _subtaskCtrl,
-              decoration: InputDecoration(
-                hintText: l.addSubtask,
-                prefixIcon: const Icon(PhosphorIconsRegular.plus),
-              ),
-              onSubmitted: (v) {
-                if (v.trim().isEmpty) return;
-                setState(() {
-                  subtasks.add(Subtask(taskId: 0, title: v.trim(), order: subtasks.length));
-                  _subtaskCtrl.clear();
-                });
-              },
-            ),
-            const SizedBox(height: 16),
-            TextFormField(
-              controller: locationCtrl,
-              decoration: InputDecoration(labelText: l.location, prefixIcon: const Icon(PhosphorIconsRegular.mapPin)),
-            ),
-            TextFormField(
-              controller: urlCtrl,
-              keyboardType: TextInputType.url,
-              decoration: InputDecoration(labelText: l.link, prefixIcon: const Icon(PhosphorIconsRegular.link)),
-            ),
-            TextFormField(
-              controller: estimateCtrl,
-              keyboardType: TextInputType.number,
-              decoration: InputDecoration(labelText: l.estimate, prefixIcon: const Icon(PhosphorIconsRegular.timer)),
-            ),
-            SwitchListTile(
-              contentPadding: EdgeInsets.zero,
-              secondary: const Icon(PhosphorIconsRegular.pushPin),
-              title: Text(l.pinned),
-              value: pinned,
-              onChanged: (v) => setState(() => pinned = v),
-            ),
-            if (hasDate)
-              SwitchListTile(
-                contentPadding: EdgeInsets.zero,
-                secondary: const Icon(PhosphorIconsRegular.hourglassMedium),
-                title: Text(l.countdownLabel),
-                value: countdown,
-                onChanged: (v) => setState(() => countdown = v),
-              ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+/// Grupo del editor: icono y título, y sus campos en una tarjeta suave.
+class EditorCard extends StatelessWidget {
+  const EditorCard({super.key, required this.icon, required this.title, required this.children});
+  final IconData icon;
+  final String title;
+  final List<Widget> children;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Container(
+      margin: const EdgeInsets.only(top: 14),
+      padding: const EdgeInsets.fromLTRB(14, 12, 14, 12),
+      decoration: BoxDecoration(color: theme.colorScheme.surfaceContainerLow, borderRadius: BorderRadius.circular(18)),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(icon, size: 18, color: theme.colorScheme.primary),
+              const SizedBox(width: 8),
+              Text(title, style: theme.textTheme.titleSmall!.copyWith(color: theme.colorScheme.primary)),
+            ],
+          ),
+          const SizedBox(height: 6),
+          ...children,
+        ],
       ),
     );
   }

@@ -840,5 +840,9 @@
   },
   "villageSection": "Aldea y habitante",
   "menuCardSection": "Tarjeta del menú",
-  "menuCardShow": "Mostrar la tarjeta"
+  "menuCardShow": "Mostrar la tarjeta",
+  "whenSection": "Cuándo",
+  "organizeSection": "Organizar",
+  "detailsSection": "Detalles",
+  "moreSection": "Más"
 }

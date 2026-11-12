@@ -405,5 +405,9 @@
   "goalThisWeek": "{n, plural, =0{本周还没有} other{本周 +{n}}}",
   "villageSection": "村庄和村民",
   "menuCardSection": "菜单卡片",
-  "menuCardShow": "显示卡片"
+  "menuCardShow": "显示卡片",
+  "whenSection": "时间",
+  "organizeSection": "归类",
+  "detailsSection": "详情",
+  "moreSection": "更多"
 }

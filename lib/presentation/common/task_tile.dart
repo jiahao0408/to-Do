@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../domain/models/task.dart';
 import '../../domain/snapshot.dart';
 import '../../domain/time.dart';
 import '../providers.dart';
@@ -111,12 +112,23 @@ class TaskTile extends ConsumerWidget {
       selectedTileColor: theme.colorScheme.primaryContainer.withValues(alpha: 0.5),
       onTap: onTap,
       onLongPress: onLongPress,
-      leading: CompleteCheck(
-        completed: occurrence.completed,
-        color: color,
-        animate: animations,
-        onTap: onToggle ?? () {},
-      ),
+      leading: Row(mainAxisSize: MainAxisSize.min, children: [
+        Container(
+          width: 4,
+          height: 36,
+          decoration: BoxDecoration(
+            color: color.withValues(alpha: occurrence.completed ? 0.35 : 1),
+            borderRadius: BorderRadius.circular(2),
+          ),
+        ),
+        const SizedBox(width: 10),
+        CompleteCheck(
+          completed: occurrence.completed,
+          color: color,
+          animate: animations,
+          onTap: onToggle ?? () {},
+        ),
+      ]),
       title: AnimatedDefaultTextStyle(
         duration: Duration(milliseconds: animations ? 250 : 0),
         style: theme.textTheme.bodyLarge!.copyWith(
@@ -135,8 +147,10 @@ class TaskTile extends ConsumerWidget {
           if (occurrence.isSeries) const Icon(PhosphorIconsRegular.repeat, size: 16),
           if (snap.remindersOf(occurrence.taskId).isNotEmpty)
             const Icon(PhosphorIconsRegular.bell, size: 16),
-          const SizedBox(width: 4),
-          Icon(PhosphorIconsFill.flag, size: 18, color: priorityColor(t.priority)),
+          if (t.priority != Priority.low) ...[
+            const SizedBox(width: 4),
+            Icon(PhosphorIconsFill.flag, size: 18, color: priorityColor(t.priority)),
+          ],
         ],
       ),
     );

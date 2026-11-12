@@ -9,6 +9,7 @@ import '../common/format.dart';
 import '../common/task_tile.dart';
 import '../providers.dart';
 import 'date_pager.dart';
+import 'event_style.dart';
 
 class MonthView extends ConsumerWidget {
   const MonthView({super.key});
@@ -128,21 +129,25 @@ class _DayCell extends ConsumerWidget {
         onTap: () => ref.read(calendarProvider.notifier).openDay(day),
         child: Container(
           decoration: BoxDecoration(
-            color: candidates.isNotEmpty ? theme.colorScheme.primaryContainer : null,
+            color: candidates.isNotEmpty
+                ? theme.colorScheme.primaryContainer
+                : inMonth
+                    ? null
+                    : theme.colorScheme.onSurface.withValues(alpha: 0.025),
             border: Border.all(color: theme.colorScheme.outlineVariant, width: 0.25),
           ),
           padding: const EdgeInsets.all(2),
           child: LayoutBuilder(builder: (context, c) {
             // Cuántas líneas de tareas caben; el resto se resume con «+N».
-            final maxLines = ((c.maxHeight - 22) / 16).floor().clamp(0, 6);
+            final maxLines = ((c.maxHeight - 24) / 18).floor().clamp(0, 6);
             final shown = items.length > maxLines ? (maxLines - 1).clamp(0, 6) : items.length;
             return Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Center(
                   child: Container(
-                    width: 20,
-                    height: 20,
+                    width: 22,
+                    height: 22,
                     alignment: Alignment.center,
                     decoration: isToday
                         ? BoxDecoration(color: theme.colorScheme.primary, shape: BoxShape.circle)
@@ -190,13 +195,15 @@ class _MonthChip extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final o = occurrence;
     final color = categoryColorOf(ref, o.task.categoryId, context);
+    final ev = EventColors.of(context, color, completed: o.completed);
     final chip = Container(
-      height: 15,
-      margin: const EdgeInsets.only(top: 1),
-      padding: const EdgeInsets.symmetric(horizontal: 2),
+      height: 16,
+      margin: const EdgeInsets.only(top: 2, left: 1, right: 1),
+      padding: const EdgeInsets.only(left: 3, right: 2),
       decoration: BoxDecoration(
-        color: color.withValues(alpha: o.completed ? 0.3 : 0.85),
-        borderRadius: BorderRadius.circular(3),
+        color: ev.background,
+        borderRadius: BorderRadius.circular(4),
+        border: Border(left: BorderSide(color: ev.accent, width: 2.5)),
       ),
       child: Text(
         o.task.title,
@@ -204,8 +211,9 @@ class _MonthChip extends ConsumerWidget {
         overflow: TextOverflow.clip,
         style: TextStyle(
           fontSize: 10,
-          height: 1.4,
-          color: ThemeData.estimateBrightnessForColor(color) == Brightness.dark ? Colors.white : Colors.black87,
+          height: 1.5,
+          fontWeight: FontWeight.w600,
+          color: ev.foreground,
           decoration: o.completed ? TextDecoration.lineThrough : null,
         ),
       ),

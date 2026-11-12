@@ -1421,4 +1421,16 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get menuCardShow => '显示卡片';
+
+  @override
+  String get whenSection => '时间';
+
+  @override
+  String get organizeSection => '归类';
+
+  @override
+  String get detailsSection => '详情';
+
+  @override
+  String get moreSection => '更多';
 }

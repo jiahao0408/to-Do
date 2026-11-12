@@ -2535,6 +2535,30 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Mostrar la tarjeta'**
   String get menuCardShow;
+
+  /// No description provided for @whenSection.
+  ///
+  /// In es, this message translates to:
+  /// **'Cuándo'**
+  String get whenSection;
+
+  /// No description provided for @organizeSection.
+  ///
+  /// In es, this message translates to:
+  /// **'Organizar'**
+  String get organizeSection;
+
+  /// No description provided for @detailsSection.
+  ///
+  /// In es, this message translates to:
+  /// **'Detalles'**
+  String get detailsSection;
+
+  /// No description provided for @moreSection.
+  ///
+  /// In es, this message translates to:
+  /// **'Más'**
+  String get moreSection;
 }
 
 class _AppLocalizationsDelegate

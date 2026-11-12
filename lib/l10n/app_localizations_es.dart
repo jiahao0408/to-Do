@@ -1532,4 +1532,16 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get menuCardShow => 'Mostrar la tarjeta';
+
+  @override
+  String get whenSection => 'Cuándo';
+
+  @override
+  String get organizeSection => 'Organizar';
+
+  @override
+  String get detailsSection => 'Detalles';
+
+  @override
+  String get moreSection => 'Más';
 }

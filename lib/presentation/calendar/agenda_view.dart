@@ -12,6 +12,8 @@ import '../providers.dart';
 import '../task/postpone.dart';
 import '../task/task_detail.dart';
 import '../common/ph_icons.dart';
+import '../common/empty_state.dart';
+import '../../domain/villager/villager_mood.dart';
 
 class AgendaView extends ConsumerStatefulWidget {
   const AgendaView({super.key});
@@ -92,10 +94,7 @@ class _AgendaViewState extends ConsumerState<AgendaView> {
       children.addAll(entry.value.map((o) => SwipeableTaskTile(occurrence: o)));
     }
     if (groups.isEmpty) {
-      children.add(Padding(
-        padding: const EdgeInsets.all(48),
-        child: Center(child: Text(l.noTasks, style: theme.textTheme.bodyLarge)),
-      ));
+      children.add(EmptyState(icon: PhosphorIconsRegular.sun, text: l.noTasks, mood: VillagerMood.celebrate));
     }
     children.add(Padding(
       padding: const EdgeInsets.all(16),

@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../domain/settings.dart';
 import '../../domain/stats.dart';
 import '../common/format.dart';
+import '../common/sections.dart';
 import '../providers.dart';
 import 'backup_tiles.dart';
 import 'categories_screen.dart';
@@ -19,14 +20,10 @@ class SettingsScreen extends ConsumerWidget {
     final f = Fmt.of(context);
     final s = ref.watch(settingsProvider);
     final repo = ref.read(repositoryProvider);
-    final theme = Theme.of(context);
     Future<void> set(String k, String v) => repo.setSetting(k, v);
     Future<void> setBool(String k, bool v) => repo.setSetting(k, v ? '1' : '0');
 
-    Widget header(String text) => Padding(
-          padding: const EdgeInsets.fromLTRB(16, 24, 16, 8),
-          child: Text(text, style: theme.textTheme.titleSmall!.copyWith(color: theme.colorScheme.primary)),
-        );
+    Widget header(String text) => SectionHeader(text);
 
     Future<void> pickMinute(String key, int current) async {
       final t = await showTimePicker(
@@ -40,7 +37,8 @@ class SettingsScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(title: Text(l.settings)),
       body: ListView(
-        children: [
+        padding: const EdgeInsets.only(bottom: 32),
+        children: groupInCards([
           header(l.appearanceSection),
           ListTile(
             leading: const Icon(PhosphorIconsRegular.circleHalf),
@@ -314,8 +312,7 @@ class SettingsScreen extends ConsumerWidget {
           ],
           header(l.dataSection),
           const BackupTiles(),
-          const SizedBox(height: 32),
-        ],
+        ]),
       ),
     );
   }

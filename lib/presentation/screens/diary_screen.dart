@@ -6,6 +6,7 @@ import '../../domain/time.dart';
 import '../common/format.dart';
 import '../providers.dart';
 import '../common/ph_icons.dart';
+import '../common/empty_state.dart';
 
 /// Abre el editor de la nota de [day].
 Future<void> openDayNote(BuildContext context, DateTime day) => Navigator.of(context)
@@ -109,7 +110,7 @@ class _DiaryScreenState extends ConsumerState<DiaryScreen> {
           ),
           Expanded(
             child: notes.isEmpty
-                ? Center(child: Text(l.diaryEmpty))
+                ? EmptyState(icon: PhosphorIconsRegular.bookOpenText, text: l.diaryEmpty)
                 : ListView.builder(
                     itemCount: notes.length,
                     itemBuilder: (_, i) {

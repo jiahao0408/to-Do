@@ -10,6 +10,8 @@ import '../calendar/agenda_view.dart';
 import '../common/format.dart';
 import '../providers.dart';
 import '../common/ph_icons.dart';
+import '../common/empty_state.dart';
+import '../../domain/villager/villager_mood.dart';
 
 enum StatusFilter { pending, completed, overdue }
 
@@ -174,7 +176,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
           const Divider(height: 1),
           Expanded(
             child: results.isEmpty
-                ? Center(child: Text(l.noResults))
+                ? EmptyState(icon: PhosphorIconsRegular.magnifyingGlass, text: l.noResults, mood: VillagerMood.worried)
                 : ListView.builder(
                     itemCount: results.length,
                     itemBuilder: (_, i) => SwipeableTaskTile(occurrence: results[i], showDate: true),

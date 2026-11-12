@@ -11,6 +11,8 @@ import '../common/task_tile.dart';
 import '../providers.dart';
 import '../task/quick_add.dart';
 import '../common/ph_icons.dart';
+import '../common/empty_state.dart';
+import '../../domain/villager/villager_mood.dart';
 
 Occurrence _occ(Task t) =>
     Occurrence(task: t, series: t, occurrenceDate: null, completed: t.isCompleted);
@@ -29,7 +31,7 @@ class InboxScreen extends ConsumerWidget {
         child: const Icon(PhosphorIconsRegular.plus),
       ),
       body: inbox.isEmpty
-          ? Center(child: Text(l.inboxEmpty))
+          ? EmptyState(icon: PhosphorIconsRegular.tray, text: l.inboxEmpty, mood: VillagerMood.celebrate)
           : ListView(
               children: [for (final t in inbox) SwipeableTaskTile(occurrence: _occ(t))],
             ),

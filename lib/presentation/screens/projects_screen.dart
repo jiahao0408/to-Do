@@ -15,6 +15,7 @@ import '../task/task_editor.dart';
 import '../village/building_widgets.dart';
 import 'categories_screen.dart';
 import '../common/ph_icons.dart';
+import '../common/empty_state.dart';
 
 /// Crea o edita un proyecto. Devuelve el id guardado.
 Future<int?> editProject(BuildContext context, WidgetRef ref, [Project? project]) async {
@@ -237,7 +238,7 @@ class ProjectScreen extends ConsumerWidget {
               child: Text(l.projectSeriesNote, style: theme.textTheme.bodySmall),
             ),
           if (tasks.isEmpty)
-            Padding(padding: const EdgeInsets.all(32), child: Center(child: Text(l.projectEmpty))),
+            EmptyState(icon: PhosphorIconsRegular.buildings, text: l.projectEmpty, size: 110),
           for (final o in pending) SwipeableTaskTile(occurrence: o, showDate: true),
           if (done.isNotEmpty) ...[
             Padding(

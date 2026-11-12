@@ -19,43 +19,55 @@ class StatsScreen extends ConsumerWidget {
     final snap = ref.watch(snapshotProvider);
     final now = ref.watch(clockProvider).now();
     final stats = Stats(snap, now, weekStartsMonday: ref.watch(settingsProvider).weekStartsMonday);
-    final (streak, best) = stats.dayStreak();
+    final (streak, best) = stats.streak(ref.watch(settingsProvider).streakRule);
+    final scheme = theme.colorScheme;
+
+    Widget box(Widget child, {Color? color}) => Container(
+      margin: const EdgeInsets.only(top: 12),
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(color: color ?? scheme.surfaceContainerLow, borderRadius: BorderRadius.circular(18)),
+      child: child,
+    );
     final days = stats.lastDays(7);
     final ws = startOfWeek(now, weekStartsMonday: ref.watch(settingsProvider).weekStartsMonday);
     final weekMinutes = stats.realMinutes(from: ws, to: addDays(ws, 7));
 
     Widget rateCard(String label, Rate r) => Expanded(
-          child: Card(
-            child: Padding(
-              padding: const EdgeInsets.all(12),
-              child: Column(
-                children: [
-                  Text(label, style: theme.textTheme.labelMedium),
-                  const SizedBox(height: 8),
-                  SizedBox(
-                    width: 56,
-                    height: 56,
-                    child: Stack(
-                      alignment: Alignment.center,
-                      children: [
-                        SizedBox.expand(
-                          child: CircularProgressIndicator(
-                            value: r.ratio,
-                            strokeWidth: 6,
-                            backgroundColor: theme.colorScheme.surfaceContainerHighest,
-                          ),
-                        ),
-                        Text('${(r.ratio * 100).round()}%', style: theme.textTheme.labelLarge),
-                      ],
+      child: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 4),
+        decoration: BoxDecoration(color: scheme.surfaceContainerLow, borderRadius: BorderRadius.circular(18)),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 8),
+          child: Column(
+            children: [
+              Text(label, style: theme.textTheme.labelMedium),
+              const SizedBox(height: 8),
+              SizedBox(
+                width: 56,
+                height: 56,
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    SizedBox.expand(
+                      child: CircularProgressIndicator(
+                        value: r.ratio,
+                        strokeWidth: 7,
+                        strokeCap: StrokeCap.round,
+                        color: scheme.primary,
+                        backgroundColor: scheme.primary.withValues(alpha: 0.12),
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 4),
-                  Text('${r.done}/${r.total}', style: theme.textTheme.bodySmall),
-                ],
+                    Text('${(r.ratio * 100).round()}%', style: theme.textTheme.labelLarge),
+                  ],
+                ),
               ),
-            ),
+              const SizedBox(height: 4),
+              Text('${r.done}/${r.total}', style: theme.textTheme.bodySmall),
+            ],
           ),
-        );
+        ),
+      ),
+    );
 
     final maxTotal = days.fold<int>(1, (m, d) => d.$2.total > m ? d.$2.total : m);
 
@@ -64,67 +76,111 @@ class StatsScreen extends ConsumerWidget {
       body: ListView(
         padding: const EdgeInsets.all(12),
         children: [
-          Text(l.statsCompletionRate, style: theme.textTheme.titleSmall),
-          Row(children: [
-            rateCard(l.statsToday, stats.todayRate),
-            rateCard(l.statsThisWeek, stats.weekRate),
-            rateCard(l.statsThisMonth, stats.monthRate),
-          ]),
-          Card(
-            child: ListTile(
-              leading: const Icon(PhosphorIconsFill.fire, color: Colors.deepOrange, size: 36),
-              title: Text('${l.statsStreak}: ${l.statsStreakDays(streak)}', style: theme.textTheme.titleMedium),
-              subtitle: Text(l.statsBestStreak(best)),
-            ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(4, 4, 4, 8),
+            child: Text(l.statsCompletionRate, style: theme.textTheme.titleSmall),
           ),
-          Card(
-            child: ListTile(
-              leading: const Icon(PhosphorIconsRegular.listChecks),
-              title: Text(l.statsWeeklySummary),
-              subtitle: Text(l.statsWeeklySummaryBody(stats.weekRate.done, stats.weekRate.total, weekMinutes)),
-            ),
+          Row(
+            children: [
+              rateCard(l.statsToday, stats.todayRate),
+              rateCard(l.statsThisWeek, stats.weekRate),
+              rateCard(l.statsThisMonth, stats.monthRate),
+            ],
           ),
-          const SizedBox(height: 12),
-          Text(l.statsLast7Days, style: theme.textTheme.titleSmall),
-          const SizedBox(height: 8),
-          SizedBox(
-            height: 140,
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.end,
+          box(
+            color: const Color(0xFFFF7043).withValues(alpha: 0.14),
+            Row(
               children: [
-                for (final (d, r) in days)
-                  Expanded(
-                    child: Semantics(
-                      label: '${f.weekdayShort(d)} ${r.done}/${r.total}',
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Text('${r.done}/${r.total}', style: theme.textTheme.labelSmall),
-                          const SizedBox(height: 2),
-                          Container(
-                            margin: const EdgeInsets.symmetric(horizontal: 6),
-                            height: 90.0 * r.total / maxTotal,
-                            decoration: BoxDecoration(
-                              color: theme.colorScheme.surfaceContainerHighest,
-                              borderRadius: BorderRadius.circular(4),
-                            ),
-                            alignment: Alignment.bottomCenter,
-                            child: FractionallySizedBox(
-                              heightFactor: r.ratio,
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  color: theme.colorScheme.primary,
-                                  borderRadius: BorderRadius.circular(4),
+                const Icon(PhosphorIconsFill.fire, color: Color(0xFFF4511E), size: 40),
+                const SizedBox(width: 14),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(l.statsStreak, style: theme.textTheme.labelLarge),
+                      Text(l.statsStreakDays(streak), style: theme.textTheme.headlineSmall),
+                    ],
+                  ),
+                ),
+                Text(l.statsBestStreak(best), style: theme.textTheme.labelMedium),
+              ],
+            ),
+          ),
+          box(
+            Row(
+              children: [
+                Icon(PhosphorIconsRegular.listChecks, color: scheme.primary),
+                const SizedBox(width: 14),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(l.statsWeeklySummary, style: theme.textTheme.titleSmall),
+                      Text(
+                        l.statsWeeklySummaryBody(stats.weekRate.done, stats.weekRate.total, weekMinutes),
+                        style: theme.textTheme.bodyMedium,
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          box(
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(l.statsLast7Days, style: theme.textTheme.titleSmall),
+                const SizedBox(height: 8),
+                SizedBox(
+                  height: 140,
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      for (final (d, r) in days)
+                        Expanded(
+                          child: Semantics(
+                            label: '${f.weekdayShort(d)} ${r.done}/${r.total}',
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Text('${r.done}/${r.total}', style: theme.textTheme.labelSmall),
+                                const SizedBox(height: 2),
+                                Container(
+                                  margin: const EdgeInsets.symmetric(horizontal: 6),
+                                  height: 90.0 * r.total / maxTotal,
+                                  decoration: BoxDecoration(
+                                    color: scheme.primary.withValues(alpha: 0.12),
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  alignment: Alignment.bottomCenter,
+                                  child: FractionallySizedBox(
+                                    heightFactor: r.ratio,
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        color: isSameDay(d, now)
+                                            ? scheme.primary
+                                            : scheme.primary.withValues(alpha: 0.6),
+                                        borderRadius: BorderRadius.circular(8),
+                                      ),
+                                    ),
+                                  ),
                                 ),
-                              ),
+                                const SizedBox(height: 4),
+                                Text(
+                                  f.weekdayShort(d),
+                                  style: theme.textTheme.labelSmall!.copyWith(
+                                    fontWeight: isSameDay(d, now) ? FontWeight.w700 : null,
+                                    color: isSameDay(d, now) ? scheme.primary : null,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
-                          const SizedBox(height: 4),
-                          Text(f.weekdayShort(d), style: theme.textTheme.labelSmall),
-                        ],
-                      ),
-                    ),
+                        ),
+                    ],
                   ),
+                ),
               ],
             ),
           ),
@@ -134,14 +190,31 @@ class StatsScreen extends ConsumerWidget {
           Text(l.statsHabits, style: theme.textTheme.titleSmall),
           for (final h in stats.habits())
             ListTile(
-              leading: const Icon(PhosphorIconsRegular.repeat),
+              leading: Icon(PhosphorIconsRegular.repeat, color: scheme.primary),
               title: Text(h.task.title),
-              subtitle: LinearProgressIndicator(value: h.rate.ratio),
+              subtitle: Padding(
+                padding: const EdgeInsets.only(top: 6),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(4),
+                  child: LinearProgressIndicator(
+                    value: h.rate.ratio,
+                    minHeight: 6,
+                    backgroundColor: scheme.primary.withValues(alpha: 0.12),
+                  ),
+                ),
+              ),
               trailing: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  Text('🔥 ${h.current}', style: theme.textTheme.titleSmall),
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Icon(PhosphorIconsFill.fire, size: 16, color: Color(0xFFF4511E)),
+                      const SizedBox(width: 2),
+                      Text('${h.current}', style: theme.textTheme.titleSmall),
+                    ],
+                  ),
                   Text(l.statsBestStreak(h.best), style: theme.textTheme.labelSmall),
                 ],
               ),
@@ -166,7 +239,6 @@ class StatsScreen extends ConsumerWidget {
   }
 }
 
-
 /// Mapa de calor anual: cada día coloreado según el % completado.
 class YearHeatmap extends StatelessWidget {
   const YearHeatmap({super.key, required this.stats, required this.year});
@@ -180,7 +252,15 @@ class YearHeatmap extends StatelessWidget {
     final cs = Theme.of(context).colorScheme;
     if (future || r == null || r.total == 0) return cs.surfaceContainerHighest;
     final ratio = r.ratio;
-    final alpha = ratio == 0 ? 0.12 : ratio < 0.34 ? 0.35 : ratio < 0.67 ? 0.6 : ratio < 1 ? 0.8 : 1.0;
+    final alpha = ratio == 0
+        ? 0.12
+        : ratio < 0.34
+        ? 0.35
+        : ratio < 0.67
+        ? 0.6
+        : ratio < 1
+        ? 0.8
+        : 1.0;
     return cs.primary.withValues(alpha: alpha);
   }
 
@@ -213,30 +293,33 @@ class YearHeatmap extends StatelessWidget {
                   child: Column(
                     children: [
                       for (var d = 0; d < 7; d++)
-                        Builder(builder: (context) {
-                          final day = addDays(gridStart, w * 7 + d);
-                          if (day.year != year) return const SizedBox(width: _cell, height: _cell + _gap);
-                          final r = rates[formatDateKey(day)];
-                          final future = day.isAfter(today);
-                          return Padding(
-                            padding: const EdgeInsets.only(bottom: _gap),
-                            child: Tooltip(
-                              triggerMode: TooltipTriggerMode.tap,
-                              message: '${f.weekdayDayMonth(day)} · ${r == null ? l.noTasks : '${r.done}/${r.total}'}',
-                              child: Container(
-                                width: _cell,
-                                height: _cell,
-                                decoration: BoxDecoration(
-                                  color: _color(context, r, future),
-                                  borderRadius: BorderRadius.circular(3),
-                                  border: isSameDay(day, today)
-                                      ? Border.all(color: theme.colorScheme.onSurface, width: 1.5)
-                                      : null,
+                        Builder(
+                          builder: (context) {
+                            final day = addDays(gridStart, w * 7 + d);
+                            if (day.year != year) return const SizedBox(width: _cell, height: _cell + _gap);
+                            final r = rates[formatDateKey(day)];
+                            final future = day.isAfter(today);
+                            return Padding(
+                              padding: const EdgeInsets.only(bottom: _gap),
+                              child: Tooltip(
+                                triggerMode: TooltipTriggerMode.tap,
+                                message:
+                                    '${f.weekdayDayMonth(day)} · ${r == null ? l.noTasks : '${r.done}/${r.total}'}',
+                                child: Container(
+                                  width: _cell,
+                                  height: _cell,
+                                  decoration: BoxDecoration(
+                                    color: _color(context, r, future),
+                                    borderRadius: BorderRadius.circular(3),
+                                    border: isSameDay(day, today)
+                                        ? Border.all(color: theme.colorScheme.onSurface, width: 1.5)
+                                        : null,
+                                  ),
                                 ),
                               ),
-                            ),
-                          );
-                        }),
+                            );
+                          },
+                        ),
                     ],
                   ),
                 ),

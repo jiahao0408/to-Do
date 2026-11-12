@@ -111,8 +111,11 @@ class _CardShell extends StatelessWidget {
   Widget build(BuildContext context) => Padding(
         padding: const EdgeInsets.symmetric(horizontal: 2),
         child: Material(
-          color: Theme.of(context).colorScheme.surfaceContainerHigh,
-          borderRadius: BorderRadius.circular(16),
+          color: Theme.of(context).colorScheme.primaryContainer.withValues(alpha: 0.45),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(18),
+            side: BorderSide(color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.18)),
+          ),
           clipBehavior: Clip.antiAlias,
           child: child,
         ),

@@ -9,6 +9,7 @@ import '../common/actions.dart';
 import '../common/format.dart';
 import '../providers.dart';
 import '../common/ph_icons.dart';
+import '../common/empty_state.dart';
 
 class TemplatesScreen extends ConsumerWidget {
   const TemplatesScreen({super.key});
@@ -26,7 +27,7 @@ class TemplatesScreen extends ConsumerWidget {
         child: const Icon(PhosphorIconsRegular.plus),
       ),
       body: templates.isEmpty
-          ? Center(child: Padding(padding: const EdgeInsets.all(32), child: Text(l.noTemplates, textAlign: TextAlign.center)))
+          ? EmptyState(icon: PhosphorIconsRegular.squaresFour, text: l.noTemplates)
           : ListView(
               children: [
                 for (final t in templates)

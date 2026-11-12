@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../domain/snapshot.dart';
 import '../../domain/time.dart';
 import '../common/format.dart';
+import '../common/pixel_logo.dart';
 import '../providers.dart';
 import '../screens/categories_screen.dart';
 import '../screens/diary_screen.dart';
@@ -100,12 +101,17 @@ class AppDrawer extends ConsumerWidget {
           padding: const EdgeInsets.only(bottom: 16),
           children: [
             Padding(
-              padding: const EdgeInsets.fromLTRB(28, 20, 16, 4),
-              child: Text(l.appTitle, style: theme.textTheme.headlineSmall),
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(28, 0, 16, 8),
-              child: Text(f.fullDate(now), style: theme.textTheme.bodySmall),
+              padding: const EdgeInsets.fromLTRB(24, 20, 16, 12),
+              child: Row(children: [
+                const PixelLogo(size: 44),
+                const SizedBox(width: 14),
+                Expanded(
+                  child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                    Text(l.appTitle, style: theme.textTheme.headlineSmall),
+                    Text(f.fullDate(now), style: theme.textTheme.bodySmall),
+                  ]),
+                ),
+              ]),
             ),
             const MenuCarousel(),
             item(PhosphorIconsRegular.tray, l.inbox, () => open(const InboxScreen()),

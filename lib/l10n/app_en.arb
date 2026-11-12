@@ -405,5 +405,9 @@
   "goalThisWeek": "{n, plural, =0{Nothing this week} =1{+1 this week} other{+{n} this week}}",
   "villageSection": "Village & villager",
   "menuCardSection": "Menu card",
-  "menuCardShow": "Show the card"
+  "menuCardShow": "Show the card",
+  "whenSection": "When",
+  "organizeSection": "Organize",
+  "detailsSection": "Details",
+  "moreSection": "More"
 }

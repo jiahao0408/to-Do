@@ -18,6 +18,7 @@ import '../providers.dart';
 import '../task/quick_add.dart';
 import '../task/task_detail.dart';
 import '../common/ph_icons.dart';
+import 'event_style.dart';
 
 const double kHourLabelWidth = 48;
 
@@ -214,17 +215,19 @@ class _TimelineState extends ConsumerState<Timeline> {
                               for (var i = 0; i < days.length; i++)
                                 if (isSameDay(days[i], now))
                                   Positioned(
-                                    top: minutesOfDay(now) / 60 * hh - 1,
+                                    top: minutesOfDay(now) / 60 * hh - 6,
                                     left: i * colWidth,
                                     width: colWidth,
                                     child: IgnorePointer(
                                       child: Row(children: [
                                         Container(
-                                          width: 8,
-                                          height: 8,
+                                          width: 12,
+                                          height: 12,
                                           decoration: BoxDecoration(
-                                              color: theme.colorScheme.error,
-                                              shape: BoxShape.circle),
+                                            color: theme.colorScheme.error,
+                                            shape: BoxShape.circle,
+                                            border: Border.all(color: theme.colorScheme.surface, width: 2),
+                                          ),
                                         ),
                                         Expanded(
                                             child: Container(
@@ -401,18 +404,17 @@ class _TimelineBlockState extends ConsumerState<TimelineBlock> {
             t.start!.minute + _deltaMinutes)
         : t.start!;
     final duration = _resizing ? _newDuration : t.effectiveDurationMin;
-    final onColor = ThemeData.estimateBrightnessForColor(color) == Brightness.dark
-        ? Colors.white
-        : Colors.black87;
+    final ev = EventColors.of(context, color, completed: o.completed);
+    final onColor = ev.foreground;
 
     Widget block = Container(
       margin: const EdgeInsets.fromLTRB(1, 1, 2, 1),
       decoration: BoxDecoration(
-        color: o.completed ? color.withValues(alpha: 0.35) : color.withValues(alpha: 0.9),
-        borderRadius: BorderRadius.circular(6),
+        color: ev.background,
+        borderRadius: BorderRadius.circular(8),
         border: selected
             ? Border.all(color: theme.colorScheme.onSurface, width: 2.5)
-            : Border(left: BorderSide(color: priorityColor(t.priority), width: 3)),
+            : Border(left: BorderSide(color: ev.accent, width: 4)),
         boxShadow: _dragging || _resizing
             ? [const BoxShadow(blurRadius: 8, color: Colors.black26)]
             : null,
@@ -456,6 +458,11 @@ class _TimelineBlockState extends ConsumerState<TimelineBlock> {
                 ],
               ),
             ),
+            if (t.priority == Priority.high && c.maxWidth > 64)
+              Padding(
+                padding: const EdgeInsets.only(top: 2, right: 2),
+                child: Icon(PhosphorIconsFill.flag, size: 12, color: priorityColor(Priority.high)),
+              ),
             if (c.maxWidth > 40)
               CompleteCheck(
                 completed: o.completed,
@@ -617,9 +624,7 @@ class _AllDayChip extends ConsumerWidget {
     final o = occurrence;
     final color = categoryColorOf(ref, o.task.categoryId, context);
     final selected = ref.watch(selectionProvider).contains(o);
-    final onColor = ThemeData.estimateBrightnessForColor(color) == Brightness.dark
-        ? Colors.white
-        : Colors.black87;
+    final ev = EventColors.of(context, color, completed: o.completed);
     return GestureDetector(
       onTap: () => ref.read(selectionProvider).isNotEmpty
           ? ref.read(selectionProvider.notifier).toggle(o)
@@ -633,16 +638,17 @@ class _AllDayChip extends ConsumerWidget {
         padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
         width: double.infinity,
         decoration: BoxDecoration(
-          color: color.withValues(alpha: o.completed ? 0.35 : 0.9),
-          borderRadius: BorderRadius.circular(4),
-          border: selected ? Border.all(width: 2) : null,
+          color: ev.background,
+          borderRadius: BorderRadius.circular(6),
+          border: selected ? Border.all(width: 2) : Border(left: BorderSide(color: ev.accent, width: 3)),
         ),
         child: Text(
           o.task.title,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
           style: Theme.of(context).textTheme.labelSmall!.copyWith(
-                color: onColor,
+                color: ev.foreground,
+                fontWeight: FontWeight.w600,
                 decoration: o.completed ? TextDecoration.lineThrough : null,
               ),
         ),

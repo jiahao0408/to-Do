@@ -175,6 +175,22 @@ Mejora de la 1.0: sin imágenes de terceros. Todo lo de la aldea se dibuja en c�
 
 Esquema de la base de datos v3: columna `projects.building`. Las copias de la 1.x se siguen importando (test). Los ajustes del habitante siguen con las claves `whale.*` de la 1.1 para no perder la energía ni la posición.
 
+### Interfaz 2.0
+
+| Parte | Detalle |
+| --- | --- |
+| Logo | Ladrillos en forma de ✓ en pixel art 16 × 16 (azul de la app; el último ladrillo, amarillo, aún en el aire). `tool/make_logo.py` genera los PNG y `dart run flutter_launcher_icons` los iconos de Android (adaptativo y monocromo) e iOS. Dentro de la app: `PixelLogo` |
+| Tema | flex_color_scheme 8 con superficies tintadas suaves del color de acento (o del fondo de pantalla) y esquinas más redondas |
+| Fuente | Inter 400–700 empaquetada en `assets/fonts` (SIL OFL); el chino sigue con la fuente del sistema |
+| Iconos | Phosphor Regular/Fill. El paquete `phosphor_flutter` no compila con Flutter 3.47 (`IconData` es `final`), así que sus fuentes están en `assets/fonts` (MIT) y `lib/presentation/common/ph_icons.dart` define solo los iconos usados |
+| Transiciones | Paquete animations 2: eje compartido al abrir pantallas y fundido al cambiar de vista (se apagan con «Animaciones») |
+| Calendario | Eventos con fondo tintado, texto del mismo color y barra de acento; días de fuera del mes atenuados; punto de «ahora» más visible |
+| Tareas | Detalle con cabecera del color de la categoría y bloques; editor en cuatro tarjetas (cuándo, organizar, detalles, más); la bandera solo aparece si la prioridad no es baja |
+| Menú y ajustes | Logo en la cabecera del menú, carrusel destacado y ajustes agrupados en tarjetas |
+| Vacíos y estadísticas | Pantallas vacías con el habitante; estadísticas en tarjetas, racha con la regla de Ajustes y hoy resaltado en el gráfico |
+
+Versiones fijadas: flex_color_scheme 8.3.0 y animations 2.0.11, porque flex_color_scheme 9 y animations 3 usan el paquete `material_ui`, que no encaja con el Material de Flutter 3.47.
+
 ## Decisiones tomadas
 
 El documento pide preguntar ante las ambigüedades. Como pediste avanzar sin parar, las he resuelto así; cualquiera se puede cambiar:
