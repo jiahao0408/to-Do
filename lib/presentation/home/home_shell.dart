@@ -19,6 +19,7 @@ import '../screens/inbox_screen.dart';
 import '../screens/overdue_dialog.dart';
 import '../screens/search_screen.dart';
 import '../task/quick_add.dart';
+import '../whale/whale_floating.dart';
 import 'app_drawer.dart';
 import 'extra_destinations.dart';
 
@@ -170,7 +171,12 @@ class _HomeShellState extends ConsumerState<HomeShell> {
           drawer: selecting ? null : const AppDrawer(),
           body: Column(
             children: [
-              Expanded(child: body),
+              Expanded(
+                child: Stack(children: [
+                  Positioned.fill(child: body),
+                  WhaleFloating(hidden: selecting || (_inboxOpen && timeline)),
+                ]),
+              ),
               if (_inboxOpen && timeline) InboxPanel(onClose: () => setState(() => _inboxOpen = false)),
             ],
           ),

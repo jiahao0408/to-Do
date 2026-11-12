@@ -10,7 +10,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../domain/whale/whale_lines.dart';
-import '../../domain/whale/whale_mood.dart';
 import '../common/format.dart';
 import '../providers.dart';
 import 'whale_assets.dart';

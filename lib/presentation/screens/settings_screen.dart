@@ -1,6 +1,7 @@
 // Ajustes: tema (RF-54), idiomas (RF-55), semana (RF-56), avisos (RF-57).
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../domain/settings.dart';
 import '../common/format.dart';
@@ -205,6 +206,57 @@ class SettingsScreen extends ConsumerWidget {
               ],
               selected: {s.swipeLeft},
               onSelectionChanged: (v) => set(AppSettings.kSwipeLeft, v.first.name),
+            ),
+          ),
+          header(l.whaleTitle),
+          SwitchListTile(
+            secondary: const Icon(Icons.water),
+            title: Text(l.whaleShow),
+            value: s.whaleEnabled,
+            onChanged: (v) => setBool(AppSettings.kWhaleEnabled, v),
+          ),
+          if (s.whaleEnabled) ...[
+            SwitchListTile(
+              contentPadding: const EdgeInsets.only(left: 72, right: 24),
+              title: Text(l.whaleFloating),
+              value: s.whaleFloating,
+              onChanged: (v) => setBool(AppSettings.kWhaleFloating, v),
+            ),
+            SwitchListTile(
+              contentPadding: const EdgeInsets.only(left: 72, right: 24),
+              title: Text(l.whaleDrawer),
+              value: s.whaleDrawer,
+              onChanged: (v) => setBool(AppSettings.kWhaleDrawer, v),
+            ),
+            SwitchListTile(
+              contentPadding: const EdgeInsets.only(left: 72, right: 24),
+              title: Text(l.whaleTank),
+              value: s.whaleTank,
+              onChanged: (v) => setBool(AppSettings.kWhaleTank, v),
+            ),
+          ],
+          ListTile(
+            leading: const Icon(Icons.info_outline),
+            title: Text(l.whaleAbout),
+            onTap: () => showDialog<void>(
+              context: context,
+              builder: (ctx) => AlertDialog(
+                title: Text(l.whaleAbout),
+                content: Text(l.whaleCredits),
+                actions: [
+                  TextButton(
+                    onPressed: () => launchUrl(Uri.parse('https://github.com/EDMOK/blue-fish-archive'),
+                        mode: LaunchMode.externalApplication),
+                    child: const Text('GitHub'),
+                  ),
+                  TextButton(
+                    onPressed: () => launchUrl(Uri.parse('https://creativecommons.org/licenses/by-nc-sa/4.0/'),
+                        mode: LaunchMode.externalApplication),
+                    child: const Text('CC BY-NC-SA 4.0'),
+                  ),
+                  TextButton(onPressed: () => Navigator.pop(ctx), child: Text(l.close)),
+                ],
+              ),
             ),
           ),
           header(l.dataSection),

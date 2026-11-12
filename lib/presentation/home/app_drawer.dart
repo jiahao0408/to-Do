@@ -19,6 +19,8 @@ import '../screens/stats_screen.dart';
 import '../screens/templates_screen.dart';
 import '../screens/weekly_review_screen.dart';
 import '../task/task_detail.dart';
+import '../whale/whale_drawer_card.dart';
+import '../whale/whale_tank_screen.dart';
 
 class AppDrawer extends ConsumerWidget {
   const AppDrawer({super.key});
@@ -29,6 +31,7 @@ class AppDrawer extends ConsumerWidget {
     final f = Fmt.of(context);
     final theme = Theme.of(context);
     final snap = ref.watch(snapshotProvider);
+    final settings = ref.watch(settingsProvider);
     final now = ref.watch(clockProvider).now();
     final today = dateOnly(now);
 
@@ -103,6 +106,7 @@ class AppDrawer extends ConsumerWidget {
               padding: const EdgeInsets.fromLTRB(28, 0, 16, 8),
               child: Text(f.fullDate(now), style: theme.textTheme.bodySmall),
             ),
+            const WhaleDrawerCard(),
             item(Icons.inbox_outlined, l.inbox, () => open(const InboxScreen()),
                 trailing: inboxCount > 0 ? Badge(label: Text('$inboxCount')) : null),
             if (inboxCount > 0) item(Icons.playlist_add_check, l.processInbox, () => open(const ProcessInboxScreen())),
@@ -170,6 +174,8 @@ class AppDrawer extends ConsumerWidget {
 
             // ---- Herramientas
             item(Icons.book_outlined, l.diary, () => open(const DiaryScreen())),
+            if (settings.whaleEnabled && settings.whaleTank && !settings.whaleDrawer)
+              item(Icons.water, l.whaleTitle, () => open(const WhaleTankScreen())),
             item(Icons.dashboard_customize_outlined, l.templates, () => open(const TemplatesScreen())),
             item(Icons.insights_outlined, l.statistics, () => open(const StatsScreen())),
             item(Icons.rate_review_outlined, l.weeklyReview, () => open(const WeeklyReviewScreen())),
