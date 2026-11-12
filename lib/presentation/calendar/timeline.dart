@@ -226,7 +226,6 @@ class _TimelineState extends ConsumerState<Timeline> {
                                           decoration: BoxDecoration(
                                             color: theme.colorScheme.error,
                                             shape: BoxShape.circle,
-                                            border: Border.all(color: theme.colorScheme.surface, width: 2),
                                           ),
                                         ),
                                         Expanded(
