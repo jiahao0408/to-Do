@@ -50,6 +50,9 @@ class Projects extends Table {
   /// `yyyy-MM-dd`, opcional.
   TextColumn get dueDate => text().nullable()();
   BoolColumn get archived => boolean().withDefault(const Constant(false))();
+
+  /// v3: edificio de la aldea (nombre de `BuildingType`).
+  TextColumn get building => text().nullable()();
 }
 
 /// v2: diario, una nota por día.
@@ -184,7 +187,7 @@ class AppDatabase extends _$AppDatabase {
 
   /// Versión del esquema. Súbela y añade un paso en [migration] al cambiarlo.
   @override
-  int get schemaVersion => 2;
+  int get schemaVersion => 3;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
@@ -200,6 +203,9 @@ class AppDatabase extends _$AppDatabase {
             await m.addColumn(tasks, tasks.icsUid);
             await m.createTable(projects);
             await m.createTable(dayNotes);
+          }
+          if (from >= 2 && from < 3) {
+            await m.addColumn(projects, projects.building);
           }
         },
         beforeOpen: (details) async {

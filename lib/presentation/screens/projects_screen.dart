@@ -7,10 +7,12 @@ import '../../domain/models/entities.dart';
 import '../../domain/models/task.dart';
 import '../../domain/snapshot.dart';
 import '../../domain/time.dart';
+import '../../domain/village/building.dart';
 import '../calendar/agenda_view.dart';
 import '../common/format.dart';
 import '../providers.dart';
 import '../task/task_editor.dart';
+import '../village/building_widgets.dart';
 import 'categories_screen.dart';
 
 /// Crea o edita un proyecto. Devuelve el id guardado.
@@ -20,6 +22,7 @@ Future<int?> editProject(BuildContext context, WidgetRef ref, [Project? project]
   final ctrl = TextEditingController(text: project?.name ?? '');
   var color = project?.color ?? kPalette[(ref.read(snapshotProvider).projects.length * 3 + 2) % kPalette.length];
   DateTime? due = project?.dueDate;
+  var building = project?.building ?? '';
   final ok = await showDialog<bool>(
     context: context,
     builder: (ctx) => StatefulBuilder(
@@ -66,6 +69,22 @@ Future<int?> editProject(BuildContext context, WidgetRef ref, [Project? project]
                 if (d != null) setState(() => due = d);
               },
             ),
+            ListTile(
+              contentPadding: EdgeInsets.zero,
+              leading: BuildingThumb(
+                type: BuildingType.parse(building, projectId: project?.id),
+                color: Color(color),
+                size: 40,
+              ),
+              title: Text(l.building),
+              subtitle: Text(building.isEmpty
+                  ? l.buildingAuto
+                  : buildingName(l, BuildingType.parse(building))),
+              onTap: () async {
+                final b = await pickBuilding(ctx, color: Color(color), current: building);
+                if (b != null) setState(() => building = b);
+              },
+            ),
           ],
         ),
         actions: [
@@ -78,8 +97,15 @@ Future<int?> editProject(BuildContext context, WidgetRef ref, [Project? project]
   final name = ctrl.text.trim();
   if (ok != true || name.isEmpty) return null;
   final p = project == null
-      ? Project(name: name, color: color, dueDate: due)
-      : project.copyWith(name: name, color: color, dueDate: () => due);
+      ? Project(name: name, color: color, dueDate: due, building: building.isEmpty ? null : building)
+      : Project(
+          id: project.id,
+          name: name,
+          color: color,
+          dueDate: due,
+          archived: project.archived,
+          building: building.isEmpty ? null : building,
+        );
   return ref.read(repositoryProvider).saveProject(p);
 }
 

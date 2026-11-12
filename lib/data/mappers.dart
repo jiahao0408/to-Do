@@ -113,6 +113,7 @@ Project projectFromRow(ProjectRow r) => Project(
       color: r.color,
       dueDate: r.dueDate == null ? null : parseDateKey(r.dueDate!),
       archived: r.archived,
+      building: r.building,
     );
 
 DayNote dayNoteFromRow(DayNoteRow r) =>

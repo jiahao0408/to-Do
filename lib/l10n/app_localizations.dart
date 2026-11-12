@@ -2083,7 +2083,7 @@ abstract class AppLocalizations {
   /// No description provided for @whaleNormal4.
   ///
   /// In es, this message translates to:
-  /// **'¡Aquí estoy, nadando contigo!'**
+  /// **'¡Aquí estoy, construyendo contigo!'**
   String get whaleNormal4;
 
   /// No description provided for @whaleCelebrate1.
@@ -2095,7 +2095,7 @@ abstract class AppLocalizations {
   /// No description provided for @whaleCelebrate2.
   ///
   /// In es, this message translates to:
-  /// **'Día completado, me lo he comido todo'**
+  /// **'Día completado, ¡la aldea está de fiesta!'**
   String get whaleCelebrate2;
 
   /// No description provided for @whaleCelebrate3.
@@ -2113,19 +2113,19 @@ abstract class AppLocalizations {
   /// No description provided for @whaleWorried2.
   ///
   /// In es, this message translates to:
-  /// **'Lo atrasado me pone nerviosa…'**
+  /// **'Lo atrasado me inquieta…'**
   String get whaleWorried2;
 
   /// No description provided for @whaleHungry1.
   ///
   /// In es, this message translates to:
-  /// **'Tengo hambre… completa una tarea y dame de comer'**
+  /// **'Me quedo sin energía… completa una tarea y seguimos construyendo'**
   String get whaleHungry1;
 
   /// No description provided for @whaleHungry2.
   ///
   /// In es, this message translates to:
-  /// **'Mi barriguita está vacía…'**
+  /// **'Me faltan fuerzas…'**
   String get whaleHungry2;
 
   /// No description provided for @whaleSleep1.
@@ -2143,19 +2143,19 @@ abstract class AppLocalizations {
   /// No description provided for @whalePet1.
   ///
   /// In es, this message translates to:
-  /// **'Jeje'**
+  /// **'¡Hola!'**
   String get whalePet1;
 
   /// No description provided for @whalePet2.
   ///
   /// In es, this message translates to:
-  /// **'Otra vez, otra vez'**
+  /// **'Gracias por pasar'**
   String get whalePet2;
 
   /// No description provided for @whalePet3.
   ///
   /// In es, this message translates to:
-  /// **'Qué gustito…'**
+  /// **'Qué buen día hace'**
   String get whalePet3;
 
   /// No description provided for @whalePoked1.
@@ -2173,7 +2173,7 @@ abstract class AppLocalizations {
   /// No description provided for @whaleEat1.
   ///
   /// In es, this message translates to:
-  /// **'¡Qué rico!'**
+  /// **'¡Un ladrillo más!'**
   String get whaleEat1;
 
   /// No description provided for @whaleEat2.
@@ -2185,19 +2185,19 @@ abstract class AppLocalizations {
   /// No description provided for @whaleEat3.
   ///
   /// In es, this message translates to:
-  /// **'Ñam, ñam'**
+  /// **'¡A construir!'**
   String get whaleEat3;
 
   /// No description provided for @whaleTitle.
   ///
   /// In es, this message translates to:
-  /// **'Ballenita'**
+  /// **'Habitante'**
   String get whaleTitle;
 
   /// No description provided for @whaleFullness.
   ///
   /// In es, this message translates to:
-  /// **'Saciedad {p}%'**
+  /// **'Energía {p}%'**
   String whaleFullness(int p);
 
   /// No description provided for @whaleTodayDone.
@@ -2209,19 +2209,19 @@ abstract class AppLocalizations {
   /// No description provided for @whaleMoodNormal.
   ///
   /// In es, this message translates to:
-  /// **'Tranquila'**
+  /// **'En calma'**
   String get whaleMoodNormal;
 
   /// No description provided for @whaleMoodCelebrate.
   ///
   /// In es, this message translates to:
-  /// **'De celebración'**
+  /// **'De fiesta'**
   String get whaleMoodCelebrate;
 
   /// No description provided for @whaleMoodWorried.
   ///
   /// In es, this message translates to:
-  /// **'Preocupada'**
+  /// **'Con prisa'**
   String get whaleMoodWorried;
 
   /// No description provided for @whaleMoodSleep.
@@ -2233,7 +2233,7 @@ abstract class AppLocalizations {
   /// No description provided for @whalePetButton.
   ///
   /// In es, this message translates to:
-  /// **'Acariciar'**
+  /// **'Saludar'**
   String get whalePetButton;
 
   /// No description provided for @whalePokeButton.
@@ -2245,7 +2245,7 @@ abstract class AppLocalizations {
   /// No description provided for @whaleShow.
   ///
   /// In es, this message translates to:
-  /// **'Mostrar a la ballenita'**
+  /// **'Mostrar el habitante y la aldea'**
   String get whaleShow;
 
   /// No description provided for @whaleFloating.
@@ -2257,20 +2257,266 @@ abstract class AppLocalizations {
   /// No description provided for @whaleDrawer.
   ///
   /// In es, this message translates to:
-  /// **'Pecera en el menú'**
+  /// **'Tarjeta en el menú'**
   String get whaleDrawer;
 
   /// No description provided for @whaleTank.
   ///
   /// In es, this message translates to:
-  /// **'Página de la pecera'**
+  /// **'Página de la aldea'**
   String get whaleTank;
 
   /// No description provided for @whaleSemantics.
   ///
   /// In es, this message translates to:
-  /// **'Ballenita, {mood}, saciedad {p}%'**
+  /// **'Habitante, {mood}, energía {p}%'**
   String whaleSemantics(String mood, int p);
+
+  /// No description provided for @villageTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Aldea'**
+  String get villageTitle;
+
+  /// No description provided for @villageEmpty.
+  ///
+  /// In es, this message translates to:
+  /// **'Crea un proyecto para poner la primera piedra'**
+  String get villageEmpty;
+
+  /// No description provided for @villageHistoric.
+  ///
+  /// In es, this message translates to:
+  /// **'Barrio histórico'**
+  String get villageHistoric;
+
+  /// No description provided for @villageStage.
+  ///
+  /// In es, this message translates to:
+  /// **'Fase {n}/10'**
+  String villageStage(int n);
+
+  /// No description provided for @villageHint.
+  ///
+  /// In es, this message translates to:
+  /// **'Cada 10 % de avance de un proyecto añade una fase a su edificio'**
+  String get villageHint;
+
+  /// No description provided for @building.
+  ///
+  /// In es, this message translates to:
+  /// **'Edificio en la aldea'**
+  String get building;
+
+  /// No description provided for @buildingAuto.
+  ///
+  /// In es, this message translates to:
+  /// **'Automático'**
+  String get buildingAuto;
+
+  /// No description provided for @buildingGroupHomes.
+  ///
+  /// In es, this message translates to:
+  /// **'Viviendas'**
+  String get buildingGroupHomes;
+
+  /// No description provided for @buildingGroupWork.
+  ///
+  /// In es, this message translates to:
+  /// **'Trabajo y estudio'**
+  String get buildingGroupWork;
+
+  /// No description provided for @buildingGroupInfrastructure.
+  ///
+  /// In es, this message translates to:
+  /// **'Infraestructura'**
+  String get buildingGroupInfrastructure;
+
+  /// No description provided for @buildingGroupLeisure.
+  ///
+  /// In es, this message translates to:
+  /// **'Ocio y naturaleza'**
+  String get buildingGroupLeisure;
+
+  /// No description provided for @buildingHouse.
+  ///
+  /// In es, this message translates to:
+  /// **'Casa'**
+  String get buildingHouse;
+
+  /// No description provided for @buildingCabin.
+  ///
+  /// In es, this message translates to:
+  /// **'Cabaña'**
+  String get buildingCabin;
+
+  /// No description provided for @buildingApartments.
+  ///
+  /// In es, this message translates to:
+  /// **'Edificio de pisos'**
+  String get buildingApartments;
+
+  /// No description provided for @buildingSchool.
+  ///
+  /// In es, this message translates to:
+  /// **'Escuela'**
+  String get buildingSchool;
+
+  /// No description provided for @buildingLibrary.
+  ///
+  /// In es, this message translates to:
+  /// **'Biblioteca'**
+  String get buildingLibrary;
+
+  /// No description provided for @buildingOffice.
+  ///
+  /// In es, this message translates to:
+  /// **'Oficina'**
+  String get buildingOffice;
+
+  /// No description provided for @buildingWorkshop.
+  ///
+  /// In es, this message translates to:
+  /// **'Taller'**
+  String get buildingWorkshop;
+
+  /// No description provided for @buildingBridge.
+  ///
+  /// In es, this message translates to:
+  /// **'Puente'**
+  String get buildingBridge;
+
+  /// No description provided for @buildingWaterTower.
+  ///
+  /// In es, this message translates to:
+  /// **'Torre de agua'**
+  String get buildingWaterTower;
+
+  /// No description provided for @buildingPowerPlant.
+  ///
+  /// In es, this message translates to:
+  /// **'Central eléctrica'**
+  String get buildingPowerPlant;
+
+  /// No description provided for @buildingStation.
+  ///
+  /// In es, this message translates to:
+  /// **'Estación'**
+  String get buildingStation;
+
+  /// No description provided for @buildingPark.
+  ///
+  /// In es, this message translates to:
+  /// **'Parque'**
+  String get buildingPark;
+
+  /// No description provided for @buildingFarm.
+  ///
+  /// In es, this message translates to:
+  /// **'Granja'**
+  String get buildingFarm;
+
+  /// No description provided for @buildingLighthouse.
+  ///
+  /// In es, this message translates to:
+  /// **'Faro'**
+  String get buildingLighthouse;
+
+  /// No description provided for @buildingCastle.
+  ///
+  /// In es, this message translates to:
+  /// **'Castillo'**
+  String get buildingCastle;
+
+  /// No description provided for @cardToday.
+  ///
+  /// In es, this message translates to:
+  /// **'Hoy'**
+  String get cardToday;
+
+  /// No description provided for @cardStreak.
+  ///
+  /// In es, this message translates to:
+  /// **'Racha'**
+  String get cardStreak;
+
+  /// No description provided for @cardGoal.
+  ///
+  /// In es, this message translates to:
+  /// **'Meta de la semana'**
+  String get cardGoal;
+
+  /// No description provided for @cardVillager.
+  ///
+  /// In es, this message translates to:
+  /// **'Habitante'**
+  String get cardVillager;
+
+  /// No description provided for @cardPages.
+  ///
+  /// In es, this message translates to:
+  /// **'Páginas de la tarjeta'**
+  String get cardPages;
+
+  /// No description provided for @cardOverdue.
+  ///
+  /// In es, this message translates to:
+  /// **'{n, plural, =0{Nada atrasado} =1{1 atrasada} other{{n} atrasadas}}'**
+  String cardOverdue(num n);
+
+  /// No description provided for @cardNext.
+  ///
+  /// In es, this message translates to:
+  /// **'Siguiente: {title}'**
+  String cardNext(String title);
+
+  /// No description provided for @cardNothingNext.
+  ///
+  /// In es, this message translates to:
+  /// **'No queda nada más hoy'**
+  String get cardNothingNext;
+
+  /// No description provided for @streakRule.
+  ///
+  /// In es, this message translates to:
+  /// **'Regla de la racha'**
+  String get streakRule;
+
+  /// No description provided for @streakRuleAny.
+  ///
+  /// In es, this message translates to:
+  /// **'Al menos 1 tarea'**
+  String get streakRuleAny;
+
+  /// No description provided for @streakRuleAll.
+  ///
+  /// In es, this message translates to:
+  /// **'Todas las del día'**
+  String get streakRuleAll;
+
+  /// No description provided for @goalTarget.
+  ///
+  /// In es, this message translates to:
+  /// **'Meta de la semana'**
+  String get goalTarget;
+
+  /// No description provided for @goalNone.
+  ///
+  /// In es, this message translates to:
+  /// **'Sin meta'**
+  String get goalNone;
+
+  /// No description provided for @goalPick.
+  ///
+  /// In es, this message translates to:
+  /// **'Elige un proyecto o una categoría en Ajustes'**
+  String get goalPick;
+
+  /// No description provided for @goalThisWeek.
+  ///
+  /// In es, this message translates to:
+  /// **'{n, plural, =0{Nada esta semana} =1{+1 esta semana} other{+{n} esta semana}}'**
+  String goalThisWeek(num n);
 }
 
 class _AppLocalizationsDelegate

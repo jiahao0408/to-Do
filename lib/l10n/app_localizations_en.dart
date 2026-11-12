@@ -1262,13 +1262,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get whaleNormal3 => 'A little break and we keep going';
 
   @override
-  String get whaleNormal4 => 'Here I am, swimming with you!';
+  String get whaleNormal4 => 'Here I am, building with you!';
 
   @override
   String get whaleCelebrate1 => 'All done! You were great today';
 
   @override
-  String get whaleCelebrate2 => 'Day complete, I ate it all';
+  String get whaleCelebrate2 => 'Day complete, the village is celebrating!';
 
   @override
   String get whaleCelebrate3 => 'What a productive day!';
@@ -1285,13 +1285,14 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get whaleWorried2 => 'Overdue stuff makes me nervous…';
+  String get whaleWorried2 => 'Overdue stuff makes me uneasy…';
 
   @override
-  String get whaleHungry1 => 'I\'m hungry… finish a task and feed me';
+  String get whaleHungry1 =>
+      'Running out of energy… finish a task and we keep building';
 
   @override
-  String get whaleHungry2 => 'My tummy is empty…';
+  String get whaleHungry2 => 'I have no strength left…';
 
   @override
   String get whaleSleep1 => 'Zzz…';
@@ -1300,13 +1301,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get whaleSleep2 => 'Let\'s continue tomorrow…';
 
   @override
-  String get whalePet1 => 'Hehe';
+  String get whalePet1 => 'Hi!';
 
   @override
-  String get whalePet2 => 'Again, again';
+  String get whalePet2 => 'Thanks for stopping by';
 
   @override
-  String get whalePet3 => 'So nice…';
+  String get whalePet3 => 'What a nice day';
 
   @override
   String get whalePoked1 => 'Mm… what time is it?';
@@ -1315,20 +1316,20 @@ class AppLocalizationsEn extends AppLocalizations {
   String get whalePoked2 => 'Five more minutes…';
 
   @override
-  String get whaleEat1 => 'Yummy!';
+  String get whaleEat1 => 'One more brick!';
 
   @override
   String get whaleEat2 => 'Another task, another!';
 
   @override
-  String get whaleEat3 => 'Nom nom';
+  String get whaleEat3 => 'Let\'s build!';
 
   @override
-  String get whaleTitle => 'Whale';
+  String get whaleTitle => 'Villager';
 
   @override
   String whaleFullness(int p) {
-    return 'Fullness $p%';
+    return 'Energy $p%';
   }
 
   @override
@@ -1343,31 +1344,177 @@ class AppLocalizationsEn extends AppLocalizations {
   String get whaleMoodCelebrate => 'Celebrating';
 
   @override
-  String get whaleMoodWorried => 'Worried';
+  String get whaleMoodWorried => 'In a hurry';
 
   @override
   String get whaleMoodSleep => 'Sleeping';
 
   @override
-  String get whalePetButton => 'Pat';
+  String get whalePetButton => 'Wave';
 
   @override
   String get whalePokeButton => 'Poke';
 
   @override
-  String get whaleShow => 'Show the whale';
+  String get whaleShow => 'Show the villager and the village';
 
   @override
   String get whaleFloating => 'Calendar corner';
 
   @override
-  String get whaleDrawer => 'Tank in the menu';
+  String get whaleDrawer => 'Card in the menu';
 
   @override
-  String get whaleTank => 'Tank page';
+  String get whaleTank => 'Village page';
 
   @override
   String whaleSemantics(String mood, int p) {
-    return 'Whale, $mood, fullness $p%';
+    return 'Villager, $mood, energy $p%';
+  }
+
+  @override
+  String get villageTitle => 'Village';
+
+  @override
+  String get villageEmpty => 'Create a project to lay the first stone';
+
+  @override
+  String get villageHistoric => 'Historic quarter';
+
+  @override
+  String villageStage(int n) {
+    return 'Stage $n/10';
+  }
+
+  @override
+  String get villageHint =>
+      'Every 10% of a project adds a stage to its building';
+
+  @override
+  String get building => 'Village building';
+
+  @override
+  String get buildingAuto => 'Automatic';
+
+  @override
+  String get buildingGroupHomes => 'Homes';
+
+  @override
+  String get buildingGroupWork => 'Work & study';
+
+  @override
+  String get buildingGroupInfrastructure => 'Infrastructure';
+
+  @override
+  String get buildingGroupLeisure => 'Leisure & nature';
+
+  @override
+  String get buildingHouse => 'House';
+
+  @override
+  String get buildingCabin => 'Cabin';
+
+  @override
+  String get buildingApartments => 'Apartments';
+
+  @override
+  String get buildingSchool => 'School';
+
+  @override
+  String get buildingLibrary => 'Library';
+
+  @override
+  String get buildingOffice => 'Office';
+
+  @override
+  String get buildingWorkshop => 'Workshop';
+
+  @override
+  String get buildingBridge => 'Bridge';
+
+  @override
+  String get buildingWaterTower => 'Water tower';
+
+  @override
+  String get buildingPowerPlant => 'Power plant';
+
+  @override
+  String get buildingStation => 'Station';
+
+  @override
+  String get buildingPark => 'Park';
+
+  @override
+  String get buildingFarm => 'Farm';
+
+  @override
+  String get buildingLighthouse => 'Lighthouse';
+
+  @override
+  String get buildingCastle => 'Castle';
+
+  @override
+  String get cardToday => 'Today';
+
+  @override
+  String get cardStreak => 'Streak';
+
+  @override
+  String get cardGoal => 'Weekly goal';
+
+  @override
+  String get cardVillager => 'Villager';
+
+  @override
+  String get cardPages => 'Card pages';
+
+  @override
+  String cardOverdue(num n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: '$n overdue',
+      one: '1 overdue',
+      zero: 'Nothing overdue',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String cardNext(String title) {
+    return 'Next: $title';
+  }
+
+  @override
+  String get cardNothingNext => 'Nothing else today';
+
+  @override
+  String get streakRule => 'Streak rule';
+
+  @override
+  String get streakRuleAny => 'At least 1 task';
+
+  @override
+  String get streakRuleAll => 'All of the day';
+
+  @override
+  String get goalTarget => 'Weekly goal';
+
+  @override
+  String get goalNone => 'No goal';
+
+  @override
+  String get goalPick => 'Pick a project or a category in Settings';
+
+  @override
+  String goalThisWeek(num n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: '+$n this week',
+      one: '+1 this week',
+      zero: 'Nothing this week',
+    );
+    return '$_temp0';
   }
 }

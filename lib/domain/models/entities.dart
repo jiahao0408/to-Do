@@ -165,19 +165,31 @@ class TaskTemplate {
 
 /// v2: proyecto (aparte de la categoría), con fecha límite opcional.
 class Project {
-  const Project({this.id, required this.name, required this.color, this.dueDate, this.archived = false});
+  const Project({
+    this.id,
+    required this.name,
+    required this.color,
+    this.dueDate,
+    this.archived = false,
+    this.building,
+  });
   final int? id;
   final String name;
   final int color;
   final DateTime? dueDate;
   final bool archived;
 
-  Project copyWith({String? name, int? color, DateTime? Function()? dueDate, bool? archived}) => Project(
+  /// v3: edificio de la aldea (nombre de `BuildingType`); null = automático.
+  final String? building;
+
+  Project copyWith({String? name, int? color, DateTime? Function()? dueDate, bool? archived, String? building}) =>
+      Project(
         id: id,
         name: name ?? this.name,
         color: color ?? this.color,
         dueDate: dueDate != null ? dueDate() : this.dueDate,
         archived: archived ?? this.archived,
+        building: building ?? this.building,
       );
 }
 

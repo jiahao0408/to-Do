@@ -84,7 +84,7 @@ void main() {
 
   test('copia de seguridad incluye proyectos y diario', () async {
     final tmp = await Directory.systemTemp.createTemp('v2');
-    final p = await repo.saveProject(const Project(name: 'Casa', color: 5));
+    final p = await repo.saveProject(const Project(name: 'Casa', color: 5, building: 'castle'));
     await service.create(t('Pintar', project: p));
     await repo.saveDayNote(DateTime(2026, 11, 8), 'nota');
     final zip = await BackupService(db, attachmentsDir: tmp).exportZip(tmp);
@@ -92,6 +92,7 @@ void main() {
     await BackupService(db2, attachmentsDir: tmp).importFile(zip);
     final s2 = await Repository(db2).loadSnapshot();
     expect(s2.projects.single.name, 'Casa');
+    expect(s2.projects.single.building, 'castle');
     expect(s2.tasks.single.projectId, s2.projects.single.id);
     expect(s2.dayNotes.single.body, 'nota');
     await db2.close();
@@ -121,5 +122,34 @@ void main() {
     expect(snap.tasks.single.projectId, isNull);
     expect(formatWallClock(snap.tasks.single.start!), '2026-11-08T09:00');
     await tmp.delete(recursive: true);
+  });
+
+  test('copia de la 1.1 (proyecto sin edificio) se importa', () async {
+    final tmp = await Directory.systemTemp.createTemp('v11');
+    final json = <String, Object?>{
+      'format': 'todo_calendar_backup',
+      'formatVersion': 1,
+      'schemaVersion': 2,
+      'tables': {
+        'projects': [
+          {'id': 4, 'name': 'TFG', 'color': 3, 'dueDate': null, 'archived': false},
+        ],
+      },
+    };
+    await BackupService(db, attachmentsDir: tmp).importJson(json);
+    final snap = await repo.loadSnapshot();
+    expect(snap.projects.single.name, 'TFG');
+    expect(snap.projects.single.building, isNull);
+    await tmp.delete(recursive: true);
+  });
+
+  test('editar el proyecto guarda el edificio', () async {
+    final id = await repo.saveProject(const Project(name: 'Faro', color: 2, building: 'lighthouse'));
+    var snap = await repo.loadSnapshot();
+    expect(snap.projectById(id)!.building, 'lighthouse');
+    await repo.saveProject(snap.projectById(id)!.copyWith(archived: true));
+    snap = await repo.loadSnapshot();
+    expect(snap.projectById(id)!.building, 'lighthouse');
+    expect(snap.projectById(id)!.archived, isTrue);
   });
 }

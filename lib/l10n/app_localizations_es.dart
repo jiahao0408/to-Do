@@ -1268,13 +1268,13 @@ class AppLocalizationsEs extends AppLocalizations {
   String get whaleNormal3 => 'Un ratito de descanso y seguimos';
 
   @override
-  String get whaleNormal4 => '¡Aquí estoy, nadando contigo!';
+  String get whaleNormal4 => '¡Aquí estoy, construyendo contigo!';
 
   @override
   String get whaleCelebrate1 => '¡Todo hecho! Hoy has estado genial';
 
   @override
-  String get whaleCelebrate2 => 'Día completado, me lo he comido todo';
+  String get whaleCelebrate2 => 'Día completado, ¡la aldea está de fiesta!';
 
   @override
   String get whaleCelebrate3 => '¡Qué día tan productivo!';
@@ -1291,13 +1291,14 @@ class AppLocalizationsEs extends AppLocalizations {
   }
 
   @override
-  String get whaleWorried2 => 'Lo atrasado me pone nerviosa…';
+  String get whaleWorried2 => 'Lo atrasado me inquieta…';
 
   @override
-  String get whaleHungry1 => 'Tengo hambre… completa una tarea y dame de comer';
+  String get whaleHungry1 =>
+      'Me quedo sin energía… completa una tarea y seguimos construyendo';
 
   @override
-  String get whaleHungry2 => 'Mi barriguita está vacía…';
+  String get whaleHungry2 => 'Me faltan fuerzas…';
 
   @override
   String get whaleSleep1 => 'Zzz…';
@@ -1306,13 +1307,13 @@ class AppLocalizationsEs extends AppLocalizations {
   String get whaleSleep2 => 'Mañana seguimos…';
 
   @override
-  String get whalePet1 => 'Jeje';
+  String get whalePet1 => '¡Hola!';
 
   @override
-  String get whalePet2 => 'Otra vez, otra vez';
+  String get whalePet2 => 'Gracias por pasar';
 
   @override
-  String get whalePet3 => 'Qué gustito…';
+  String get whalePet3 => 'Qué buen día hace';
 
   @override
   String get whalePoked1 => 'Mmm… ¿qué hora es?';
@@ -1321,20 +1322,20 @@ class AppLocalizationsEs extends AppLocalizations {
   String get whalePoked2 => 'Cinco minutitos más…';
 
   @override
-  String get whaleEat1 => '¡Qué rico!';
+  String get whaleEat1 => '¡Un ladrillo más!';
 
   @override
   String get whaleEat2 => '¡Otra tarea, otra!';
 
   @override
-  String get whaleEat3 => 'Ñam, ñam';
+  String get whaleEat3 => '¡A construir!';
 
   @override
-  String get whaleTitle => 'Ballenita';
+  String get whaleTitle => 'Habitante';
 
   @override
   String whaleFullness(int p) {
-    return 'Saciedad $p%';
+    return 'Energía $p%';
   }
 
   @override
@@ -1343,37 +1344,183 @@ class AppLocalizationsEs extends AppLocalizations {
   }
 
   @override
-  String get whaleMoodNormal => 'Tranquila';
+  String get whaleMoodNormal => 'En calma';
 
   @override
-  String get whaleMoodCelebrate => 'De celebración';
+  String get whaleMoodCelebrate => 'De fiesta';
 
   @override
-  String get whaleMoodWorried => 'Preocupada';
+  String get whaleMoodWorried => 'Con prisa';
 
   @override
   String get whaleMoodSleep => 'Durmiendo';
 
   @override
-  String get whalePetButton => 'Acariciar';
+  String get whalePetButton => 'Saludar';
 
   @override
   String get whalePokeButton => 'Darle un toque';
 
   @override
-  String get whaleShow => 'Mostrar a la ballenita';
+  String get whaleShow => 'Mostrar el habitante y la aldea';
 
   @override
   String get whaleFloating => 'En la esquina del calendario';
 
   @override
-  String get whaleDrawer => 'Pecera en el menú';
+  String get whaleDrawer => 'Tarjeta en el menú';
 
   @override
-  String get whaleTank => 'Página de la pecera';
+  String get whaleTank => 'Página de la aldea';
 
   @override
   String whaleSemantics(String mood, int p) {
-    return 'Ballenita, $mood, saciedad $p%';
+    return 'Habitante, $mood, energía $p%';
+  }
+
+  @override
+  String get villageTitle => 'Aldea';
+
+  @override
+  String get villageEmpty => 'Crea un proyecto para poner la primera piedra';
+
+  @override
+  String get villageHistoric => 'Barrio histórico';
+
+  @override
+  String villageStage(int n) {
+    return 'Fase $n/10';
+  }
+
+  @override
+  String get villageHint =>
+      'Cada 10 % de avance de un proyecto añade una fase a su edificio';
+
+  @override
+  String get building => 'Edificio en la aldea';
+
+  @override
+  String get buildingAuto => 'Automático';
+
+  @override
+  String get buildingGroupHomes => 'Viviendas';
+
+  @override
+  String get buildingGroupWork => 'Trabajo y estudio';
+
+  @override
+  String get buildingGroupInfrastructure => 'Infraestructura';
+
+  @override
+  String get buildingGroupLeisure => 'Ocio y naturaleza';
+
+  @override
+  String get buildingHouse => 'Casa';
+
+  @override
+  String get buildingCabin => 'Cabaña';
+
+  @override
+  String get buildingApartments => 'Edificio de pisos';
+
+  @override
+  String get buildingSchool => 'Escuela';
+
+  @override
+  String get buildingLibrary => 'Biblioteca';
+
+  @override
+  String get buildingOffice => 'Oficina';
+
+  @override
+  String get buildingWorkshop => 'Taller';
+
+  @override
+  String get buildingBridge => 'Puente';
+
+  @override
+  String get buildingWaterTower => 'Torre de agua';
+
+  @override
+  String get buildingPowerPlant => 'Central eléctrica';
+
+  @override
+  String get buildingStation => 'Estación';
+
+  @override
+  String get buildingPark => 'Parque';
+
+  @override
+  String get buildingFarm => 'Granja';
+
+  @override
+  String get buildingLighthouse => 'Faro';
+
+  @override
+  String get buildingCastle => 'Castillo';
+
+  @override
+  String get cardToday => 'Hoy';
+
+  @override
+  String get cardStreak => 'Racha';
+
+  @override
+  String get cardGoal => 'Meta de la semana';
+
+  @override
+  String get cardVillager => 'Habitante';
+
+  @override
+  String get cardPages => 'Páginas de la tarjeta';
+
+  @override
+  String cardOverdue(num n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: '$n atrasadas',
+      one: '1 atrasada',
+      zero: 'Nada atrasado',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String cardNext(String title) {
+    return 'Siguiente: $title';
+  }
+
+  @override
+  String get cardNothingNext => 'No queda nada más hoy';
+
+  @override
+  String get streakRule => 'Regla de la racha';
+
+  @override
+  String get streakRuleAny => 'Al menos 1 tarea';
+
+  @override
+  String get streakRuleAll => 'Todas las del día';
+
+  @override
+  String get goalTarget => 'Meta de la semana';
+
+  @override
+  String get goalNone => 'Sin meta';
+
+  @override
+  String get goalPick => 'Elige un proyecto o una categoría en Ajustes';
+
+  @override
+  String goalThisWeek(num n) {
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: '+$n esta semana',
+      one: '+1 esta semana',
+      zero: 'Nada esta semana',
+    );
+    return '$_temp0';
   }
 }

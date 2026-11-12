@@ -335,6 +335,7 @@ class Repository {
       color: Value(p.color),
       dueDate: Value(p.dueDate == null ? null : formatDateKey(p.dueDate!)),
       archived: Value(p.archived),
+      building: Value(p.building),
     );
     if (p.id == null) return db.into(db.projects).insert(c);
     await (db.update(db.projects)..where((x) => x.id.equals(p.id!))).write(c);

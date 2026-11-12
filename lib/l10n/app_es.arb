@@ -703,9 +703,9 @@
     }
   },
   "whaleNormal3": "Un ratito de descanso y seguimos",
-  "whaleNormal4": "¡Aquí estoy, nadando contigo!",
+  "whaleNormal4": "¡Aquí estoy, construyendo contigo!",
   "whaleCelebrate1": "¡Todo hecho! Hoy has estado genial",
-  "whaleCelebrate2": "Día completado, me lo he comido todo",
+  "whaleCelebrate2": "Día completado, ¡la aldea está de fiesta!",
   "whaleCelebrate3": "¡Qué día tan productivo!",
   "whaleWorried1": "{n, plural, =1{Hay 1 tarea atrasada… ¿la miramos?} other{Hay {n} tareas atrasadas… ¿las miramos?}}",
   "@whaleWorried1": {
@@ -715,21 +715,21 @@
       }
     }
   },
-  "whaleWorried2": "Lo atrasado me pone nerviosa…",
-  "whaleHungry1": "Tengo hambre… completa una tarea y dame de comer",
-  "whaleHungry2": "Mi barriguita está vacía…",
+  "whaleWorried2": "Lo atrasado me inquieta…",
+  "whaleHungry1": "Me quedo sin energía… completa una tarea y seguimos construyendo",
+  "whaleHungry2": "Me faltan fuerzas…",
   "whaleSleep1": "Zzz…",
   "whaleSleep2": "Mañana seguimos…",
-  "whalePet1": "Jeje",
-  "whalePet2": "Otra vez, otra vez",
-  "whalePet3": "Qué gustito…",
+  "whalePet1": "¡Hola!",
+  "whalePet2": "Gracias por pasar",
+  "whalePet3": "Qué buen día hace",
   "whalePoked1": "Mmm… ¿qué hora es?",
   "whalePoked2": "Cinco minutitos más…",
-  "whaleEat1": "¡Qué rico!",
+  "whaleEat1": "¡Un ladrillo más!",
   "whaleEat2": "¡Otra tarea, otra!",
-  "whaleEat3": "Ñam, ñam",
-  "whaleTitle": "Ballenita",
-  "whaleFullness": "Saciedad {p}%",
+  "whaleEat3": "¡A construir!",
+  "whaleTitle": "Habitante",
+  "whaleFullness": "Energía {p}%",
   "@whaleFullness": {
     "placeholders": {
       "p": {
@@ -748,17 +748,17 @@
       }
     }
   },
-  "whaleMoodNormal": "Tranquila",
-  "whaleMoodCelebrate": "De celebración",
-  "whaleMoodWorried": "Preocupada",
+  "whaleMoodNormal": "En calma",
+  "whaleMoodCelebrate": "De fiesta",
+  "whaleMoodWorried": "Con prisa",
   "whaleMoodSleep": "Durmiendo",
-  "whalePetButton": "Acariciar",
+  "whalePetButton": "Saludar",
   "whalePokeButton": "Darle un toque",
-  "whaleShow": "Mostrar a la ballenita",
+  "whaleShow": "Mostrar el habitante y la aldea",
   "whaleFloating": "En la esquina del calendario",
-  "whaleDrawer": "Pecera en el menú",
-  "whaleTank": "Página de la pecera",
-  "whaleSemantics": "Ballenita, {mood}, saciedad {p}%",
+  "whaleDrawer": "Tarjeta en el menú",
+  "whaleTank": "Página de la aldea",
+  "whaleSemantics": "Habitante, {mood}, energía {p}%",
   "@whaleSemantics": {
     "placeholders": {
       "mood": {
@@ -766,6 +766,75 @@
       },
       "p": {
         "type": "int"
+      }
+    }
+  },
+  "villageTitle": "Aldea",
+  "villageEmpty": "Crea un proyecto para poner la primera piedra",
+  "villageHistoric": "Barrio histórico",
+  "villageStage": "Fase {n}/10",
+  "@villageStage": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "villageHint": "Cada 10 % de avance de un proyecto añade una fase a su edificio",
+  "building": "Edificio en la aldea",
+  "buildingAuto": "Automático",
+  "buildingGroupHomes": "Viviendas",
+  "buildingGroupWork": "Trabajo y estudio",
+  "buildingGroupInfrastructure": "Infraestructura",
+  "buildingGroupLeisure": "Ocio y naturaleza",
+  "buildingHouse": "Casa",
+  "buildingCabin": "Cabaña",
+  "buildingApartments": "Edificio de pisos",
+  "buildingSchool": "Escuela",
+  "buildingLibrary": "Biblioteca",
+  "buildingOffice": "Oficina",
+  "buildingWorkshop": "Taller",
+  "buildingBridge": "Puente",
+  "buildingWaterTower": "Torre de agua",
+  "buildingPowerPlant": "Central eléctrica",
+  "buildingStation": "Estación",
+  "buildingPark": "Parque",
+  "buildingFarm": "Granja",
+  "buildingLighthouse": "Faro",
+  "buildingCastle": "Castillo",
+  "cardToday": "Hoy",
+  "cardStreak": "Racha",
+  "cardGoal": "Meta de la semana",
+  "cardVillager": "Habitante",
+  "cardPages": "Páginas de la tarjeta",
+  "cardOverdue": "{n, plural, =0{Nada atrasado} =1{1 atrasada} other{{n} atrasadas}}",
+  "@cardOverdue": {
+    "placeholders": {
+      "n": {
+        "type": "num"
+      }
+    }
+  },
+  "cardNext": "Siguiente: {title}",
+  "@cardNext": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "cardNothingNext": "No queda nada más hoy",
+  "streakRule": "Regla de la racha",
+  "streakRuleAny": "Al menos 1 tarea",
+  "streakRuleAll": "Todas las del día",
+  "goalTarget": "Meta de la semana",
+  "goalNone": "Sin meta",
+  "goalPick": "Elige un proyecto o una categoría en Ajustes",
+  "goalThisWeek": "{n, plural, =0{Nada esta semana} =1{+1 esta semana} other{+{n} esta semana}}",
+  "@goalThisWeek": {
+    "placeholders": {
+      "n": {
+        "type": "num"
       }
     }
   }

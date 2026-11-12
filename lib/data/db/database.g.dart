@@ -3925,8 +3925,26 @@ class $ProjectsTable extends Projects
     ),
     defaultValue: const Constant(false),
   );
+  static const VerificationMeta _buildingMeta = const VerificationMeta(
+    'building',
+  );
   @override
-  List<GeneratedColumn> get $columns => [id, name, color, dueDate, archived];
+  late final GeneratedColumn<String> building = GeneratedColumn<String>(
+    'building',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [
+    id,
+    name,
+    color,
+    dueDate,
+    archived,
+    building,
+  ];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -3970,6 +3988,12 @@ class $ProjectsTable extends Projects
         archived.isAcceptableOrUnknown(data['archived']!, _archivedMeta),
       );
     }
+    if (data.containsKey('building')) {
+      context.handle(
+        _buildingMeta,
+        building.isAcceptableOrUnknown(data['building']!, _buildingMeta),
+      );
+    }
     return context;
   }
 
@@ -3999,6 +4023,10 @@ class $ProjectsTable extends Projects
         DriftSqlType.bool,
         data['${effectivePrefix}archived'],
       )!,
+      building: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}building'],
+      ),
     );
   }
 
@@ -4016,12 +4044,16 @@ class ProjectRow extends DataClass implements Insertable<ProjectRow> {
   /// `yyyy-MM-dd`, opcional.
   final String? dueDate;
   final bool archived;
+
+  /// v3: edificio de la aldea (nombre de `BuildingType`).
+  final String? building;
   const ProjectRow({
     required this.id,
     required this.name,
     required this.color,
     this.dueDate,
     required this.archived,
+    this.building,
   });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
@@ -4033,6 +4065,9 @@ class ProjectRow extends DataClass implements Insertable<ProjectRow> {
       map['due_date'] = Variable<String>(dueDate);
     }
     map['archived'] = Variable<bool>(archived);
+    if (!nullToAbsent || building != null) {
+      map['building'] = Variable<String>(building);
+    }
     return map;
   }
 
@@ -4045,6 +4080,9 @@ class ProjectRow extends DataClass implements Insertable<ProjectRow> {
           ? const Value.absent()
           : Value(dueDate),
       archived: Value(archived),
+      building: building == null && nullToAbsent
+          ? const Value.absent()
+          : Value(building),
     );
   }
 
@@ -4059,6 +4097,7 @@ class ProjectRow extends DataClass implements Insertable<ProjectRow> {
       color: serializer.fromJson<int>(json['color']),
       dueDate: serializer.fromJson<String?>(json['dueDate']),
       archived: serializer.fromJson<bool>(json['archived']),
+      building: serializer.fromJson<String?>(json['building']),
     );
   }
   @override
@@ -4070,6 +4109,7 @@ class ProjectRow extends DataClass implements Insertable<ProjectRow> {
       'color': serializer.toJson<int>(color),
       'dueDate': serializer.toJson<String?>(dueDate),
       'archived': serializer.toJson<bool>(archived),
+      'building': serializer.toJson<String?>(building),
     };
   }
 
@@ -4079,12 +4119,14 @@ class ProjectRow extends DataClass implements Insertable<ProjectRow> {
     int? color,
     Value<String?> dueDate = const Value.absent(),
     bool? archived,
+    Value<String?> building = const Value.absent(),
   }) => ProjectRow(
     id: id ?? this.id,
     name: name ?? this.name,
     color: color ?? this.color,
     dueDate: dueDate.present ? dueDate.value : this.dueDate,
     archived: archived ?? this.archived,
+    building: building.present ? building.value : this.building,
   );
   ProjectRow copyWithCompanion(ProjectsCompanion data) {
     return ProjectRow(
@@ -4093,6 +4135,7 @@ class ProjectRow extends DataClass implements Insertable<ProjectRow> {
       color: data.color.present ? data.color.value : this.color,
       dueDate: data.dueDate.present ? data.dueDate.value : this.dueDate,
       archived: data.archived.present ? data.archived.value : this.archived,
+      building: data.building.present ? data.building.value : this.building,
     );
   }
 
@@ -4103,13 +4146,14 @@ class ProjectRow extends DataClass implements Insertable<ProjectRow> {
           ..write('name: $name, ')
           ..write('color: $color, ')
           ..write('dueDate: $dueDate, ')
-          ..write('archived: $archived')
+          ..write('archived: $archived, ')
+          ..write('building: $building')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode => Object.hash(id, name, color, dueDate, archived);
+  int get hashCode => Object.hash(id, name, color, dueDate, archived, building);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -4118,7 +4162,8 @@ class ProjectRow extends DataClass implements Insertable<ProjectRow> {
           other.name == this.name &&
           other.color == this.color &&
           other.dueDate == this.dueDate &&
-          other.archived == this.archived);
+          other.archived == this.archived &&
+          other.building == this.building);
 }
 
 class ProjectsCompanion extends UpdateCompanion<ProjectRow> {
@@ -4127,12 +4172,14 @@ class ProjectsCompanion extends UpdateCompanion<ProjectRow> {
   final Value<int> color;
   final Value<String?> dueDate;
   final Value<bool> archived;
+  final Value<String?> building;
   const ProjectsCompanion({
     this.id = const Value.absent(),
     this.name = const Value.absent(),
     this.color = const Value.absent(),
     this.dueDate = const Value.absent(),
     this.archived = const Value.absent(),
+    this.building = const Value.absent(),
   });
   ProjectsCompanion.insert({
     this.id = const Value.absent(),
@@ -4140,6 +4187,7 @@ class ProjectsCompanion extends UpdateCompanion<ProjectRow> {
     required int color,
     this.dueDate = const Value.absent(),
     this.archived = const Value.absent(),
+    this.building = const Value.absent(),
   }) : name = Value(name),
        color = Value(color);
   static Insertable<ProjectRow> custom({
@@ -4148,6 +4196,7 @@ class ProjectsCompanion extends UpdateCompanion<ProjectRow> {
     Expression<int>? color,
     Expression<String>? dueDate,
     Expression<bool>? archived,
+    Expression<String>? building,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -4155,6 +4204,7 @@ class ProjectsCompanion extends UpdateCompanion<ProjectRow> {
       if (color != null) 'color': color,
       if (dueDate != null) 'due_date': dueDate,
       if (archived != null) 'archived': archived,
+      if (building != null) 'building': building,
     });
   }
 
@@ -4164,6 +4214,7 @@ class ProjectsCompanion extends UpdateCompanion<ProjectRow> {
     Value<int>? color,
     Value<String?>? dueDate,
     Value<bool>? archived,
+    Value<String?>? building,
   }) {
     return ProjectsCompanion(
       id: id ?? this.id,
@@ -4171,6 +4222,7 @@ class ProjectsCompanion extends UpdateCompanion<ProjectRow> {
       color: color ?? this.color,
       dueDate: dueDate ?? this.dueDate,
       archived: archived ?? this.archived,
+      building: building ?? this.building,
     );
   }
 
@@ -4192,6 +4244,9 @@ class ProjectsCompanion extends UpdateCompanion<ProjectRow> {
     if (archived.present) {
       map['archived'] = Variable<bool>(archived.value);
     }
+    if (building.present) {
+      map['building'] = Variable<String>(building.value);
+    }
     return map;
   }
 
@@ -4202,7 +4257,8 @@ class ProjectsCompanion extends UpdateCompanion<ProjectRow> {
           ..write('name: $name, ')
           ..write('color: $color, ')
           ..write('dueDate: $dueDate, ')
-          ..write('archived: $archived')
+          ..write('archived: $archived, ')
+          ..write('building: $building')
           ..write(')'))
         .toString();
   }
@@ -7943,6 +7999,7 @@ typedef $$ProjectsTableCreateCompanionBuilder = ProjectsCompanion Function({
   required int color,
   Value<String?> dueDate,
   Value<bool> archived,
+  Value<String?> building,
 });
 typedef $$ProjectsTableUpdateCompanionBuilder = ProjectsCompanion Function({
   Value<int> id,
@@ -7950,6 +8007,7 @@ typedef $$ProjectsTableUpdateCompanionBuilder = ProjectsCompanion Function({
   Value<int> color,
   Value<String?> dueDate,
   Value<bool> archived,
+  Value<String?> building,
 });
 
 class $$ProjectsTableFilterComposer
@@ -7983,6 +8041,11 @@ class $$ProjectsTableFilterComposer
 
   ColumnFilters<bool> get archived => $composableBuilder(
     column: $table.archived,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get building => $composableBuilder(
+    column: $table.building,
     builder: (column) => ColumnFilters(column),
   );
 }
@@ -8020,6 +8083,11 @@ class $$ProjectsTableOrderingComposer
     column: $table.archived,
     builder: (column) => ColumnOrderings(column),
   );
+
+  ColumnOrderings<String> get building => $composableBuilder(
+    column: $table.building,
+    builder: (column) => ColumnOrderings(column),
+  );
 }
 
 class $$ProjectsTableAnnotationComposer
@@ -8045,6 +8113,9 @@ class $$ProjectsTableAnnotationComposer
 
   GeneratedColumn<bool> get archived =>
       $composableBuilder(column: $table.archived, builder: (column) => column);
+
+  GeneratedColumn<String> get building =>
+      $composableBuilder(column: $table.building, builder: (column) => column);
 }
 
 class $$ProjectsTableTableManager
@@ -8083,12 +8154,14 @@ class $$ProjectsTableTableManager
                 Value<int> color = const Value.absent(),
                 Value<String?> dueDate = const Value.absent(),
                 Value<bool> archived = const Value.absent(),
+                Value<String?> building = const Value.absent(),
               }) => ProjectsCompanion(
                 id: id,
                 name: name,
                 color: color,
                 dueDate: dueDate,
                 archived: archived,
+                building: building,
               ),
           createCompanionCallback:
               ({
@@ -8097,12 +8170,14 @@ class $$ProjectsTableTableManager
                 required int color,
                 Value<String?> dueDate = const Value.absent(),
                 Value<bool> archived = const Value.absent(),
+                Value<String?> building = const Value.absent(),
               }) => ProjectsCompanion.insert(
                 id: id,
                 name: name,
                 color: color,
                 dueDate: dueDate,
                 archived: archived,
+                building: building,
               ),
           withReferenceMapper: (p0) => p0
               .map(
