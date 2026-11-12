@@ -1,4 +1,4 @@
-// 鲸鱼娘：饱腹度、心情与台词（领域层）。
+// Ballenita：饱腹度、心情与台词（领域层）。
 import 'dart:math';
 
 import 'package:flutter_test/flutter_test.dart';

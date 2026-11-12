@@ -1367,13 +1367,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get whaleTank => 'Tank page';
 
   @override
-  String get whaleAbout => 'About the character';
-
-  @override
-  String get whaleCredits =>
-      'Original 上善无形 · redesign ZipZipPipe · source EDMOK/blue-fish-archive · CC BY-NC-SA 4.0';
-
-  @override
   String whaleSemantics(String mood, int p) {
     return 'Whale, $mood, fullness $p%';
   }

@@ -2266,18 +2266,6 @@ abstract class AppLocalizations {
   /// **'Página de la pecera'**
   String get whaleTank;
 
-  /// No description provided for @whaleAbout.
-  ///
-  /// In es, this message translates to:
-  /// **'Sobre el personaje'**
-  String get whaleAbout;
-
-  /// No description provided for @whaleCredits.
-  ///
-  /// In es, this message translates to:
-  /// **'Original 上善无形 · segundo diseño ZipZipPipe · fuente EDMOK/blue-fish-archive · CC BY-NC-SA 4.0'**
-  String get whaleCredits;
-
   /// No description provided for @whaleSemantics.
   ///
   /// In es, this message translates to:

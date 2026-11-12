@@ -1,4 +1,4 @@
-// 鲸鱼娘：控制器（喂食、撤销、恢复备份、总开关冻结、戳醒）。
+// Ballenita：控制器（喂食、撤销、恢复备份、总开关冻结、戳醒）。
 import 'dart:io';
 
 import 'package:drift/drift.dart' show driftRuntimeOptions;

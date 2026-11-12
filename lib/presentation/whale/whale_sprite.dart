@@ -1,4 +1,4 @@
-// 鲸鱼娘：la ballenita en pantalla. Imagen del ánimo (rotando cada ~20 s),
+// Ballenita：la ballenita en pantalla. Imagen del ánimo (rotando cada ~20 s),
 // flotando, con bocadillo al tocarla, caricia al mantener pulsado y huevo de
 // pascua con 5 toques en 3 s.
 

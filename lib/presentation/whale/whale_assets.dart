@@ -1,4 +1,4 @@
-// 鲸鱼娘：读取 assets/whale/manifest.json。清单缺失或损坏时返回空列表。
+// Ballenita：读取 assets/whale/manifest.json。清单缺失或损坏时返回空列表。
 
 import 'dart:convert';
 

@@ -1223,7 +1223,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get whaleEat3 => '啊呜啊呜';
 
   @override
-  String get whaleTitle => '鲸鱼娘';
+  String get whaleTitle => '小鲸鱼';
 
   @override
   String whaleFullness(int p) {
@@ -1254,7 +1254,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get whalePokeButton => '戳一下';
 
   @override
-  String get whaleShow => '显示鲸鱼娘';
+  String get whaleShow => '显示小鲸鱼';
 
   @override
   String get whaleFloating => '日历角落';
@@ -1266,14 +1266,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get whaleTank => '鱼缸页面';
 
   @override
-  String get whaleAbout => '关于形象';
-
-  @override
-  String get whaleCredits =>
-      '原设 上善无形 · 二设 ZipZipPipe · 来源 EDMOK/blue-fish-archive · CC BY-NC-SA 4.0';
-
-  @override
   String whaleSemantics(String mood, int p) {
-    return '鲸鱼娘，$mood，饱腹度 $p%';
+    return '小鲸鱼，$mood，饱腹度 $p%';
   }
 }

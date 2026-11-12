@@ -1,4 +1,4 @@
-// 鲸鱼娘：从 ARB 生成候选台词（只收录上下文能填进去的句子）。
+// Ballenita：从 ARB 生成候选台词（只收录上下文能填进去的句子）。
 
 import '../../domain/whale/whale_lines.dart';
 import '../../l10n/app_localizations.dart';

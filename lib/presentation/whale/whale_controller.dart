@@ -1,4 +1,4 @@
-// 鲸鱼娘：控制器。Lee la foto de datos y los ajustes, calcula el estado y lo
+// Ballenita：控制器。Lee la foto de datos y los ajustes, calcula el estado y lo
 // guarda en la tabla settings (con un retardo para no escribir a cada paso).
 
 import 'dart:async';

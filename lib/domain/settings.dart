@@ -44,7 +44,7 @@ class AppSettings {
   static const kSeeded = 'seeded';
   static const kLastOverdueCheck = 'lastOverdueCheck';
 
-  // 鲸鱼娘
+  // Ballenita
   static const kWhaleEnabled = 'whale.enabled';
   static const kWhaleFloating = 'whale.floating';
   static const kWhaleDrawer = 'whale.drawer';

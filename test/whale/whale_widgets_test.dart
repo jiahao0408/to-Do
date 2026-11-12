@@ -1,4 +1,4 @@
-// 鲸鱼娘：组件测试（WhaleSprite；Task 6 再追加三个位置）。
+// Ballenita：组件测试（WhaleSprite；Task 6 再追加三个位置）。
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -160,7 +160,7 @@ void main() {
     final handle = tester.ensureSemantics();
     await tester.pumpWidget(host(FakeWhale(view(fullness: 42.4)), animations: false));
     await tester.pump();
-    expect(find.bySemanticsLabel(RegExp('鲸鱼娘.*饱腹度 42%')), findsOneWidget);
+    expect(find.bySemanticsLabel(RegExp('小鲸鱼.*饱腹度 42%')), findsOneWidget);
     handle.dispose();
   });
 
@@ -226,11 +226,11 @@ void main() {
       expect(area.right - box.right, closeTo(12, 0.5));
     });
 
-    testWidgets('鱼缸页面显示署名文字', (tester) async {
+    testWidgets('鱼缸页面没有署名文字', (tester) async {
       await tester.pumpWidget(host(FakeWhale(view()), animations: false, page: const WhaleTankScreen()));
       await tester.pump();
-      expect(find.textContaining('ZipZipPipe'), findsOneWidget);
-      expect(find.textContaining('CC BY-NC-SA 4.0'), findsOneWidget);
+      expect(find.textContaining('ZipZipPipe'), findsNothing);
+      expect(find.textContaining('CC BY-NC-SA'), findsNothing);
       expect(find.textContaining('饱腹度 70%'), findsWidgets);
     });
   });

@@ -1,5 +1,5 @@
 // C：página de la pecera: acuario dibujado, la ballenita grande, saciedad,
-// tareas de hoy, botones y atribución.
+// tareas de hoy y botones.
 
 import 'dart:math';
 
@@ -96,9 +96,6 @@ class _WhaleTankScreenState extends ConsumerState<WhaleTankScreen> with SingleTi
                     ),
                   ),
                 ),
-                const SizedBox(height: 16),
-                Text(l.whaleCredits,
-                    textAlign: TextAlign.center, style: const TextStyle(fontSize: 11, color: ink)),
               ],
             ),
           ),

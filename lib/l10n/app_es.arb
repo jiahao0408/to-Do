@@ -758,8 +758,6 @@
   "whaleFloating": "En la esquina del calendario",
   "whaleDrawer": "Pecera en el menú",
   "whaleTank": "Página de la pecera",
-  "whaleAbout": "Sobre el personaje",
-  "whaleCredits": "Original 上善无形 · segundo diseño ZipZipPipe · fuente EDMOK/blue-fish-archive · CC BY-NC-SA 4.0",
   "whaleSemantics": "Ballenita, {mood}, saciedad {p}%",
   "@whaleSemantics": {
     "placeholders": {

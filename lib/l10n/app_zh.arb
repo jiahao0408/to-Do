@@ -348,7 +348,7 @@
   "whaleEat1": "好吃！",
   "whaleEat2": "再来一件！",
   "whaleEat3": "啊呜啊呜",
-  "whaleTitle": "鲸鱼娘",
+  "whaleTitle": "小鲸鱼",
   "whaleFullness": "饱腹度 {p}%",
   "whaleTodayDone": "今天完成 {done}/{total}",
   "whaleMoodNormal": "平常",
@@ -357,11 +357,9 @@
   "whaleMoodSleep": "睡觉",
   "whalePetButton": "摸摸头",
   "whalePokeButton": "戳一下",
-  "whaleShow": "显示鲸鱼娘",
+  "whaleShow": "显示小鲸鱼",
   "whaleFloating": "日历角落",
   "whaleDrawer": "菜单鱼缸",
   "whaleTank": "鱼缸页面",
-  "whaleAbout": "关于形象",
-  "whaleCredits": "原设 上善无形 · 二设 ZipZipPipe · 来源 EDMOK/blue-fish-archive · CC BY-NC-SA 4.0",
-  "whaleSemantics": "鲸鱼娘，{mood}，饱腹度 {p}%"
+  "whaleSemantics": "小鲸鱼，{mood}，饱腹度 {p}%"
 }
