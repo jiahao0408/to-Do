@@ -4,6 +4,7 @@
 import '../data/repository.dart';
 import '../domain/ics/ics.dart';
 import '../domain/models/entities.dart';
+import '../domain/settings.dart';
 import '../domain/snapshot.dart';
 import '../domain/time.dart';
 
@@ -97,6 +98,8 @@ class IcsService {
           }
         }
       }
+      // La ballenita no se «come» las tareas importadas ya completadas.
+      await repo.setSetting(AppSettings.kWhaleRebase, '1');
       return created;
     });
   }

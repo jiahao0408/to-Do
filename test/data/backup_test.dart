@@ -57,7 +57,12 @@ void main() {
     await BackupService(dbB, attachmentsDir: attB).importFile(zip);
     final after = await BackupService(dbB, attachmentsDir: attB).exportJson();
 
-    expect(after['tables'], before['tables']);
+    // La importación añade el aviso para que la ballenita no «coma» lo importado.
+    final afterTables = Map<String, dynamic>.from(after['tables'] as Map);
+    final settings = (afterTables['settings'] as List).cast<Map<String, dynamic>>();
+    expect(settings.where((r) => r['key'] == 'whale.rebase').single['value'], '1');
+    afterTables['settings'] = settings.where((r) => r['key'] != 'whale.rebase').toList();
+    expect(afterTables, before['tables']);
     expect(File('${attB.path}/foto.jpg').readAsBytesSync(), [1, 2, 3, 4]);
     final snap = await Repository(dbB).loadSnapshot();
     expect(snap.tasks.single.start, DateTime(2026, 12, 15, 9, 30));

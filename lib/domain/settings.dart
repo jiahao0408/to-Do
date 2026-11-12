@@ -44,6 +44,17 @@ class AppSettings {
   static const kSeeded = 'seeded';
   static const kLastOverdueCheck = 'lastOverdueCheck';
 
+  // 鲸鱼娘
+  static const kWhaleEnabled = 'whale.enabled';
+  static const kWhaleFloating = 'whale.floating';
+  static const kWhaleDrawer = 'whale.drawer';
+  static const kWhaleTank = 'whale.tank';
+  static const kWhalePos = 'whale.pos';
+
+  /// Lo escriben la importación de copias y de .ics: la ballenita re-basa el
+  /// recuento de completadas en vez de «comer» lo importado.
+  static const kWhaleRebase = 'whale.rebase';
+
   /// Código de idioma ('es', 'en', 'zh') o null = idioma del sistema.
   String? get localeCode {
     final v = _s(kLocale);
@@ -68,6 +79,12 @@ class AppSettings {
   double get hourHeight => double.tryParse(_s(kHourHeight) ?? '') ?? 64;
   int get reviewWeekday => _i(kReviewWeekday, DateTime.sunday);
   bool get permissionAsked => _b(kPermissionAsked, false);
+
+  bool get whaleEnabled => _b(kWhaleEnabled, true);
+  bool get whaleFloating => _b(kWhaleFloating, true);
+  bool get whaleDrawer => _b(kWhaleDrawer, true);
+  bool get whaleTank => _b(kWhaleTank, true);
+  String? get whalePos => _s(kWhalePos);
 
   SummarySettings get summaries => SummarySettings(
         dailyEnabled: _b(kDailySummary, false),

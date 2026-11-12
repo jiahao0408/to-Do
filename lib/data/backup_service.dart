@@ -10,6 +10,7 @@ import 'package:archive/archive.dart';
 import 'package:drift/drift.dart';
 import 'package:path/path.dart' as p;
 
+import '../domain/settings.dart';
 import 'db/database.dart';
 
 class BackupException implements Exception {
@@ -140,6 +141,9 @@ class BackupService {
       await put(db.templates, 'templates', TemplateRow.fromJson);
       await put(db.settings, 'settings', SettingRow.fromJson);
       await put(db.dayNotes, 'dayNotes', DayNoteRow.fromJson);
+      // La ballenita no debe «comerse» las tareas completadas de la copia.
+      await db.into(db.settings).insertOnConflictUpdate(
+          SettingsCompanion.insert(key: AppSettings.kWhaleRebase, value: '1'));
     });
   }
 
