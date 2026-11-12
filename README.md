@@ -160,9 +160,20 @@ Decididas por ti: cada punto recoge la opción que elegiste.
 | Guía de gestos | ☑️ | Gestos y ejemplos de texto natural |
 | Mapa de calor anual | ☑️ | En Estadísticas, % completado por día; toca un día para ver su recuento |
 | Nombre «to Do» | ✅ | En Android, iOS y los tres idiomas |
-| Ballenita | ✅ | Mascota offline: su ánimo sigue tus tareas (dormida de 22:00 a 7:00, de celebración si completas todo el día, preocupada con atrasadas o hambre). Completar una tarea le da de comer (+15 %) y se va quedando con hambre (−50 % al día), pero nunca muere. Tocar = frase, mantener pulsado = caricia, 5 toques = sorpresa. Aparece en la esquina del calendario (arrastrable), en una pecera del menú y en su propia página. Se apaga en Ajustes › Ballenita. Probado en emulador y con tests |
 
 Esquema de la base de datos v2: columnas `tasks.projectId` y `tasks.icsUid`, y tablas `projects` y `day_notes`. La migración desde v1 se ha probado instalando encima de la v1 en el emulador sin perder datos, y las copias de seguridad de v1 se siguen importando (test).
+
+## Versión 2.0 (2026-11-12)
+
+Mejora de la 1.0: sin imágenes de terceros. Todo lo de la aldea se dibuja en código.
+
+| Función | Estado | Detalle |
+| --- | --- | --- |
+| Aldea | ✅ | Página propia (menú › Aldea). Cada proyecto es un edificio isométrico que eliges al crearlo o editarlo: 15 tipos en 4 grupos (viviendas, trabajo y estudio, infraestructura, ocio y naturaleza). Crece una fase por cada 10 % de avance: solar con cartel → cimientos → obra con andamios → terminado → decorado (bandera, flores, ventanas encendidas, humo, luz del faro). Los archivados van al barrio histórico, al otro lado del río. Zoom y arrastre; tocar un edificio abre su proyecto. Probado en emulador y con tests |
+| Habitante | ✅ | Constructor con casco dibujado en código, con la mecánica de la 1.1: energía (+15 % por tarea completada, −50 % al día, nunca llega a «morir»), ánimo (durmiendo de 22:00 a 7:00, de fiesta, con prisa si hay atrasadas o poca energía) y reacciones (tocar = frase, mantener = saludo, 5 toques = sorpresa). Pasea por la aldea, está en la esquina del calendario y en el carrusel |
+| Carrusel del menú | ✅ | Arriba del menú lateral, deslizable: Hoy (progreso, siguiente tarea, atrasadas), Racha (con mapa de 28 días), Meta de la semana (proyecto o categoría) y Habitante. En Ajustes › Tarjeta del menú eliges las páginas, la regla de racha (al menos 1 tarea / todas las del día) y la meta |
+
+Esquema de la base de datos v3: columna `projects.building`. Las copias de la 1.x se siguen importando (test). Los ajustes del habitante siguen con las claves `whale.*` de la 1.1 para no perder la energía ni la posición.
 
 ## Decisiones tomadas
 

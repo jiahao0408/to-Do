@@ -60,7 +60,10 @@ class _ThumbPainter extends CustomPainter {
     // Ancho del rombo = 2u; alto total ≈ u (suelo) + h·u.
     final u = size.width / 2.1 < size.height / (1 + h) ? size.width / 2.1 : size.height / (1 + h);
     final iso = Iso(Offset(size.width / 2, size.height - u * 1.02), u);
+    canvas.save();
+    canvas.clipRect(Offset.zero & size); // el haz del faro no se sale
     paintBuilding(canvas, iso, 0, 0, type, stage, color);
+    canvas.restore();
   }
 
   @override

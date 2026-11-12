@@ -153,13 +153,15 @@ void paintBuilding(Canvas c, Iso iso, double x, double y, BuildingType type, int
       drawWindows(c, iso, x + b.x, y + b.y, b.z, b.w, b.d, b.h,
           stage == 10 ? const Color(0xFFFFE08A) : const Color(0xFF5D6F80));
     }
-    if (reveal >= b.top || full) {
+    // El tejado también crece: primero bajo, luego con su altura final.
+    final rh = full ? b.rh : min(b.rh, reveal - b.z - b.h);
+    if (rh > 0) {
       final rc = b.roofColor ?? accent;
       switch (b.roof) {
         case _Roof.gable:
-          drawGable(c, iso, x + b.x - 0.03, y + b.y - 0.03, b.z + b.h, b.w + 0.06, b.d + 0.06, b.rh, rc);
+          drawGable(c, iso, x + b.x - 0.03, y + b.y - 0.03, b.z + b.h, b.w + 0.06, b.d + 0.06, rh, rc);
         case _Roof.pyramid:
-          drawPyramid(c, iso, x + b.x - 0.02, y + b.y - 0.02, b.z + b.h, b.w + 0.04, b.d + 0.04, b.rh, rc);
+          drawPyramid(c, iso, x + b.x - 0.02, y + b.y - 0.02, b.z + b.h, b.w + 0.04, b.d + 0.04, rh, rc);
         case _Roof.flat:
           break;
       }
@@ -215,6 +217,8 @@ void _paintScaffold(Canvas c, Iso iso, double x, double y, _Spec spec, double re
     ..strokeWidth = 1;
   for (final b in spec.blocks) {
     if (b.z + b.h <= reveal) continue;
+    // Piezas en lo alto que aún no han empezado: sin andamio flotando.
+    if (b.z > 0 && reveal <= b.z) continue;
     final bx = x + b.x - 0.02, by = y + b.y - 0.02, w = b.w + 0.04, d = b.d + 0.04;
     final z0 = max(b.z, reveal), z1 = b.z + b.h;
     for (final (px, py) in [(bx, by + d), (bx + w, by + d), (bx + w, by)]) {
