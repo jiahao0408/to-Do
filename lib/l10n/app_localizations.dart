@@ -2062,215 +2062,215 @@ abstract class AppLocalizations {
   /// **'Más'**
   String get heatMore;
 
-  /// No description provided for @whaleNormal1.
+  /// No description provided for @villagerNormal1.
   ///
   /// In es, this message translates to:
   /// **'{n, plural, =0{Hoy no te queda nada pendiente} =1{Hoy te queda 1 cosa} other{Hoy te quedan {n} cosas}}'**
-  String whaleNormal1(int n);
+  String villagerNormal1(int n);
 
-  /// No description provided for @whaleNormal2.
+  /// No description provided for @villagerNormal2.
   ///
   /// In es, this message translates to:
   /// **'Lo siguiente: {title} a las {time}'**
-  String whaleNormal2(String title, String time);
+  String villagerNormal2(String title, String time);
 
-  /// No description provided for @whaleNormal3.
+  /// No description provided for @villagerNormal3.
   ///
   /// In es, this message translates to:
   /// **'Un ratito de descanso y seguimos'**
-  String get whaleNormal3;
+  String get villagerNormal3;
 
-  /// No description provided for @whaleNormal4.
+  /// No description provided for @villagerNormal4.
   ///
   /// In es, this message translates to:
   /// **'¡Aquí estoy, construyendo contigo!'**
-  String get whaleNormal4;
+  String get villagerNormal4;
 
-  /// No description provided for @whaleCelebrate1.
+  /// No description provided for @villagerCelebrate1.
   ///
   /// In es, this message translates to:
   /// **'¡Todo hecho! Hoy has estado genial'**
-  String get whaleCelebrate1;
+  String get villagerCelebrate1;
 
-  /// No description provided for @whaleCelebrate2.
+  /// No description provided for @villagerCelebrate2.
   ///
   /// In es, this message translates to:
   /// **'Día completado, ¡la aldea está de fiesta!'**
-  String get whaleCelebrate2;
+  String get villagerCelebrate2;
 
-  /// No description provided for @whaleCelebrate3.
+  /// No description provided for @villagerCelebrate3.
   ///
   /// In es, this message translates to:
   /// **'¡Qué día tan productivo!'**
-  String get whaleCelebrate3;
+  String get villagerCelebrate3;
 
-  /// No description provided for @whaleWorried1.
+  /// No description provided for @villagerWorried1.
   ///
   /// In es, this message translates to:
   /// **'{n, plural, =1{Hay 1 tarea atrasada… ¿la miramos?} other{Hay {n} tareas atrasadas… ¿las miramos?}}'**
-  String whaleWorried1(int n);
+  String villagerWorried1(int n);
 
-  /// No description provided for @whaleWorried2.
+  /// No description provided for @villagerWorried2.
   ///
   /// In es, this message translates to:
   /// **'Lo atrasado me inquieta…'**
-  String get whaleWorried2;
+  String get villagerWorried2;
 
-  /// No description provided for @whaleHungry1.
+  /// No description provided for @villagerHungry1.
   ///
   /// In es, this message translates to:
   /// **'Me quedo sin energía… completa una tarea y seguimos construyendo'**
-  String get whaleHungry1;
+  String get villagerHungry1;
 
-  /// No description provided for @whaleHungry2.
+  /// No description provided for @villagerHungry2.
   ///
   /// In es, this message translates to:
   /// **'Me faltan fuerzas…'**
-  String get whaleHungry2;
+  String get villagerHungry2;
 
-  /// No description provided for @whaleSleep1.
+  /// No description provided for @villagerSleep1.
   ///
   /// In es, this message translates to:
   /// **'Zzz…'**
-  String get whaleSleep1;
+  String get villagerSleep1;
 
-  /// No description provided for @whaleSleep2.
+  /// No description provided for @villagerSleep2.
   ///
   /// In es, this message translates to:
   /// **'Mañana seguimos…'**
-  String get whaleSleep2;
+  String get villagerSleep2;
 
-  /// No description provided for @whalePet1.
+  /// No description provided for @villagerPet1.
   ///
   /// In es, this message translates to:
   /// **'¡Hola!'**
-  String get whalePet1;
+  String get villagerPet1;
 
-  /// No description provided for @whalePet2.
+  /// No description provided for @villagerPet2.
   ///
   /// In es, this message translates to:
   /// **'Gracias por pasar'**
-  String get whalePet2;
+  String get villagerPet2;
 
-  /// No description provided for @whalePet3.
+  /// No description provided for @villagerPet3.
   ///
   /// In es, this message translates to:
   /// **'Qué buen día hace'**
-  String get whalePet3;
+  String get villagerPet3;
 
-  /// No description provided for @whalePoked1.
+  /// No description provided for @villagerPoked1.
   ///
   /// In es, this message translates to:
   /// **'Mmm… ¿qué hora es?'**
-  String get whalePoked1;
+  String get villagerPoked1;
 
-  /// No description provided for @whalePoked2.
+  /// No description provided for @villagerPoked2.
   ///
   /// In es, this message translates to:
   /// **'Cinco minutitos más…'**
-  String get whalePoked2;
+  String get villagerPoked2;
 
-  /// No description provided for @whaleEat1.
+  /// No description provided for @villagerEat1.
   ///
   /// In es, this message translates to:
   /// **'¡Un ladrillo más!'**
-  String get whaleEat1;
+  String get villagerEat1;
 
-  /// No description provided for @whaleEat2.
+  /// No description provided for @villagerEat2.
   ///
   /// In es, this message translates to:
   /// **'¡Otra tarea, otra!'**
-  String get whaleEat2;
+  String get villagerEat2;
 
-  /// No description provided for @whaleEat3.
+  /// No description provided for @villagerEat3.
   ///
   /// In es, this message translates to:
   /// **'¡A construir!'**
-  String get whaleEat3;
+  String get villagerEat3;
 
-  /// No description provided for @whaleTitle.
+  /// No description provided for @villagerTitle.
   ///
   /// In es, this message translates to:
   /// **'Habitante'**
-  String get whaleTitle;
+  String get villagerTitle;
 
-  /// No description provided for @whaleFullness.
+  /// No description provided for @villagerFullness.
   ///
   /// In es, this message translates to:
   /// **'Energía {p}%'**
-  String whaleFullness(int p);
+  String villagerFullness(int p);
 
-  /// No description provided for @whaleTodayDone.
+  /// No description provided for @villagerTodayDone.
   ///
   /// In es, this message translates to:
   /// **'Hoy: {done}/{total} hechas'**
-  String whaleTodayDone(int done, int total);
+  String villagerTodayDone(int done, int total);
 
-  /// No description provided for @whaleMoodNormal.
+  /// No description provided for @villagerMoodNormal.
   ///
   /// In es, this message translates to:
   /// **'En calma'**
-  String get whaleMoodNormal;
+  String get villagerMoodNormal;
 
-  /// No description provided for @whaleMoodCelebrate.
+  /// No description provided for @villagerMoodCelebrate.
   ///
   /// In es, this message translates to:
   /// **'De fiesta'**
-  String get whaleMoodCelebrate;
+  String get villagerMoodCelebrate;
 
-  /// No description provided for @whaleMoodWorried.
+  /// No description provided for @villagerMoodWorried.
   ///
   /// In es, this message translates to:
   /// **'Con prisa'**
-  String get whaleMoodWorried;
+  String get villagerMoodWorried;
 
-  /// No description provided for @whaleMoodSleep.
+  /// No description provided for @villagerMoodSleep.
   ///
   /// In es, this message translates to:
   /// **'Durmiendo'**
-  String get whaleMoodSleep;
+  String get villagerMoodSleep;
 
-  /// No description provided for @whalePetButton.
+  /// No description provided for @villagerPetButton.
   ///
   /// In es, this message translates to:
   /// **'Saludar'**
-  String get whalePetButton;
+  String get villagerPetButton;
 
-  /// No description provided for @whalePokeButton.
+  /// No description provided for @villagerPokeButton.
   ///
   /// In es, this message translates to:
   /// **'Darle un toque'**
-  String get whalePokeButton;
+  String get villagerPokeButton;
 
-  /// No description provided for @whaleShow.
+  /// No description provided for @villagerShow.
   ///
   /// In es, this message translates to:
   /// **'Mostrar el habitante y la aldea'**
-  String get whaleShow;
+  String get villagerShow;
 
-  /// No description provided for @whaleFloating.
+  /// No description provided for @villagerFloating.
   ///
   /// In es, this message translates to:
   /// **'En la esquina del calendario'**
-  String get whaleFloating;
+  String get villagerFloating;
 
-  /// No description provided for @whaleDrawer.
+  /// No description provided for @villagerDrawer.
   ///
   /// In es, this message translates to:
   /// **'Tarjeta en el menú'**
-  String get whaleDrawer;
+  String get villagerDrawer;
 
-  /// No description provided for @whaleTank.
+  /// No description provided for @villagerTank.
   ///
   /// In es, this message translates to:
   /// **'Página de la aldea'**
-  String get whaleTank;
+  String get villagerTank;
 
-  /// No description provided for @whaleSemantics.
+  /// No description provided for @villagerSemantics.
   ///
   /// In es, this message translates to:
   /// **'Habitante, {mood}, energía {p}%'**
-  String whaleSemantics(String mood, int p);
+  String villagerSemantics(String mood, int p);
 
   /// No description provided for @villageTitle.
   ///
@@ -2517,6 +2517,24 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'{n, plural, =0{Nada esta semana} =1{+1 esta semana} other{+{n} esta semana}}'**
   String goalThisWeek(num n);
+
+  /// No description provided for @villageSection.
+  ///
+  /// In es, this message translates to:
+  /// **'Aldea y habitante'**
+  String get villageSection;
+
+  /// No description provided for @menuCardSection.
+  ///
+  /// In es, this message translates to:
+  /// **'Tarjeta del menú'**
+  String get menuCardSection;
+
+  /// No description provided for @menuCardShow.
+  ///
+  /// In es, this message translates to:
+  /// **'Mostrar la tarjeta'**
+  String get menuCardShow;
 }
 
 class _AppLocalizationsDelegate

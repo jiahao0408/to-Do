@@ -1,9 +1,9 @@
-// Ballenita：饱腹度。完成任务就是喂食；随时间慢慢饿，但永远不会死。
+// Habitante：饱腹度。完成任务就是喂食；随时间慢慢饿，但永远不会死。
 
 import '../snapshot.dart';
 
-class WhaleState {
-  const WhaleState({required this.fullness, required this.updatedAt, required this.baseline});
+class VillagerState {
+  const VillagerState({required this.fullness, required this.updatedAt, required this.baseline});
 
   /// 0–100.
   final double fullness;
@@ -23,31 +23,31 @@ class WhaleState {
   static const kUpdatedAt = 'whale.updatedAt';
   static const kBaseline = 'whale.completedBaseline';
 
-  factory WhaleState.initial(DateTime now, int completedNow) =>
-      WhaleState(fullness: kInitial, updatedAt: now, baseline: completedNow);
+  factory VillagerState.initial(DateTime now, int completedNow) =>
+      VillagerState(fullness: kInitial, updatedAt: now, baseline: completedNow);
 
   static double _clamp(double v) => v.clamp(0, 100).toDouble();
 
   /// Bajada lineal: [kDecayPerDay] cada 24 h desde [updatedAt].
-  WhaleState decayed(DateTime now) {
+  VillagerState decayed(DateTime now) {
     if (!now.isAfter(updatedAt)) return this;
     final hours = now.difference(updatedAt).inMicroseconds / Duration.microsecondsPerHour;
-    return WhaleState(fullness: _clamp(fullness - kDecayPerDay * hours / 24), updatedAt: now, baseline: baseline);
+    return VillagerState(fullness: _clamp(fullness - kDecayPerDay * hours / 24), updatedAt: now, baseline: baseline);
   }
 
   /// `fullness += (completedNow - baseline) * 15`, y `baseline = completedNow`.
-  WhaleState applyCompletions(int completedNow) => WhaleState(
+  VillagerState applyCompletions(int completedNow) => VillagerState(
         fullness: _clamp(fullness + (completedNow - baseline) * kFeedPerTask),
         updatedAt: updatedAt,
         baseline: completedNow,
       );
 
   /// Solo cambia la línea base (tras importar o restaurar una copia).
-  WhaleState rebased(int completedNow) =>
-      WhaleState(fullness: fullness, updatedAt: updatedAt, baseline: completedNow);
+  VillagerState rebased(int completedNow) =>
+      VillagerState(fullness: fullness, updatedAt: updatedAt, baseline: completedNow);
 
   /// Mientras el interruptor general está apagado: no baja ni come.
-  WhaleState frozenAt(DateTime now) => WhaleState(fullness: fullness, updatedAt: now, baseline: baseline);
+  VillagerState frozenAt(DateTime now) => VillagerState(fullness: fullness, updatedAt: now, baseline: baseline);
 
   bool get hungry => fullness < kHungry;
 
@@ -57,12 +57,12 @@ class WhaleState {
         kBaseline: '$baseline',
       };
 
-  static WhaleState? fromSettings(Map<String, String> raw) {
+  static VillagerState? fromSettings(Map<String, String> raw) {
     final f = double.tryParse(raw[kFullness] ?? '');
     final u = DateTime.tryParse(raw[kUpdatedAt] ?? '');
     final b = int.tryParse(raw[kBaseline] ?? '');
     if (f == null || u == null || b == null) return null;
-    return WhaleState(fullness: _clamp(f), updatedAt: u, baseline: b);
+    return VillagerState(fullness: _clamp(f), updatedAt: u, baseline: b);
   }
 }
 

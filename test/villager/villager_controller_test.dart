@@ -1,4 +1,4 @@
-// Ballenita：控制器（喂食、撤销、恢复备份、总开关冻结、戳醒）。
+// Habitante：控制器（喂食、撤销、恢复备份、总开关冻结、戳醒）。
 import 'dart:io';
 
 import 'package:drift/drift.dart' show driftRuntimeOptions;
@@ -12,9 +12,9 @@ import 'package:todo_calendar/data/repository.dart';
 import 'package:todo_calendar/domain/models/task.dart';
 import 'package:todo_calendar/domain/settings.dart';
 import 'package:todo_calendar/domain/time.dart';
-import 'package:todo_calendar/domain/whale/whale_mood.dart';
+import 'package:todo_calendar/domain/villager/villager_mood.dart';
 import 'package:todo_calendar/presentation/providers.dart';
-import 'package:todo_calendar/presentation/whale/whale_controller.dart';
+import 'package:todo_calendar/presentation/village/villager_controller.dart';
 
 void main() {
   driftRuntimeOptions.dontWarnAboutMultipleDatabases = true;
@@ -35,7 +35,7 @@ void main() {
       databaseProvider.overrideWithValue(db),
       clockProvider.overrideWithValue(clock),
     ]);
-    c.listen(whaleProvider, (_, _) {}, fireImmediately: true);
+    c.listen(villagerProvider, (_, _) {}, fireImmediately: true);
     await settle();
   });
 
@@ -59,17 +59,17 @@ void main() {
   }
 
   test('新养的从 70 开始', () {
-    expect(c.read(whaleProvider).state.fullness, 70);
+    expect(c.read(villagerProvider).state.fullness, 70);
   });
 
   test('完成一件任务后饱腹度 +15，reaction == eat', () async {
     final id = await service.create(task('a'));
     await settle();
-    final tick = c.read(whaleProvider).reactionTick;
+    final tick = c.read(villagerProvider).reactionTick;
     await complete(id, true);
-    final v = c.read(whaleProvider);
+    final v = c.read(villagerProvider);
     expect(v.state.fullness, 85);
-    expect(v.reaction, WhaleReaction.eat);
+    expect(v.reaction, VillagerReaction.eat);
     expect(v.reactionTick, greaterThan(tick));
   });
 
@@ -78,11 +78,11 @@ void main() {
     await settle();
     await complete(id, true);
     await complete(id, false);
-    expect(c.read(whaleProvider).state.fullness, 70);
+    expect(c.read(villagerProvider).state.fullness, 70);
   });
 
   test('恢复备份后不跳变', () async {
-    final tmp = await Directory.systemTemp.createTemp('whale');
+    final tmp = await Directory.systemTemp.createTemp('villager');
     final db2 = AppDatabase(NativeDatabase.memory());
     final r2 = Repository(db2, clock: clock);
     final s2 = TaskService(r2);
@@ -94,53 +94,53 @@ void main() {
     await BackupService(db, attachmentsDir: tmp).importFile(zip);
     await settle();
     await settle();
-    expect(c.read(whaleProvider).state.fullness, 70);
-    expect((await repo.getSetting(AppSettings.kWhaleRebase)) == '1', isFalse, reason: 'el aviso se consume');
+    expect(c.read(villagerProvider).state.fullness, 70);
+    expect((await repo.getSetting(AppSettings.kVillagerRebase)) == '1', isFalse, reason: 'el aviso se consume');
     await db2.close();
     await tmp.delete(recursive: true);
   });
 
   test('关闭总开关 7 天后再打开，饱腹度不变', () async {
-    await repo.setSetting(AppSettings.kWhaleEnabled, '0');
+    await repo.setSetting(AppSettings.kVillagerEnabled, '0');
     await settle();
-    expect(c.read(whaleProvider).enabled, isFalse);
+    expect(c.read(villagerProvider).enabled, isFalse);
     clock.value = clock.value.add(const Duration(days: 7));
-    c.read(whaleProvider.notifier).refresh();
-    await repo.setSetting(AppSettings.kWhaleEnabled, '1');
+    c.read(villagerProvider.notifier).refresh();
+    await repo.setSetting(AppSettings.kVillagerEnabled, '1');
     await settle();
-    expect(c.read(whaleProvider).state.fullness, closeTo(70, 0.01));
+    expect(c.read(villagerProvider).state.fullness, closeTo(70, 0.01));
   });
 
   test('开着时一天后饿了 50', () async {
     clock.value = clock.value.add(const Duration(hours: 24));
-    c.read(whaleProvider.notifier).refresh();
-    expect(c.read(whaleProvider).state.fullness, closeTo(20, 0.01));
-    expect(c.read(whaleProvider).mood, WhaleMood.worried);
+    c.read(villagerProvider.notifier).refresh();
+    expect(c.read(villagerProvider).state.fullness, closeTo(20, 0.01));
+    expect(c.read(villagerProvider).mood, VillagerMood.worried);
   });
 
   test('22:30 poke 时 reaction == poked；12:00 poke 时 reaction == null', () async {
-    c.read(whaleProvider.notifier).poke();
-    expect(c.read(whaleProvider).reaction, isNull);
+    c.read(villagerProvider.notifier).poke();
+    expect(c.read(villagerProvider).reaction, isNull);
     clock.value = DateTime(2026, 11, 12, 22, 30);
-    c.read(whaleProvider.notifier).refresh();
-    c.read(whaleProvider.notifier).poke();
-    expect(c.read(whaleProvider).reaction, WhaleReaction.poked);
+    c.read(villagerProvider.notifier).refresh();
+    c.read(villagerProvider.notifier).poke();
+    expect(c.read(villagerProvider).reaction, VillagerReaction.poked);
   });
 
   test('pet / easter / clearReaction', () {
-    final n = c.read(whaleProvider.notifier);
+    final n = c.read(villagerProvider.notifier);
     n.pet();
-    expect(c.read(whaleProvider).reaction, WhaleReaction.pet);
+    expect(c.read(villagerProvider).reaction, VillagerReaction.pet);
     n.easter();
-    expect(c.read(whaleProvider).reaction, WhaleReaction.easter);
+    expect(c.read(villagerProvider).reaction, VillagerReaction.easter);
     n.clearReaction();
-    expect(c.read(whaleProvider).reaction, isNull);
+    expect(c.read(villagerProvider).reaction, isNull);
   });
 
   test('上下文：今天剩几件和下一件', () async {
     await service.create(task('Inglés'));
     await settle();
-    final ctx = c.read(whaleProvider).context;
+    final ctx = c.read(villagerProvider).context;
     expect(ctx.remainingToday, 1);
     expect(ctx.nextTitle, 'Inglés');
     expect(ctx.nextStart, DateTime(2026, 11, 12, 15));

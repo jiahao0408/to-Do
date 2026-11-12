@@ -7,10 +7,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../domain/settings.dart';
 import '../providers.dart';
-import 'whale_sprite.dart';
+import 'villager_sprite.dart';
 
-class WhaleFloating extends ConsumerStatefulWidget {
-  const WhaleFloating({super.key, required this.hidden});
+class VillagerFloating extends ConsumerStatefulWidget {
+  const VillagerFloating({super.key, required this.hidden});
 
   /// Selección múltiple, panel de bandeja abierto…
   final bool hidden;
@@ -19,10 +19,10 @@ class WhaleFloating extends ConsumerStatefulWidget {
   static const double margin = 12;
 
   @override
-  ConsumerState<WhaleFloating> createState() => _WhaleFloatingState();
+  ConsumerState<VillagerFloating> createState() => _VillagerFloatingState();
 }
 
-class _WhaleFloatingState extends ConsumerState<WhaleFloating> {
+class _VillagerFloatingState extends ConsumerState<VillagerFloating> {
   Offset? _drag;
 
   /// Posición recién soltada, hasta que llegue a los ajustes.
@@ -39,18 +39,18 @@ class _WhaleFloatingState extends ConsumerState<WhaleFloating> {
   Widget build(BuildContext context) {
     final s = ref.watch(settingsProvider);
     if (widget.hidden ||
-        !s.whaleEnabled ||
-        !s.whaleFloating ||
+        !s.villagerEnabled ||
+        !s.villagerFloating ||
         MediaQuery.viewInsetsOf(context).bottom > 0) {
       return const SizedBox.shrink();
     }
-    const size = WhaleFloating.size, m = WhaleFloating.margin;
+    const size = VillagerFloating.size, m = VillagerFloating.margin;
     return Positioned.fill(
       child: LayoutBuilder(builder: (context, c) {
         final w = c.maxWidth, h = c.maxHeight;
         final maxX = (w - size - m).clamp(m, double.infinity);
         final maxY = (h - size - m).clamp(m, double.infinity);
-        final (right, frac) = _local ?? _parse(s.whalePos);
+        final (right, frac) = _local ?? _parse(s.villagerPos);
         var x = right ? maxX : m;
         var y = (m + frac * (maxY - m)).clamp(m, maxY);
         if (_drag != null) {
@@ -74,9 +74,9 @@ class _WhaleFloatingState extends ConsumerState<WhaleFloating> {
                 });
                 ref
                     .read(repositoryProvider)
-                    .setSetting(AppSettings.kWhalePos, '${toRight ? 'right' : 'left'}:${f.toStringAsFixed(3)}');
+                    .setSetting(AppSettings.kVillagerPos, '${toRight ? 'right' : 'left'}:${f.toStringAsFixed(3)}');
               },
-              child: WhaleSprite(
+              child: VillagerSprite(
                 size: size,
                 bubbleAlignment: right ? Alignment.topRight : Alignment.topLeft,
               ),

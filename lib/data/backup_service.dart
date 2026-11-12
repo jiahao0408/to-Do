@@ -143,7 +143,7 @@ class BackupService {
       await put(db.dayNotes, 'dayNotes', DayNoteRow.fromJson);
       // La ballenita no debe «comerse» las tareas completadas de la copia.
       await db.into(db.settings).insertOnConflictUpdate(
-          SettingsCompanion.insert(key: AppSettings.kWhaleRebase, value: '1'));
+          SettingsCompanion.insert(key: AppSettings.kVillagerRebase, value: '1'));
     });
   }
 

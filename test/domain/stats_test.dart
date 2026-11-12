@@ -77,4 +77,46 @@ void main() {
     expect(ct.realMin, 90);
     expect(Stats(s, now).realMinutes(taskId: 1), 90);
   });
+
+  group('racha configurable', () {
+    Task doneOn(int id, DateTime d) =>
+        t(id, d).copyWith(status: TaskStatus.completed, completedAt: () => d);
+
+    test('«al menos 1»: cuenta días con algo completado; hoy sin nada no rompe', () {
+      // Completado algo el 4, 5 y 6; nada el 3; hoy (7) nada aún.
+      final s = snap([
+        doneOn(1, DateTime(2026, 11, 2, 10)),
+        doneOn(2, DateTime(2026, 11, 4, 10)),
+        doneOn(3, DateTime(2026, 11, 5, 10)),
+        doneOn(4, DateTime(2026, 11, 6, 10)),
+        t(5, DateTime(2026, 11, 7, 9)),
+      ]);
+      expect(Stats(s, now).streak(StreakRule.any), (3, 3));
+    });
+
+    test('«al menos 1»: las ocurrencias de series también cuentan', () {
+      final s = snap([t(1, DateTime(2026, 11, 1, 8), rrule: 'FREQ=DAILY')], comp: [
+        OccurrenceCompletion(seriesId: 1, occurrenceDate: DateTime(2026, 11, 6), completedAt: DateTime(2026, 11, 6, 9)),
+        OccurrenceCompletion(seriesId: 1, occurrenceDate: DateTime(2026, 11, 7), completedAt: DateTime(2026, 11, 7, 9)),
+      ]);
+      expect(Stats(s, now).streak(StreakRule.any).$1, 2);
+    });
+
+    test('«todas» es la racha de siempre', () {
+      final s = snap([t(1, DateTime(2026, 11, 1, 8), rrule: 'FREQ=DAILY')], comp: [
+        for (final d in [1, 2, 3, 5, 6]) c(1, DateTime(2026, 11, d)),
+      ]);
+      expect(Stats(s, now).streak(StreakRule.all), Stats(s, now).dayStreak());
+    });
+
+    test('marcas: hoy en curso es neutro; días sin tareas neutros con «todas»', () {
+      final s = snap([
+        doneOn(1, DateTime(2026, 11, 5, 10)),
+        t(2, DateTime(2026, 11, 6, 10)),
+        t(3, DateTime(2026, 11, 7, 10)),
+      ]);
+      expect(Stats(s, now).streakMarks(4, StreakRule.all), [null, true, false, null]);
+      expect(Stats(s, now).streakMarks(4, StreakRule.any), [false, true, false, null]);
+    });
+  });
 }

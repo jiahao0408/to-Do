@@ -1242,7 +1242,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get heatMore => 'More';
 
   @override
-  String whaleNormal1(int n) {
+  String villagerNormal1(int n) {
     String _temp0 = intl.Intl.pluralLogic(
       n,
       locale: localeName,
@@ -1254,27 +1254,27 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String whaleNormal2(String title, String time) {
+  String villagerNormal2(String title, String time) {
     return 'Next: $title at $time';
   }
 
   @override
-  String get whaleNormal3 => 'A little break and we keep going';
+  String get villagerNormal3 => 'A little break and we keep going';
 
   @override
-  String get whaleNormal4 => 'Here I am, building with you!';
+  String get villagerNormal4 => 'Here I am, building with you!';
 
   @override
-  String get whaleCelebrate1 => 'All done! You were great today';
+  String get villagerCelebrate1 => 'All done! You were great today';
 
   @override
-  String get whaleCelebrate2 => 'Day complete, the village is celebrating!';
+  String get villagerCelebrate2 => 'Day complete, the village is celebrating!';
 
   @override
-  String get whaleCelebrate3 => 'What a productive day!';
+  String get villagerCelebrate3 => 'What a productive day!';
 
   @override
-  String whaleWorried1(int n) {
+  String villagerWorried1(int n) {
     String _temp0 = intl.Intl.pluralLogic(
       n,
       locale: localeName,
@@ -1285,90 +1285,90 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get whaleWorried2 => 'Overdue stuff makes me uneasy…';
+  String get villagerWorried2 => 'Overdue stuff makes me uneasy…';
 
   @override
-  String get whaleHungry1 =>
+  String get villagerHungry1 =>
       'Running out of energy… finish a task and we keep building';
 
   @override
-  String get whaleHungry2 => 'I have no strength left…';
+  String get villagerHungry2 => 'I have no strength left…';
 
   @override
-  String get whaleSleep1 => 'Zzz…';
+  String get villagerSleep1 => 'Zzz…';
 
   @override
-  String get whaleSleep2 => 'Let\'s continue tomorrow…';
+  String get villagerSleep2 => 'Let\'s continue tomorrow…';
 
   @override
-  String get whalePet1 => 'Hi!';
+  String get villagerPet1 => 'Hi!';
 
   @override
-  String get whalePet2 => 'Thanks for stopping by';
+  String get villagerPet2 => 'Thanks for stopping by';
 
   @override
-  String get whalePet3 => 'What a nice day';
+  String get villagerPet3 => 'What a nice day';
 
   @override
-  String get whalePoked1 => 'Mm… what time is it?';
+  String get villagerPoked1 => 'Mm… what time is it?';
 
   @override
-  String get whalePoked2 => 'Five more minutes…';
+  String get villagerPoked2 => 'Five more minutes…';
 
   @override
-  String get whaleEat1 => 'One more brick!';
+  String get villagerEat1 => 'One more brick!';
 
   @override
-  String get whaleEat2 => 'Another task, another!';
+  String get villagerEat2 => 'Another task, another!';
 
   @override
-  String get whaleEat3 => 'Let\'s build!';
+  String get villagerEat3 => 'Let\'s build!';
 
   @override
-  String get whaleTitle => 'Villager';
+  String get villagerTitle => 'Villager';
 
   @override
-  String whaleFullness(int p) {
+  String villagerFullness(int p) {
     return 'Energy $p%';
   }
 
   @override
-  String whaleTodayDone(int done, int total) {
+  String villagerTodayDone(int done, int total) {
     return 'Today: $done/$total done';
   }
 
   @override
-  String get whaleMoodNormal => 'Calm';
+  String get villagerMoodNormal => 'Calm';
 
   @override
-  String get whaleMoodCelebrate => 'Celebrating';
+  String get villagerMoodCelebrate => 'Celebrating';
 
   @override
-  String get whaleMoodWorried => 'In a hurry';
+  String get villagerMoodWorried => 'In a hurry';
 
   @override
-  String get whaleMoodSleep => 'Sleeping';
+  String get villagerMoodSleep => 'Sleeping';
 
   @override
-  String get whalePetButton => 'Wave';
+  String get villagerPetButton => 'Wave';
 
   @override
-  String get whalePokeButton => 'Poke';
+  String get villagerPokeButton => 'Poke';
 
   @override
-  String get whaleShow => 'Show the villager and the village';
+  String get villagerShow => 'Show the villager and the village';
 
   @override
-  String get whaleFloating => 'Calendar corner';
+  String get villagerFloating => 'Calendar corner';
 
   @override
-  String get whaleDrawer => 'Card in the menu';
+  String get villagerDrawer => 'Card in the menu';
 
   @override
-  String get whaleTank => 'Village page';
+  String get villagerTank => 'Village page';
 
   @override
-  String whaleSemantics(String mood, int p) {
+  String villagerSemantics(String mood, int p) {
     return 'Villager, $mood, energy $p%';
   }
 
@@ -1517,4 +1517,13 @@ class AppLocalizationsEn extends AppLocalizations {
     );
     return '$_temp0';
   }
+
+  @override
+  String get villageSection => 'Village & villager';
+
+  @override
+  String get menuCardSection => 'Menu card';
+
+  @override
+  String get menuCardShow => 'Show the card';
 }

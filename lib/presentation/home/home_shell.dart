@@ -19,7 +19,7 @@ import '../screens/inbox_screen.dart';
 import '../screens/overdue_dialog.dart';
 import '../screens/search_screen.dart';
 import '../task/quick_add.dart';
-import '../whale/whale_floating.dart';
+import '../village/villager_floating.dart';
 import 'app_drawer.dart';
 import 'extra_destinations.dart';
 
@@ -174,7 +174,7 @@ class _HomeShellState extends ConsumerState<HomeShell> {
               Expanded(
                 child: Stack(children: [
                   Positioned.fill(child: body),
-                  WhaleFloating(hidden: selecting || (_inboxOpen && timeline)),
+                  VillagerFloating(hidden: selecting || (_inboxOpen && timeline)),
                 ]),
               ),
               if (_inboxOpen && timeline) InboxPanel(onClose: () => setState(() => _inboxOpen = false)),

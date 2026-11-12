@@ -1,6 +1,7 @@
 // Ajustes de la app, guardados como clave/valor en la tabla Settings.
 
 import 'notification_plan.dart';
+import 'stats.dart';
 
 /// Vistas del calendario. `threeDays` = hoy, mañana y pasado; `workWeek` =
 /// lunes a viernes.
@@ -9,6 +10,9 @@ enum CalendarView { day, threeDays, week, workWeek, month, agenda }
 enum AppThemeMode { system, light, dark }
 
 enum SwipeLeftAction { delete, postpone }
+
+/// Páginas del carrusel del menú lateral.
+enum MenuCard { today, streak, goal, villager }
 
 class AppSettings {
   const AppSettings(this.raw);
@@ -44,16 +48,24 @@ class AppSettings {
   static const kSeeded = 'seeded';
   static const kLastOverdueCheck = 'lastOverdueCheck';
 
-  // Ballenita
-  static const kWhaleEnabled = 'whale.enabled';
-  static const kWhaleFloating = 'whale.floating';
-  static const kWhaleDrawer = 'whale.drawer';
-  static const kWhaleTank = 'whale.tank';
-  static const kWhalePos = 'whale.pos';
+  // Habitante
+  static const kVillagerEnabled = 'whale.enabled';
+  static const kVillagerFloating = 'whale.floating';
+  static const kVillagerDrawer = 'whale.drawer';
+  static const kVillagerTank = 'whale.tank';
+  static const kVillagerPos = 'whale.pos';
 
-  /// Lo escriben la importación de copias y de .ics: la ballenita re-basa el
+  // Carrusel del menú
+  /// Páginas visibles, separadas por comas (nombres de [MenuCard]).
+  static const kMenuCards = 'menu.cards';
+  static const kStreakRule = 'streak.rule';
+
+  /// «p:ID» (proyecto) o «c:ID» (categoría); vacío = sin meta.
+  static const kWeeklyGoal = 'goal.target';
+
+  /// Lo escriben la importación de copias y de .ics: el habitante re-basa el
   /// recuento de completadas en vez de «comer» lo importado.
-  static const kWhaleRebase = 'whale.rebase';
+  static const kVillagerRebase = 'whale.rebase';
 
   /// Código de idioma ('es', 'en', 'zh') o null = idioma del sistema.
   String? get localeCode {
@@ -80,11 +92,25 @@ class AppSettings {
   int get reviewWeekday => _i(kReviewWeekday, DateTime.sunday);
   bool get permissionAsked => _b(kPermissionAsked, false);
 
-  bool get whaleEnabled => _b(kWhaleEnabled, true);
-  bool get whaleFloating => _b(kWhaleFloating, true);
-  bool get whaleDrawer => _b(kWhaleDrawer, true);
-  bool get whaleTank => _b(kWhaleTank, true);
-  String? get whalePos => _s(kWhalePos);
+  bool get villagerEnabled => _b(kVillagerEnabled, true);
+  bool get villagerFloating => _b(kVillagerFloating, true);
+  bool get villagerDrawer => _b(kVillagerDrawer, true);
+  bool get villagerTank => _b(kVillagerTank, true);
+  String? get villagerPos => _s(kVillagerPos);
+
+  /// Por defecto, todas en orden.
+  List<MenuCard> get menuCards {
+    final v = _s(kMenuCards);
+    if (v == null) return MenuCard.values;
+    final names = v.split(',').toSet();
+    return [for (final c in MenuCard.values) if (names.contains(c.name)) c];
+  }
+
+  StreakRule get streakRule => StreakRule.values.asNameMap()[_s(kStreakRule)] ?? StreakRule.all;
+  String? get weeklyGoal {
+    final v = _s(kWeeklyGoal);
+    return v == null || v.isEmpty ? null : v;
+  }
 
   SummarySettings get summaries => SummarySettings(
         dailyEnabled: _b(kDailySummary, false),

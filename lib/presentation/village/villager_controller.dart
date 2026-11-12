@@ -1,4 +1,4 @@
-// Ballenita：控制器。Lee la foto de datos y los ajustes, calcula el estado y lo
+// Habitante：控制器。Lee la foto de datos y los ajustes, calcula el estado y lo
 // guarda en la tabla settings (con un retardo para no escribir a cada paso).
 
 import 'dart:async';
@@ -8,13 +8,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../data/repository.dart';
 import '../../domain/settings.dart';
 import '../../domain/snapshot.dart';
-import '../../domain/whale/whale_lines.dart';
-import '../../domain/whale/whale_mood.dart';
-import '../../domain/whale/whale_state.dart';
+import '../../domain/villager/villager_lines.dart';
+import '../../domain/villager/villager_mood.dart';
+import '../../domain/villager/villager_state.dart';
 import '../providers.dart';
 
-class WhaleView {
-  const WhaleView({
+class VillagerView {
+  const VillagerView({
     required this.state,
     required this.mood,
     required this.context,
@@ -23,18 +23,18 @@ class WhaleView {
     this.reactionTick = 0,
   });
 
-  final WhaleState state;
-  final WhaleMood mood;
-  final WhaleContext context;
+  final VillagerState state;
+  final VillagerMood mood;
+  final VillagerContext context;
   final bool enabled;
 
   /// Reacción puntual en curso (null = ninguna).
-  final WhaleReaction? reaction;
+  final VillagerReaction? reaction;
 
   /// Sube con cada interacción o comida: la imagen y la frase se renuevan.
   final int reactionTick;
 
-  WhaleView copyWith({WhaleReaction? Function()? reaction, int? reactionTick}) => WhaleView(
+  VillagerView copyWith({VillagerReaction? Function()? reaction, int? reactionTick}) => VillagerView(
         state: state,
         mood: mood,
         context: context,
@@ -44,13 +44,13 @@ class WhaleView {
       );
 }
 
-final whaleProvider = NotifierProvider<WhaleController, WhaleView>(WhaleController.new);
+final villagerProvider = NotifierProvider<VillagerController, VillagerView>(VillagerController.new);
 
-class WhaleController extends Notifier<WhaleView> {
-  WhaleState? _state;
+class VillagerController extends Notifier<VillagerView> {
+  VillagerState? _state;
 
   /// Lo último que se escribió en settings (o se leyó al arrancar).
-  WhaleState? _saved;
+  VillagerState? _saved;
   AppSnapshot? _snap;
   bool _wasEnabled = true;
   Timer? _minute;
@@ -58,7 +58,7 @@ class WhaleController extends Notifier<WhaleView> {
   late Repository _repo;
 
   @override
-  WhaleView build() {
+  VillagerView build() {
     _repo = ref.read(repositoryProvider);
     _minute = Timer.periodic(const Duration(minutes: 1), (_) => refresh());
     ref.onDispose(() {
@@ -74,10 +74,10 @@ class WhaleController extends Notifier<WhaleView> {
       _ => null,
     };
     return initial ??
-        WhaleView(
-          state: WhaleState.initial(now, 0),
-          mood: WhaleMood.normal,
-          context: const WhaleContext(remainingToday: 0, overdue: 0, fullness: WhaleState.kInitial),
+        VillagerView(
+          state: VillagerState.initial(now, 0),
+          mood: VillagerMood.normal,
+          context: const VillagerContext(remainingToday: 0, overdue: 0, fullness: VillagerState.kInitial),
           enabled: true,
         );
   }
@@ -95,20 +95,20 @@ class WhaleController extends Notifier<WhaleView> {
     if (v != null) state = v;
   }
 
-  WhaleView? _compute(AppSnapshot snap, DateTime now, {required bool fromSnapshot}) {
+  VillagerView? _compute(AppSnapshot snap, DateTime now, {required bool fromSnapshot}) {
     _snap = snap;
     final settings = AppSettings(snap.settings);
     final count = completedCount(snap);
-    if (_state == null) _saved = WhaleState.fromSettings(snap.settings);
-    var st = _state ?? _saved ?? WhaleState.initial(now, count);
-    WhaleReaction? reaction = _stateOrNull?.reaction;
+    if (_state == null) _saved = VillagerState.fromSettings(snap.settings);
+    var st = _state ?? _saved ?? VillagerState.initial(now, count);
+    VillagerReaction? reaction = _stateOrNull?.reaction;
     var tick = _stateOrNull?.reactionTick ?? 0;
 
-    if (snap.settings[AppSettings.kWhaleRebase] == '1') {
+    if (snap.settings[AppSettings.kVillagerRebase] == '1') {
       st = st.rebased(count);
-      _repo.setSetting(AppSettings.kWhaleRebase, '0');
+      _repo.setSetting(AppSettings.kVillagerRebase, '0');
     }
-    final enabled = settings.whaleEnabled;
+    final enabled = settings.villagerEnabled;
     if (!enabled) {
       st = st.frozenAt(now).rebased(count);
     } else {
@@ -116,7 +116,7 @@ class WhaleController extends Notifier<WhaleView> {
       final before = st.baseline;
       st = st.decayed(now).applyCompletions(count);
       if (fromSnapshot && count > before) {
-        reaction = WhaleReaction.eat;
+        reaction = VillagerReaction.eat;
         tick++;
       }
     }
@@ -131,10 +131,10 @@ class WhaleController extends Notifier<WhaleView> {
     final today = snap.occurrencesOnDay(now);
     final pending = today.where((o) => !o.completed).toList();
     final next = pending.where((o) => !o.task.allDay && o.start != null && !o.start!.isBefore(now)).firstOrNull;
-    return WhaleView(
+    return VillagerView(
       state: st,
       mood: moodFor(snap: snap, now: now, fullness: st.fullness),
-      context: WhaleContext(
+      context: VillagerContext(
         remainingToday: pending.length,
         overdue: snap.overdue(now).length,
         fullness: st.fullness,
@@ -147,7 +147,7 @@ class WhaleController extends Notifier<WhaleView> {
     );
   }
 
-  WhaleView? get _stateOrNull {
+  VillagerView? get _stateOrNull {
     try {
       return state;
     } catch (_) {
@@ -171,16 +171,16 @@ class WhaleController extends Notifier<WhaleView> {
     }
   }
 
-  void pet() => state = state.copyWith(reaction: () => WhaleReaction.pet, reactionTick: state.reactionTick + 1);
+  void pet() => state = state.copyWith(reaction: () => VillagerReaction.pet, reactionTick: state.reactionTick + 1);
 
   /// Dormida: se despierta un momento. Despierta: solo cambia imagen y frase.
   void poke() => state = state.copyWith(
-        reaction: () => state.mood == WhaleMood.sleep ? WhaleReaction.poked : null,
+        reaction: () => state.mood == VillagerMood.sleep ? VillagerReaction.poked : null,
         reactionTick: state.reactionTick + 1,
       );
 
   void easter() =>
-      state = state.copyWith(reaction: () => WhaleReaction.easter, reactionTick: state.reactionTick + 1);
+      state = state.copyWith(reaction: () => VillagerReaction.easter, reactionTick: state.reactionTick + 1);
 
   void clearReaction() => state = state.copyWith(reaction: () => null);
 }

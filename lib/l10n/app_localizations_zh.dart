@@ -1148,7 +1148,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get heatMore => '多';
 
   @override
-  String whaleNormal1(int n) {
+  String villagerNormal1(int n) {
     String _temp0 = intl.Intl.pluralLogic(
       n,
       locale: localeName,
@@ -1159,114 +1159,114 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
-  String whaleNormal2(String title, String time) {
+  String villagerNormal2(String title, String time) {
     return '下一件：$title $time';
   }
 
   @override
-  String get whaleNormal3 => '摸鱼一下下就好';
+  String get villagerNormal3 => '摸鱼一下下就好';
 
   @override
-  String get whaleNormal4 => '我在这儿陪你盖房子～';
+  String get villagerNormal4 => '我在这儿陪你盖房子～';
 
   @override
-  String get whaleCelebrate1 => '全部完成！今天好棒';
+  String get villagerCelebrate1 => '全部完成！今天好棒';
 
   @override
-  String get whaleCelebrate2 => '今天完成啦，村子在庆祝！';
+  String get villagerCelebrate2 => '今天完成啦，村子在庆祝！';
 
   @override
-  String get whaleCelebrate3 => '今天好能干！';
+  String get villagerCelebrate3 => '今天好能干！';
 
   @override
-  String whaleWorried1(int n) {
+  String villagerWorried1(int n) {
     return '有 $n 件逾期了…一起处理一下？';
   }
 
   @override
-  String get whaleWorried2 => '逾期的事让我好着急…';
+  String get villagerWorried2 => '逾期的事让我好着急…';
 
   @override
-  String get whaleHungry1 => '没力气了…完成一件任务我们继续盖';
+  String get villagerHungry1 => '没力气了…完成一件任务我们继续盖';
 
   @override
-  String get whaleHungry2 => '浑身没劲…';
+  String get villagerHungry2 => '浑身没劲…';
 
   @override
-  String get whaleSleep1 => 'Zzz…';
+  String get villagerSleep1 => 'Zzz…';
 
   @override
-  String get whaleSleep2 => '明天再说…';
+  String get villagerSleep2 => '明天再说…';
 
   @override
-  String get whalePet1 => '你好呀！';
+  String get villagerPet1 => '你好呀！';
 
   @override
-  String get whalePet2 => '谢谢你来看我';
+  String get villagerPet2 => '谢谢你来看我';
 
   @override
-  String get whalePet3 => '今天天气真好';
+  String get villagerPet3 => '今天天气真好';
 
   @override
-  String get whalePoked1 => '唔…几点了';
+  String get villagerPoked1 => '唔…几点了';
 
   @override
-  String get whalePoked2 => '再睡五分钟…';
+  String get villagerPoked2 => '再睡五分钟…';
 
   @override
-  String get whaleEat1 => '又多一块砖！';
+  String get villagerEat1 => '又多一块砖！';
 
   @override
-  String get whaleEat2 => '再来一件！';
+  String get villagerEat2 => '再来一件！';
 
   @override
-  String get whaleEat3 => '开工啦！';
+  String get villagerEat3 => '开工啦！';
 
   @override
-  String get whaleTitle => '村民';
+  String get villagerTitle => '村民';
 
   @override
-  String whaleFullness(int p) {
+  String villagerFullness(int p) {
     return '体力 $p%';
   }
 
   @override
-  String whaleTodayDone(int done, int total) {
+  String villagerTodayDone(int done, int total) {
     return '今天完成 $done/$total';
   }
 
   @override
-  String get whaleMoodNormal => '平常';
+  String get villagerMoodNormal => '平常';
 
   @override
-  String get whaleMoodCelebrate => '庆祝';
+  String get villagerMoodCelebrate => '庆祝';
 
   @override
-  String get whaleMoodWorried => '着急';
+  String get villagerMoodWorried => '着急';
 
   @override
-  String get whaleMoodSleep => '睡觉';
+  String get villagerMoodSleep => '睡觉';
 
   @override
-  String get whalePetButton => '打招呼';
+  String get villagerPetButton => '打招呼';
 
   @override
-  String get whalePokeButton => '戳一下';
+  String get villagerPokeButton => '戳一下';
 
   @override
-  String get whaleShow => '显示村民和村庄';
+  String get villagerShow => '显示村民和村庄';
 
   @override
-  String get whaleFloating => '日历角落';
+  String get villagerFloating => '日历角落';
 
   @override
-  String get whaleDrawer => '菜单卡片';
+  String get villagerDrawer => '菜单卡片';
 
   @override
-  String get whaleTank => '村庄页面';
+  String get villagerTank => '村庄页面';
 
   @override
-  String whaleSemantics(String mood, int p) {
+  String villagerSemantics(String mood, int p) {
     return '村民，$mood，体力 $p%';
   }
 
@@ -1412,4 +1412,13 @@ class AppLocalizationsZh extends AppLocalizations {
     );
     return '$_temp0';
   }
+
+  @override
+  String get villageSection => '村庄和村民';
+
+  @override
+  String get menuCardSection => '菜单卡片';
+
+  @override
+  String get menuCardShow => '显示卡片';
 }

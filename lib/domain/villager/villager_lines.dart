@@ -1,14 +1,14 @@
-// Ballenita：台词种类、上下文和挑选（纯逻辑；文字在 ARB 里）。
+// Habitante：台词种类、上下文和挑选（纯逻辑；文字在 ARB 里）。
 
 import 'dart:math';
 
-import 'whale_mood.dart';
-import 'whale_state.dart';
+import 'villager_mood.dart';
+import 'villager_state.dart';
 
-enum WhaleLineKind { normal, celebrate, worried, hungry, sleep, pet, poked, eat }
+enum VillagerLineKind { normal, celebrate, worried, hungry, sleep, pet, poked, eat }
 
-class WhaleContext {
-  const WhaleContext({
+class VillagerContext {
+  const VillagerContext({
     required this.remainingToday,
     required this.overdue,
     required this.fullness,
@@ -24,12 +24,12 @@ class WhaleContext {
 }
 
 /// Preocupada sin atrasadas pero con hambre → frases de hambre.
-WhaleLineKind kindForMood(WhaleMood m, WhaleContext c) => switch (m) {
-      WhaleMood.sleep => WhaleLineKind.sleep,
-      WhaleMood.celebrate => WhaleLineKind.celebrate,
-      WhaleMood.worried =>
-        c.overdue == 0 && c.fullness < WhaleState.kHungry ? WhaleLineKind.hungry : WhaleLineKind.worried,
-      WhaleMood.normal => WhaleLineKind.normal,
+VillagerLineKind kindForMood(VillagerMood m, VillagerContext c) => switch (m) {
+      VillagerMood.sleep => VillagerLineKind.sleep,
+      VillagerMood.celebrate => VillagerLineKind.celebrate,
+      VillagerMood.worried =>
+        c.overdue == 0 && c.fullness < VillagerState.kHungry ? VillagerLineKind.hungry : VillagerLineKind.worried,
+      VillagerMood.normal => VillagerLineKind.normal,
     };
 
 /// Elige una frase al azar sin repetir [last] (si hay más de una).

@@ -26,6 +26,15 @@ class CategoryTime {
   final int realMin;
 }
 
+/// Qué cuenta como día de racha.
+enum StreakRule {
+  /// Completar al menos una tarea.
+  any,
+
+  /// Completar todas las del día (un día sin tareas no rompe ni suma).
+  all,
+}
+
 class Stats {
   Stats(this.snap, this.now, {this.weekStartsMonday = true});
   final AppSnapshot snap;
@@ -101,6 +110,56 @@ class Stats {
     if (run > best) best = run;
     if (current > best) best = current;
     return (current, best);
+  }
+
+  /// Días (clave `yyyy-MM-dd`) en que se completó al menos una tarea.
+  Set<String> completionDays() => {
+        for (final t in snap.tasks)
+          if (t.isCompleted && !t.isSeries && t.completedAt != null) formatDateKey(t.completedAt!.toLocal()),
+        for (final c in snap.completions) formatDateKey(c.completedAt.toLocal()),
+      };
+
+  /// Racha con la regla elegida: [StreakRule.all] = [dayStreak];
+  /// [StreakRule.any] = días seguidos completando al menos una tarea (hoy
+  /// cuenta solo si ya se completó algo).
+  (int current, int best) streak(StreakRule rule, {int lookback = 365}) {
+    if (rule == StreakRule.all) return dayStreak(lookback: lookback);
+    final days = completionDays();
+    var current = 0, best = 0, run = 0;
+    var open = true;
+    for (var i = 0; i <= lookback; i++) {
+      final has = days.contains(formatDateKey(addDays(today, -i)));
+      if (i == 0 && !has) continue;
+      if (has) {
+        run++;
+        if (open) current = run;
+      } else {
+        open = false;
+        if (run > best) best = run;
+        run = 0;
+      }
+    }
+    if (run > best) best = run;
+    return (current, best);
+  }
+
+  /// Marca de cada uno de los últimos [days] días (el último es hoy):
+  /// true = cuenta para la racha, false = la rompe, null = neutro (sin
+  /// tareas con la regla «todas», u hoy todavía en curso).
+  List<bool?> streakMarks(int days, StreakRule rule) {
+    final done = rule == StreakRule.any ? completionDays() : const <String>{};
+    final rates = rule == StreakRule.all ? dailyRates(addDays(today, -days + 1), addDays(today, 1)) : const <String, Rate>{};
+    return [
+      for (var i = days - 1; i >= 0; i--)
+        () {
+          final k = formatDateKey(addDays(today, -i));
+          if (rule == StreakRule.any) return done.contains(k) ? true : (i == 0 ? null : false);
+          final r = rates[k];
+          if (r == null || r.total == 0) return null;
+          if (r.done == r.total) return true;
+          return i == 0 ? null : false;
+        }(),
+    ];
   }
 
   /// Rachas por tarea repetida (hábitos).

@@ -683,16 +683,16 @@
   },
   "heatLess": "Menos",
   "heatMore": "Más",
-  "whaleNormal1": "{n, plural, =0{Hoy no te queda nada pendiente} =1{Hoy te queda 1 cosa} other{Hoy te quedan {n} cosas}}",
-  "@whaleNormal1": {
+  "villagerNormal1": "{n, plural, =0{Hoy no te queda nada pendiente} =1{Hoy te queda 1 cosa} other{Hoy te quedan {n} cosas}}",
+  "@villagerNormal1": {
     "placeholders": {
       "n": {
         "type": "int"
       }
     }
   },
-  "whaleNormal2": "Lo siguiente: {title} a las {time}",
-  "@whaleNormal2": {
+  "villagerNormal2": "Lo siguiente: {title} a las {time}",
+  "@villagerNormal2": {
     "placeholders": {
       "title": {
         "type": "String"
@@ -702,43 +702,43 @@
       }
     }
   },
-  "whaleNormal3": "Un ratito de descanso y seguimos",
-  "whaleNormal4": "¡Aquí estoy, construyendo contigo!",
-  "whaleCelebrate1": "¡Todo hecho! Hoy has estado genial",
-  "whaleCelebrate2": "Día completado, ¡la aldea está de fiesta!",
-  "whaleCelebrate3": "¡Qué día tan productivo!",
-  "whaleWorried1": "{n, plural, =1{Hay 1 tarea atrasada… ¿la miramos?} other{Hay {n} tareas atrasadas… ¿las miramos?}}",
-  "@whaleWorried1": {
+  "villagerNormal3": "Un ratito de descanso y seguimos",
+  "villagerNormal4": "¡Aquí estoy, construyendo contigo!",
+  "villagerCelebrate1": "¡Todo hecho! Hoy has estado genial",
+  "villagerCelebrate2": "Día completado, ¡la aldea está de fiesta!",
+  "villagerCelebrate3": "¡Qué día tan productivo!",
+  "villagerWorried1": "{n, plural, =1{Hay 1 tarea atrasada… ¿la miramos?} other{Hay {n} tareas atrasadas… ¿las miramos?}}",
+  "@villagerWorried1": {
     "placeholders": {
       "n": {
         "type": "int"
       }
     }
   },
-  "whaleWorried2": "Lo atrasado me inquieta…",
-  "whaleHungry1": "Me quedo sin energía… completa una tarea y seguimos construyendo",
-  "whaleHungry2": "Me faltan fuerzas…",
-  "whaleSleep1": "Zzz…",
-  "whaleSleep2": "Mañana seguimos…",
-  "whalePet1": "¡Hola!",
-  "whalePet2": "Gracias por pasar",
-  "whalePet3": "Qué buen día hace",
-  "whalePoked1": "Mmm… ¿qué hora es?",
-  "whalePoked2": "Cinco minutitos más…",
-  "whaleEat1": "¡Un ladrillo más!",
-  "whaleEat2": "¡Otra tarea, otra!",
-  "whaleEat3": "¡A construir!",
-  "whaleTitle": "Habitante",
-  "whaleFullness": "Energía {p}%",
-  "@whaleFullness": {
+  "villagerWorried2": "Lo atrasado me inquieta…",
+  "villagerHungry1": "Me quedo sin energía… completa una tarea y seguimos construyendo",
+  "villagerHungry2": "Me faltan fuerzas…",
+  "villagerSleep1": "Zzz…",
+  "villagerSleep2": "Mañana seguimos…",
+  "villagerPet1": "¡Hola!",
+  "villagerPet2": "Gracias por pasar",
+  "villagerPet3": "Qué buen día hace",
+  "villagerPoked1": "Mmm… ¿qué hora es?",
+  "villagerPoked2": "Cinco minutitos más…",
+  "villagerEat1": "¡Un ladrillo más!",
+  "villagerEat2": "¡Otra tarea, otra!",
+  "villagerEat3": "¡A construir!",
+  "villagerTitle": "Habitante",
+  "villagerFullness": "Energía {p}%",
+  "@villagerFullness": {
     "placeholders": {
       "p": {
         "type": "int"
       }
     }
   },
-  "whaleTodayDone": "Hoy: {done}/{total} hechas",
-  "@whaleTodayDone": {
+  "villagerTodayDone": "Hoy: {done}/{total} hechas",
+  "@villagerTodayDone": {
     "placeholders": {
       "done": {
         "type": "int"
@@ -748,18 +748,18 @@
       }
     }
   },
-  "whaleMoodNormal": "En calma",
-  "whaleMoodCelebrate": "De fiesta",
-  "whaleMoodWorried": "Con prisa",
-  "whaleMoodSleep": "Durmiendo",
-  "whalePetButton": "Saludar",
-  "whalePokeButton": "Darle un toque",
-  "whaleShow": "Mostrar el habitante y la aldea",
-  "whaleFloating": "En la esquina del calendario",
-  "whaleDrawer": "Tarjeta en el menú",
-  "whaleTank": "Página de la aldea",
-  "whaleSemantics": "Habitante, {mood}, energía {p}%",
-  "@whaleSemantics": {
+  "villagerMoodNormal": "En calma",
+  "villagerMoodCelebrate": "De fiesta",
+  "villagerMoodWorried": "Con prisa",
+  "villagerMoodSleep": "Durmiendo",
+  "villagerPetButton": "Saludar",
+  "villagerPokeButton": "Darle un toque",
+  "villagerShow": "Mostrar el habitante y la aldea",
+  "villagerFloating": "En la esquina del calendario",
+  "villagerDrawer": "Tarjeta en el menú",
+  "villagerTank": "Página de la aldea",
+  "villagerSemantics": "Habitante, {mood}, energía {p}%",
+  "@villagerSemantics": {
     "placeholders": {
       "mood": {
         "type": "String"
@@ -837,5 +837,8 @@
         "type": "num"
       }
     }
-  }
+  },
+  "villageSection": "Aldea y habitante",
+  "menuCardSection": "Tarjeta del menú",
+  "menuCardShow": "Mostrar la tarjeta"
 }

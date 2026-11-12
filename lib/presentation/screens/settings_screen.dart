@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../domain/settings.dart';
+import '../../domain/stats.dart';
 import '../common/format.dart';
 import '../providers.dart';
 import 'backup_tiles.dart';
@@ -207,31 +208,107 @@ class SettingsScreen extends ConsumerWidget {
               onSelectionChanged: (v) => set(AppSettings.kSwipeLeft, v.first.name),
             ),
           ),
-          header(l.whaleTitle),
+          header(l.villageSection),
           SwitchListTile(
-            secondary: const Icon(Icons.water),
-            title: Text(l.whaleShow),
-            value: s.whaleEnabled,
-            onChanged: (v) => setBool(AppSettings.kWhaleEnabled, v),
+            secondary: const Icon(Icons.holiday_village_outlined),
+            title: Text(l.villagerShow),
+            value: s.villagerEnabled,
+            onChanged: (v) => setBool(AppSettings.kVillagerEnabled, v),
           ),
-          if (s.whaleEnabled) ...[
+          if (s.villagerEnabled) ...[
             SwitchListTile(
               contentPadding: const EdgeInsets.only(left: 72, right: 24),
-              title: Text(l.whaleFloating),
-              value: s.whaleFloating,
-              onChanged: (v) => setBool(AppSettings.kWhaleFloating, v),
+              title: Text(l.villagerFloating),
+              value: s.villagerFloating,
+              onChanged: (v) => setBool(AppSettings.kVillagerFloating, v),
             ),
             SwitchListTile(
               contentPadding: const EdgeInsets.only(left: 72, right: 24),
-              title: Text(l.whaleDrawer),
-              value: s.whaleDrawer,
-              onChanged: (v) => setBool(AppSettings.kWhaleDrawer, v),
+              title: Text(l.villagerTank),
+              value: s.villagerTank,
+              onChanged: (v) => setBool(AppSettings.kVillagerTank, v),
             ),
-            SwitchListTile(
+          ],
+          header(l.menuCardSection),
+          SwitchListTile(
+            secondary: const Icon(Icons.view_carousel_outlined),
+            title: Text(l.menuCardShow),
+            value: s.villagerDrawer,
+            onChanged: (v) => setBool(AppSettings.kVillagerDrawer, v),
+          ),
+          if (s.villagerDrawer) ...[
+            ListTile(
               contentPadding: const EdgeInsets.only(left: 72, right: 24),
-              title: Text(l.whaleTank),
-              value: s.whaleTank,
-              onChanged: (v) => setBool(AppSettings.kWhaleTank, v),
+              title: Text(l.cardPages),
+              subtitle: Padding(
+                padding: const EdgeInsets.only(top: 8),
+                child: Wrap(spacing: 8, runSpacing: 4, children: [
+                  for (final c in MenuCard.values)
+                    FilterChip(
+                      label: Text(switch (c) {
+                        MenuCard.today => l.cardToday,
+                        MenuCard.streak => l.cardStreak,
+                        MenuCard.goal => l.cardGoal,
+                        MenuCard.villager => l.cardVillager,
+                      }),
+                      selected: s.menuCards.contains(c),
+                      onSelected: c == MenuCard.villager && !s.villagerEnabled
+                          ? null
+                          : (on) {
+                              final next = {...s.menuCards};
+                              on ? next.add(c) : next.remove(c);
+                              set(AppSettings.kMenuCards,
+                                  [for (final m in MenuCard.values) if (next.contains(m)) m.name].join(','));
+                            },
+                    ),
+                ]),
+              ),
+            ),
+            ListTile(
+              contentPadding: const EdgeInsets.only(left: 72, right: 24),
+              title: Text(l.streakRule),
+              subtitle: Padding(
+                padding: const EdgeInsets.only(top: 8),
+                child: SegmentedButton<StreakRule>(
+                  showSelectedIcon: false,
+                  segments: [
+                    ButtonSegment(value: StreakRule.any, label: Text(l.streakRuleAny)),
+                    ButtonSegment(value: StreakRule.all, label: Text(l.streakRuleAll)),
+                  ],
+                  selected: {s.streakRule},
+                  onSelectionChanged: (v) => set(AppSettings.kStreakRule, v.first.name),
+                ),
+              ),
+            ),
+            ListTile(
+              contentPadding: const EdgeInsets.only(left: 72, right: 24),
+              title: Text(l.goalTarget),
+              trailing: DropdownButton<String>(
+                value: _goalValue(ref, s.weeklyGoal),
+                underline: const SizedBox.shrink(),
+                items: [
+                  DropdownMenuItem(value: '', child: Text(l.goalNone)),
+                  for (final p in ref.watch(snapshotProvider).projects.where((p) => !p.archived))
+                    DropdownMenuItem(
+                      value: 'p:${p.id}',
+                      child: Row(mainAxisSize: MainAxisSize.min, children: [
+                        Icon(Icons.folder, size: 16, color: Color(p.color)),
+                        const SizedBox(width: 6),
+                        Text(p.name),
+                      ]),
+                    ),
+                  for (final c in ref.watch(snapshotProvider).categories)
+                    DropdownMenuItem(
+                      value: 'c:${c.id}',
+                      child: Row(mainAxisSize: MainAxisSize.min, children: [
+                        CircleAvatar(radius: 6, backgroundColor: Color(c.color)),
+                        const SizedBox(width: 6),
+                        Text(c.name),
+                      ]),
+                    ),
+                ],
+                onChanged: (v) => set(AppSettings.kWeeklyGoal, v ?? ''),
+              ),
             ),
           ],
           header(l.dataSection),
@@ -241,4 +318,15 @@ class SettingsScreen extends ConsumerWidget {
       ),
     );
   }
+}
+
+/// Valor del desplegable de la meta: '' si no hay o ya no existe.
+String _goalValue(WidgetRef ref, String? raw) {
+  if (raw == null) return '';
+  final snap = ref.watch(snapshotProvider);
+  final id = int.tryParse(raw.substring(2));
+  final exists = raw.startsWith('p:')
+      ? snap.projects.any((p) => p.id == id && !p.archived)
+      : snap.categories.any((c) => c.id == id);
+  return exists ? raw : '';
 }

@@ -99,7 +99,7 @@ class IcsService {
         }
       }
       // La ballenita no se «come» las tareas importadas ya completadas.
-      await repo.setSetting(AppSettings.kWhaleRebase, '1');
+      await repo.setSetting(AppSettings.kVillagerRebase, '1');
       return created;
     });
   }
