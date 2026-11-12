@@ -2559,6 +2559,96 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Más'**
   String get moreSection;
+
+  /// No description provided for @importProject.
+  ///
+  /// In es, this message translates to:
+  /// **'Importar proyecto'**
+  String get importProject;
+
+  /// No description provided for @importProjectHint.
+  ///
+  /// In es, this message translates to:
+  /// **'Pega un plan: # título, ## módulos (serán tareas) y puntos con - (serán subtareas). Las fechas como «mañana a las 10» se leen solas.'**
+  String get importProjectHint;
+
+  /// No description provided for @importText.
+  ///
+  /// In es, this message translates to:
+  /// **'Texto del plan'**
+  String get importText;
+
+  /// No description provided for @importPaste.
+  ///
+  /// In es, this message translates to:
+  /// **'Pegar'**
+  String get importPaste;
+
+  /// No description provided for @importFile.
+  ///
+  /// In es, this message translates to:
+  /// **'Abrir .md o .txt'**
+  String get importFile;
+
+  /// No description provided for @importCopyPrompt.
+  ///
+  /// In es, this message translates to:
+  /// **'Copiar prompt para la IA'**
+  String get importCopyPrompt;
+
+  /// No description provided for @importPromptCopied.
+  ///
+  /// In es, this message translates to:
+  /// **'Prompt copiado. Pégalo en tu IA y añade al final lo que quieres planificar.'**
+  String get importPromptCopied;
+
+  /// No description provided for @importPrompt.
+  ///
+  /// In es, this message translates to:
+  /// **'Organiza lo que te pido al final como un proyecto, en Markdown y con exactamente este formato, sin texto antes ni después:\n\n# Título del proyecto\n## Módulo 1 (si tiene fecha, escríbela al final: «el lunes a las 10», «12/12»)\n- Subtarea\n- Subtarea\n## Módulo 2\n- Subtarea\n\nUsa entre 3 y 8 módulos con 2 a 6 subtareas cada uno.\n\nLo que quiero planificar: '**
+  String get importPrompt;
+
+  /// No description provided for @importSummary.
+  ///
+  /// In es, this message translates to:
+  /// **'{m, plural, =1{1 módulo} other{{m} módulos}} · {s, plural, =1{1 subtarea} other{{s} subtareas}}'**
+  String importSummary(num m, num s);
+
+  /// No description provided for @importNothing.
+  ///
+  /// In es, this message translates to:
+  /// **'Aún no hay módulos. Usa ## para cada módulo o una lista con -.'**
+  String get importNothing;
+
+  /// No description provided for @importCreate.
+  ///
+  /// In es, this message translates to:
+  /// **'Crear proyecto'**
+  String get importCreate;
+
+  /// No description provided for @importDefaultTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Proyecto importado'**
+  String get importDefaultTitle;
+
+  /// No description provided for @importDone.
+  ///
+  /// In es, this message translates to:
+  /// **'Proyecto creado'**
+  String get importDone;
+
+  /// No description provided for @importReadError.
+  ///
+  /// In es, this message translates to:
+  /// **'No se pudo leer el archivo'**
+  String get importReadError;
+
+  /// No description provided for @importPreview.
+  ///
+  /// In es, this message translates to:
+  /// **'Vista previa'**
+  String get importPreview;
 }
 
 class _AppLocalizationsDelegate

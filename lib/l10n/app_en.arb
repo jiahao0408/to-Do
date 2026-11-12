@@ -409,5 +409,20 @@
   "whenSection": "When",
   "organizeSection": "Organize",
   "detailsSection": "Details",
-  "moreSection": "More"
+  "moreSection": "More",
+  "importProject": "Import project",
+  "importProjectHint": "Paste a plan: # title, ## modules (become tasks) and - bullet points (become subtasks). Dates like \"tomorrow at 10\" are read automatically.",
+  "importText": "Plan text",
+  "importPaste": "Paste",
+  "importFile": "Open .md or .txt",
+  "importCopyPrompt": "Copy prompt for the AI",
+  "importPromptCopied": "Prompt copied. Paste it into your AI and add what you want to plan at the end.",
+  "importPrompt": "Organize what I ask at the end as a project, in Markdown, using exactly this format and no text before or after:\n\n# Project title\n## Module 1 (if it has a date, put it at the end: \"on Monday at 10\", \"12/12\")\n- Subtask\n- Subtask\n## Module 2\n- Subtask\n\nUse 3 to 8 modules with 2 to 6 subtasks each.\n\nWhat I want to plan: ",
+  "importSummary": "{m, plural, =1{1 module} other{{m} modules}} · {s, plural, =1{1 subtask} other{{s} subtasks}}",
+  "importNothing": "No modules yet. Use ## for each module or a list with -.",
+  "importCreate": "Create project",
+  "importDefaultTitle": "Imported project",
+  "importDone": "Project created",
+  "importReadError": "Couldn't read the file",
+  "importPreview": "Preview"
 }

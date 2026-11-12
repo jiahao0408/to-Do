@@ -844,5 +844,30 @@
   "whenSection": "Cuándo",
   "organizeSection": "Organizar",
   "detailsSection": "Detalles",
-  "moreSection": "Más"
+  "moreSection": "Más",
+  "importProject": "Importar proyecto",
+  "importProjectHint": "Pega un plan: # título, ## módulos (serán tareas) y puntos con - (serán subtareas). Las fechas como «mañana a las 10» se leen solas.",
+  "importText": "Texto del plan",
+  "importPaste": "Pegar",
+  "importFile": "Abrir .md o .txt",
+  "importCopyPrompt": "Copiar prompt para la IA",
+  "importPromptCopied": "Prompt copiado. Pégalo en tu IA y añade al final lo que quieres planificar.",
+  "importPrompt": "Organiza lo que te pido al final como un proyecto, en Markdown y con exactamente este formato, sin texto antes ni después:\n\n# Título del proyecto\n## Módulo 1 (si tiene fecha, escríbela al final: «el lunes a las 10», «12/12»)\n- Subtarea\n- Subtarea\n## Módulo 2\n- Subtarea\n\nUsa entre 3 y 8 módulos con 2 a 6 subtareas cada uno.\n\nLo que quiero planificar: ",
+  "importSummary": "{m, plural, =1{1 módulo} other{{m} módulos}} · {s, plural, =1{1 subtarea} other{{s} subtareas}}",
+  "@importSummary": {
+    "placeholders": {
+      "m": {
+        "type": "num"
+      },
+      "s": {
+        "type": "num"
+      }
+    }
+  },
+  "importNothing": "Aún no hay módulos. Usa ## para cada módulo o una lista con -.",
+  "importCreate": "Crear proyecto",
+  "importDefaultTitle": "Proyecto importado",
+  "importDone": "Proyecto creado",
+  "importReadError": "No se pudo leer el archivo",
+  "importPreview": "Vista previa"
 }

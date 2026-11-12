@@ -13,6 +13,7 @@ import '../screens/diary_screen.dart';
 import '../screens/gesture_guide_screen.dart';
 import '../screens/inbox_screen.dart';
 import '../screens/process_inbox_screen.dart';
+import '../screens/project_import_screen.dart';
 import '../screens/projects_screen.dart';
 import '../screens/search_screen.dart';
 import '../screens/settings_screen.dart';
@@ -136,14 +137,21 @@ class AppDrawer extends ConsumerWidget {
             // ---- Proyectos
             header(
               l.projects,
-              trailing: IconButton(
-                tooltip: l.newProject,
-                icon: const Icon(PhosphorIconsRegular.plus),
-                onPressed: () async {
-                  final id = await editProject(context, ref);
-                  if (id != null && context.mounted) open(ProjectScreen(projectId: id));
-                },
-              ),
+              trailing: Row(mainAxisSize: MainAxisSize.min, children: [
+                IconButton(
+                  tooltip: l.importProject,
+                  icon: const Icon(PhosphorIconsRegular.clipboardText),
+                  onPressed: () => open(const ProjectImportScreen()),
+                ),
+                IconButton(
+                  tooltip: l.newProject,
+                  icon: const Icon(PhosphorIconsRegular.plus),
+                  onPressed: () async {
+                    final id = await editProject(context, ref);
+                    if (id != null && context.mounted) open(ProjectScreen(projectId: id));
+                  },
+                ),
+              ]),
             ),
             for (final p in projects)
               ListTile(

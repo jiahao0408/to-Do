@@ -1544,4 +1544,67 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get moreSection => 'Más';
+
+  @override
+  String get importProject => 'Importar proyecto';
+
+  @override
+  String get importProjectHint =>
+      'Pega un plan: # título, ## módulos (serán tareas) y puntos con - (serán subtareas). Las fechas como «mañana a las 10» se leen solas.';
+
+  @override
+  String get importText => 'Texto del plan';
+
+  @override
+  String get importPaste => 'Pegar';
+
+  @override
+  String get importFile => 'Abrir .md o .txt';
+
+  @override
+  String get importCopyPrompt => 'Copiar prompt para la IA';
+
+  @override
+  String get importPromptCopied =>
+      'Prompt copiado. Pégalo en tu IA y añade al final lo que quieres planificar.';
+
+  @override
+  String get importPrompt =>
+      'Organiza lo que te pido al final como un proyecto, en Markdown y con exactamente este formato, sin texto antes ni después:\n\n# Título del proyecto\n## Módulo 1 (si tiene fecha, escríbela al final: «el lunes a las 10», «12/12»)\n- Subtarea\n- Subtarea\n## Módulo 2\n- Subtarea\n\nUsa entre 3 y 8 módulos con 2 a 6 subtareas cada uno.\n\nLo que quiero planificar: ';
+
+  @override
+  String importSummary(num m, num s) {
+    String _temp0 = intl.Intl.pluralLogic(
+      m,
+      locale: localeName,
+      other: '$m módulos',
+      one: '1 módulo',
+    );
+    String _temp1 = intl.Intl.pluralLogic(
+      s,
+      locale: localeName,
+      other: '$s subtareas',
+      one: '1 subtarea',
+    );
+    return '$_temp0 · $_temp1';
+  }
+
+  @override
+  String get importNothing =>
+      'Aún no hay módulos. Usa ## para cada módulo o una lista con -.';
+
+  @override
+  String get importCreate => 'Crear proyecto';
+
+  @override
+  String get importDefaultTitle => 'Proyecto importado';
+
+  @override
+  String get importDone => 'Proyecto creado';
+
+  @override
+  String get importReadError => 'No se pudo leer el archivo';
+
+  @override
+  String get importPreview => 'Vista previa';
 }

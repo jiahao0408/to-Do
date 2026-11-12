@@ -14,6 +14,7 @@ import '../../domain/village/layout.dart';
 import '../../domain/villager/villager_mood.dart';
 import '../common/format.dart';
 import '../providers.dart';
+import '../screens/project_import_screen.dart';
 import '../screens/projects_screen.dart';
 import '../village/villager_controller.dart';
 import '../village/villager_sprite.dart';
@@ -87,6 +88,11 @@ class _VillageScreenState extends ConsumerState<VillageScreen> with SingleTicker
       appBar: AppBar(
         title: Text(l.villageTitle),
         actions: [
+          IconButton(
+            tooltip: l.importProject,
+            icon: const Icon(PhosphorIconsRegular.clipboardText),
+            onPressed: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const ProjectImportScreen())),
+          ),
           IconButton(
             tooltip: l.newProject,
             icon: const Icon(PhosphorIconsRegular.plusCircle),

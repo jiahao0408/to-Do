@@ -1433,4 +1433,53 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get moreSection => '更多';
+
+  @override
+  String get importProject => '导入项目';
+
+  @override
+  String get importProjectHint =>
+      '粘贴一个计划：# 标题，## 模块（变成任务），- 列表项（变成子任务）。“明天10点”这样的日期会自动识别。';
+
+  @override
+  String get importText => '计划文本';
+
+  @override
+  String get importPaste => '粘贴';
+
+  @override
+  String get importFile => '打开 .md 或 .txt';
+
+  @override
+  String get importCopyPrompt => '复制给 AI 的提示词';
+
+  @override
+  String get importPromptCopied => '提示词已复制。粘贴到 AI 里，并在末尾写上你想规划的内容。';
+
+  @override
+  String get importPrompt =>
+      '请把我最后提到的内容整理成一个项目，用 Markdown，严格使用下面的格式，前后不要有其他文字：\n\n# 项目标题\n## 模块 1（如有日期，写在末尾：“周一10点”、“12/12”）\n- 子任务\n- 子任务\n## 模块 2\n- 子任务\n\n使用 3 到 8 个模块，每个模块 2 到 6 个子任务。\n\n我想规划的是：';
+
+  @override
+  String importSummary(num m, num s) {
+    return '$m 个模块 · $s 个子任务';
+  }
+
+  @override
+  String get importNothing => '还没有模块。每个模块用 ##，或者用 - 列表。';
+
+  @override
+  String get importCreate => '创建项目';
+
+  @override
+  String get importDefaultTitle => '导入的项目';
+
+  @override
+  String get importDone => '项目已创建';
+
+  @override
+  String get importReadError => '无法读取文件';
+
+  @override
+  String get importPreview => '预览';
 }

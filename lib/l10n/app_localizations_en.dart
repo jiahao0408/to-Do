@@ -1538,4 +1538,67 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get moreSection => 'More';
+
+  @override
+  String get importProject => 'Import project';
+
+  @override
+  String get importProjectHint =>
+      'Paste a plan: # title, ## modules (become tasks) and - bullet points (become subtasks). Dates like \"tomorrow at 10\" are read automatically.';
+
+  @override
+  String get importText => 'Plan text';
+
+  @override
+  String get importPaste => 'Paste';
+
+  @override
+  String get importFile => 'Open .md or .txt';
+
+  @override
+  String get importCopyPrompt => 'Copy prompt for the AI';
+
+  @override
+  String get importPromptCopied =>
+      'Prompt copied. Paste it into your AI and add what you want to plan at the end.';
+
+  @override
+  String get importPrompt =>
+      'Organize what I ask at the end as a project, in Markdown, using exactly this format and no text before or after:\n\n# Project title\n## Module 1 (if it has a date, put it at the end: \"on Monday at 10\", \"12/12\")\n- Subtask\n- Subtask\n## Module 2\n- Subtask\n\nUse 3 to 8 modules with 2 to 6 subtasks each.\n\nWhat I want to plan: ';
+
+  @override
+  String importSummary(num m, num s) {
+    String _temp0 = intl.Intl.pluralLogic(
+      m,
+      locale: localeName,
+      other: '$m modules',
+      one: '1 module',
+    );
+    String _temp1 = intl.Intl.pluralLogic(
+      s,
+      locale: localeName,
+      other: '$s subtasks',
+      one: '1 subtask',
+    );
+    return '$_temp0 · $_temp1';
+  }
+
+  @override
+  String get importNothing =>
+      'No modules yet. Use ## for each module or a list with -.';
+
+  @override
+  String get importCreate => 'Create project';
+
+  @override
+  String get importDefaultTitle => 'Imported project';
+
+  @override
+  String get importDone => 'Project created';
+
+  @override
+  String get importReadError => 'Couldn\'t read the file';
+
+  @override
+  String get importPreview => 'Preview';
 }

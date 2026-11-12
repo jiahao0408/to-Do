@@ -28,6 +28,7 @@ abstract final class PhosphorIconsRegular {
   static const checkSquare = IconData(0xe186, fontFamily: 'PhosphorRegular');
   static const checks = IconData(0xe53a, fontFamily: 'PhosphorRegular');
   static const circleHalf = IconData(0xe18c, fontFamily: 'PhosphorRegular');
+  static const clipboardText = IconData(0xe198, fontFamily: 'PhosphorRegular');
   static const clock = IconData(0xe19a, fontFamily: 'PhosphorRegular');
   static const columns = IconData(0xe546, fontFamily: 'PhosphorRegular');
   static const confetti = IconData(0xe81a, fontFamily: 'PhosphorRegular');
@@ -37,6 +38,7 @@ abstract final class PhosphorIconsRegular {
   static const export = IconData(0xeaf0, fontFamily: 'PhosphorRegular');
   static const file = IconData(0xe230, fontFamily: 'PhosphorRegular');
   static const fileArrowUp = IconData(0xe61e, fontFamily: 'PhosphorRegular');
+  static const fileText = IconData(0xe23a, fontFamily: 'PhosphorRegular');
   static const filmStrip = IconData(0xe792, fontFamily: 'PhosphorRegular');
   static const fire = IconData(0xe242, fontFamily: 'PhosphorRegular');
   static const flag = IconData(0xe244, fontFamily: 'PhosphorRegular');
