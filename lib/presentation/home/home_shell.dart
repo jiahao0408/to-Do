@@ -174,7 +174,7 @@ class _HomeShellState extends ConsumerState<HomeShell> {
           body: Column(
             children: [
               Expanded(
-                child: Stack(children: [
+                child: Stack(fit: StackFit.expand, children: [
                   Positioned.fill(
                     child: ref.watch(settingsProvider).animations && !MediaQuery.disableAnimationsOf(context)
                         ? PageTransitionSwitcher(

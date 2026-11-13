@@ -42,7 +42,10 @@ class _VillagerFloatingState extends ConsumerState<VillagerFloating> {
         !s.villagerEnabled ||
         !s.villagerFloating ||
         MediaQuery.viewInsetsOf(context).bottom > 0) {
-      return const SizedBox.shrink();
+      // Siempre posicionado: una caja suelta haría que el Stack del calendario
+      // midiera 0 de ancho y lo dejara en blanco (bandeja abierta, esquina o
+      // habitante apagados).
+      return const Positioned.fill(child: IgnorePointer(child: SizedBox.shrink()));
     }
     const size = VillagerFloating.size, m = VillagerFloating.margin;
     return Positioned.fill(

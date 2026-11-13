@@ -232,6 +232,34 @@ void main() {
       expect(find.byType(VillagerSprite), findsOneWidget);
     });
 
+    // Regresión v2.1.2: oculto o apagado dejaba el calendario en blanco
+    // (dentro de Column > Expanded > Stack, el Stack medía 0 de ancho).
+    for (final (name, hidden, extra) in [
+      ('oculto (bandeja abierta)', true, const <String, String>{}),
+      ('esquina apagada', false, {AppSettings.kVillagerFloating: '0'}),
+      ('habitante apagado', false, {AppSettings.kVillagerEnabled: '0'}),
+    ]) {
+      testWidgets('$name: el calendario de debajo conserva su tamaño', (tester) async {
+        await tester.pumpWidget(host(FakeVillager(view()), animations: false, extra: extra,
+            child: SizedBox(
+              width: 400,
+              height: 700,
+              child: Column(children: [
+                Expanded(
+                  child: Stack(children: [
+                    const Positioned.fill(child: ColoredBox(key: ValueKey('cal'), color: Colors.white)),
+                    VillagerFloating(hidden: hidden),
+                  ]),
+                ),
+              ]),
+            )));
+        await tester.pump();
+        final size = tester.getSize(find.byKey(const ValueKey('cal')));
+        expect(size.width, 400, reason: 'antes medía 0 y el calendario desaparecía');
+        expect(size.height, greaterThan(500));
+      });
+    }
+
     testWidgets('hidden: true 时不显示 VillagerFloating', (tester) async {
       await tester.pumpWidget(host(FakeVillager(view()), animations: false, child: floating(const {}, hidden: true)));
       await tester.pump();
