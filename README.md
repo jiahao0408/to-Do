@@ -207,6 +207,21 @@ El documento pide preguntar ante las ambigüedades. Como pediste avanzar sin par
 10. **compileSdk 37**, porque lo exige algún plugin. minSdk 26 (Android 8), como pide el documento.
 11. **`dynamic_color` 1.x**: la 2.x usa el nuevo paquete `material_ui`, incompatible con `MaterialApp`.
 
+## iOS: compilar sin Mac (GitHub Actions)
+
+El flujo `.github/workflows/ios.yml` compila la app en un Mac de GitHub (`flutter build ios --no-codesign`) y genera `to-Do-vX.Y.Z-ios-unsigned.ipa`:
+
+- Al subir a `main`: queda como artefacto `ios-unsigned` en la pestaña *Actions*.
+- Al subir una etiqueta `v*`, o lanzándolo a mano con *release_tag*: además se adjunta a esa release.
+
+El `.ipa` **no va firmado**. Para instalarlo en un iPhone:
+
+1. Instala [Sideloadly](https://sideloadly.io) (Windows o Mac) o AltStore.
+2. Conecta el iPhone, arrastra el `.ipa` y entra con tu Apple ID: lo firma con un certificado gratuito.
+3. En el iPhone: *Ajustes › General › VPN y gestión de dispositivos*, confía en tu Apple ID y, en iOS 16+, activa el *Modo desarrollador*.
+
+Con un Apple ID gratuito la instalación caduca a los 7 días (se vuelve a firmar con la misma herramienta). Con cuenta de desarrollador (99 €/año) dura un año y se puede publicar en TestFlight.
+
 ## Widget de iOS (pendiente en un Mac)
 
 En `ios/TodayWidget/` está el código de WidgetKit y del App Intent del check (iOS 17+). Para activarlo:
