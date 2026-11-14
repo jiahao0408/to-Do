@@ -14,9 +14,12 @@ import home_widget
     FlutterLocalNotificationsPlugin.setPluginRegistrantCallback { registry in
       GeneratedPluginRegistrant.register(with: registry)
     }
-    // RF-51: check del widget (App Intents) en segundo plano.
-    HomeWidgetBackgroundWorker.setPluginRegistrantCallback { registry in
-      GeneratedPluginRegistrant.register(with: registry)
+    // RF-51: check del widget (App Intents) en segundo plano. Solo existe en
+    // iOS 17+; en iOS 15–16 el widget se ve pero sin check interactivo.
+    if #available(iOS 17, *) {
+      HomeWidgetBackgroundWorker.setPluginRegistrantCallback { registry in
+        GeneratedPluginRegistrant.register(with: registry)
+      }
     }
     UNUserNotificationCenter.current().delegate = self as UNUserNotificationCenterDelegate
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
